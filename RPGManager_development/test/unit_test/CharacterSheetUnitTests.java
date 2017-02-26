@@ -2,6 +2,7 @@ package unit_test;
 
 import junit.framework.TestCase;
 import rpg_database.CharacterSheet;
+import rpg_database.CharacterSheet.Background;
 import rpg_database.CharacterSheet.CharacterClass;
 import rpg_database.CharacterSheet.Fields;
 import rpg_database.CharacterSheet.Gender;
@@ -107,5 +108,16 @@ public class CharacterSheetUnitTests extends TestCase {
 		testCharacterSheet.setData(Fields.CHARACTERCLASS, CharacterClass.MAGE);
 		CharacterClass characterClass = (CharacterClass) testCharacterSheet.getData(Fields.CHARACTERCLASS);
 		assertEquals(CharacterClass.MAGE, characterClass);
+	}
+
+	public void testGetDefaultBackground() {
+		Background background = (Background) defaultCharacterSheet.getData(Fields.BACKGROUND);
+		assertEquals(Background.ANDER_SURVIVOR, background);
+	}
+
+	public void testSetBackgroundApostate() {
+		testCharacterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+		Background background = (Background) testCharacterSheet.getData(Fields.BACKGROUND);
+		assertEquals(Background.APOSTATE, background);
 	}
 }
