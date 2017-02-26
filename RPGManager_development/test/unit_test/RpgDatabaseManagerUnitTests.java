@@ -1,5 +1,7 @@
 package unit_test;
 
-public class RpgDatabaseManagerUnitTests {
+import junit.framework.TestCase;
 
+public class RpgDatabaseManagerUnitTests extends TestCase{
+	
 }
