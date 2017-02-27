@@ -12,7 +12,7 @@ public class CharacterSheet {
 
 	private final HashMap<Class, Object> defaultData = initializeDefaultData();
 
-	private static HashMap<Class, Object> initializeDefaultData() {
+	private HashMap<Class, Object> initializeDefaultData() {
 		HashMap<Class, Object> defaultData = new HashMap<Class, Object>();
 		CharacterClass defaultClass = new CharacterClass(BaseClasses.WARRIOR, SpecializationClasses.NOT_APPLICABLE);
 
