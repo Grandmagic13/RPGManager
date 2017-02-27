@@ -1,4 +1,6 @@
-package unit_test;
+package unit_test.character_sheet_unit_tests;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,13 +8,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import junit.framework.TestCase;
-import rpg_database.CharacterSheet;
-import rpg_database.CharacterSheet.Background;
-import rpg_database.CharacterSheet.Fields;
+import rpg_database.character_sheet.Background;
+import rpg_database.character_sheet.CharacterSheet;
+import rpg_database.character_sheet.Fields;
 
 @RunWith(Parameterized.class)
-public class CharacterSheetBackgroundUnitTests extends TestCase {
+public class CharacterSheetBackgroundUnitTests {
 
 	@Parameters(name = "{index}: ''{0}''")
 	public static Background[] data() {
@@ -35,7 +36,7 @@ public class CharacterSheetBackgroundUnitTests extends TestCase {
 	public void testSetBackground() {
 		CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
 		testCharacterSheet.setData(Fields.BACKGROUND, background);
-		Background background = (Background) testCharacterSheet.getData(Fields.BACKGROUND);
+		Background background = testCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(background, background);
 	}
 }
