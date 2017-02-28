@@ -48,10 +48,23 @@ public class CharacterSheet {
 	}
 
 	public <DataType extends Object> DataType getData(Fields field) {
-		return (DataType) (characterData.get(field));
+		DataType data;
+		switch (field) {
+		case BASECLASS:
+			data = (DataType) getBaseClass();
+			break;
+		case SPECIALIZATIONCLASS:
+			data = (DataType) getSpecializationClass();
+			break;
+		default:
+			data = (DataType) (characterData.get(field));
+			break;
+		}
+		return data;
 	}
 
-	// TODO if DataType extends some interface, switch case can be implemented
+	// TODO if DataType implements some interface, switch case can be
+	// implemented
 	// there?
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
@@ -76,9 +89,13 @@ public class CharacterSheet {
 	}
 
 	private void setBaseClass(BaseClasses baseClass) {
-		// TODO refactor getter to get baseclass!
 		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
 		characterClass.setBaseClass(baseClass);
+	}
+
+	private BaseClasses getBaseClass() {
+		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+		return characterClass.getBaseClass();
 	}
 
 	private void setSpecializationClass(SpecializationClasses specializationClass) {
@@ -86,18 +103,20 @@ public class CharacterSheet {
 		characterClass.setSpecializationClass(specializationClass);
 	}
 
+	private SpecializationClasses getSpecializationClass() {
+		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+		return characterClass.getSpecializationClass();
+	}
+
 	private void setBackground(Background background) {
 		if (!isCharacterBaseClassAllowed(background.getAllowedBaseClasses())) {
-			// TODO refactor getter to get baseclass!
-			CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", background.toString(), characterClass.getBaseClass()
+			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", background.toString(), getData(Fields.BASECLASS)
 					.toString()));
 		}
 		this.characterData.put(Fields.BACKGROUND, background);
 	}
 
 	private boolean isCharacterBaseClassAllowed(ArrayList<BaseClasses> baseClass) {
-		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-		return baseClass.contains(characterClass.getBaseClass());
+		return baseClass.contains(getData(Fields.BASECLASS));
 	}
 }

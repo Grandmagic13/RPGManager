@@ -155,14 +155,12 @@ public class CharacterSheetUnitTests {
 
 	@Test
 	public void testGetDefaultCharacterBaseClass() {
-		CharacterClass characterClass = defaultCharacterSheet.getData(Fields.CHARACTERCLASS);
-		assertEquals(BaseClasses.WARRIOR, characterClass.getBaseClass());
+		assertEquals(BaseClasses.WARRIOR, defaultCharacterSheet.getData(Fields.BASECLASS));
 	}
 
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
-		CharacterClass characterClass = defaultCharacterSheet.getData(Fields.CHARACTERCLASS);
-		assertEquals(SpecializationClasses.NOT_APPLICABLE, characterClass.getSpecializationClass());
+		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
 	}
 
 	@Test
@@ -176,7 +174,7 @@ public class CharacterSheetUnitTests {
 	public void testSetCharacterBaseClassMage() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
-		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
+		BaseClasses actualClass = characterSheet.getData(Fields.BASECLASS);
 		assertEquals(BaseClasses.MAGE, actualClass);
 	}
 
@@ -184,7 +182,7 @@ public class CharacterSheetUnitTests {
 	public void testSetCharacterBaseClassRogue() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
-		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
+		BaseClasses actualClass = characterSheet.getData(Fields.BASECLASS);
 		assertEquals(BaseClasses.ROGUE, actualClass);
 	}
 
@@ -192,7 +190,7 @@ public class CharacterSheetUnitTests {
 	public void testSetCharacterSpecClassChampion() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.CHAMPION);
-		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
+		SpecializationClasses actualClass = characterSheet.getData(Fields.SPECIALIZATIONCLASS);
 		assertEquals(SpecializationClasses.CHAMPION, actualClass);
 	}
 
@@ -200,7 +198,7 @@ public class CharacterSheetUnitTests {
 	public void testSetCharacterSpecClassBerserker() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.BERSERKER);
-		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
+		SpecializationClasses actualClass = characterSheet.getData(Fields.SPECIALIZATIONCLASS);
 		assertEquals(SpecializationClasses.BERSERKER, actualClass);
 	}
 
@@ -225,9 +223,6 @@ public class CharacterSheetUnitTests {
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.ASSASSIN);
 	}
-	// TODO parameterized exception handling when setting spec class for wrong
-	// base class and
-	// vice versa
 
 	@Test(expected = InvalidParameterException.class)
 	public void testSetCharacterBackgroundMalformedInput() {
@@ -260,15 +255,5 @@ public class CharacterSheetUnitTests {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(baseClass, specializationClass));
 		return characterSheet;
-	}
-
-	private BaseClasses getBaseClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		return actualSheetClass.getBaseClass();
-	}
-
-	private SpecializationClasses getSpecializationClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		return actualSheetClass.getSpecializationClass();
 	}
 }
