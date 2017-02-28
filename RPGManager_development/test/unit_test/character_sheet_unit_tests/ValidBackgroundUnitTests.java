@@ -18,7 +18,7 @@ import rpg_database.character_sheet.character_class.BaseClasses;
 import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)
-public class CharacterSheetValidBackgroundUnitTests {
+public class ValidBackgroundUnitTests {
 
 	// Description:
 	//

@@ -20,7 +20,7 @@ import rpg_database.character_sheet.character_class.InvalidCharacterClassExcepti
 import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)
-public class CharacterSheetInvalidBackgroundUnitTests {
+public class InvalidBackgroundUnitTests {
 
 	// Description:
 	//
