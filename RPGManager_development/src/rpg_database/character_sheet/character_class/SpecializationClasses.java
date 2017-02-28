@@ -1,7 +1,6 @@
 package rpg_database.character_sheet.character_class;
 
 public enum SpecializationClasses {
-	// TODO specializationClasses!
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
 	BARD("Bard", BaseClasses.ROGUE), BERSERKER("Berserker", BaseClasses.WARRIOR), BLOOD_MAGE("Blood Mage", BaseClasses.MAGE),
 	CHAMPION("Champion", BaseClasses.WARRIOR), CHEVALIER("Chevalier", BaseClasses.WARRIOR), DUELIST("Duelist", BaseClasses.ROGUE),
