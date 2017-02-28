@@ -64,8 +64,6 @@ public class ValidClassAndSpecializationPairingsTests {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
-		// TODO refactor for getData
-		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		assertEquals(specializationClass, characterClass.getSpecializationClass());
+		assertEquals(specializationClass, characterSheet.getData(Fields.SPECIALIZATIONCLASS));
 	}
 }
