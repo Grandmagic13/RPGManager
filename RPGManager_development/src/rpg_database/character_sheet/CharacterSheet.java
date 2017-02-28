@@ -1,6 +1,7 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import rpg_database.character_sheet.character_class.BaseClasses;
@@ -50,11 +51,53 @@ public class CharacterSheet {
 		return (DataType) (characterData.get(field));
 	}
 
+	// TODO if DataType extends some interface, switch case can be implemented
+	// there?
 	public <DataType> void setData(Fields field, DataType value) {
-		if (value.getClass() == field.getAllowedClass())
-			this.characterData.put(field, value);
-		else
-			throw new InvalidParameterException(String.format("%s value is not an instance of %s", value.getClass()
-					.toString(), field.getAllowedClass().toString()));
+		if (value.getClass() == field.getAllowedClass()) {
+			switch (field) {
+			case BASECLASS:
+				setBaseClass((BaseClasses) value);
+				break;
+			case SPECIALIZATIONCLASS:
+				setSpecializationClass((SpecializationClasses) value);
+				break;
+			case BACKGROUND:
+				setBackground((Background) value);
+				break;
+			default:
+				this.characterData.put(field, value);
+				break;
+			}
+		} else {
+			throw new InvalidParameterException(String.format("%s value is not an instance of %s", value.getClass().toString(), field
+					.getAllowedClass().toString()));
+		}
+	}
+
+	private void setBaseClass(BaseClasses baseClass) {
+		// TODO refactor getter to get baseclass!
+		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+		characterClass.setBaseClass(baseClass);
+	}
+
+	private void setSpecializationClass(SpecializationClasses specializationClass) {
+		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+		characterClass.setSpecializationClass(specializationClass);
+	}
+
+	private void setBackground(Background background) {
+		if (!isCharacterBaseClassAllowed(background.getAllowedBaseClasses())) {
+			// TODO refactor getter to get baseclass!
+			CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", background.toString(), characterClass.getBaseClass()
+					.toString()));
+		}
+		this.characterData.put(Fields.BACKGROUND, background);
+	}
+
+	private boolean isCharacterBaseClassAllowed(ArrayList<BaseClasses> baseClass) {
+		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
+		return baseClass.contains(characterClass.getBaseClass());
 	}
 }

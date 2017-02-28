@@ -176,7 +176,7 @@ public class CharacterSheetUnitTests {
 	@Test
 	public void testSetCharacterBaseClassMage() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.MAGE);
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(BaseClasses.MAGE, actualClass);
 	}
@@ -184,7 +184,7 @@ public class CharacterSheetUnitTests {
 	@Test
 	public void testSetCharacterBaseClassRogue() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.ROGUE);
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
 		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(BaseClasses.ROGUE, actualClass);
 	}
@@ -192,7 +192,7 @@ public class CharacterSheetUnitTests {
 	@Test
 	public void testSetCharacterSpecClassChampion() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.CHAMPION);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.CHAMPION);
 		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(SpecializationClasses.CHAMPION, actualClass);
 	}
@@ -200,7 +200,7 @@ public class CharacterSheetUnitTests {
 	@Test
 	public void testSetCharacterSpecClassBerserker() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.BERSERKER);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.BERSERKER);
 		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(SpecializationClasses.BERSERKER, actualClass);
 	}
@@ -219,14 +219,14 @@ public class CharacterSheetUnitTests {
 	public void testSetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
 				SpecializationClasses.ARCANE_WARRIOR);
-		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.WARRIOR);
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
 				SpecializationClasses.ARCANE_WARRIOR);
-		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.ASSASSIN);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.ASSASSIN);
 	}
 	// TODO parameterized exception handling when setting spec class for wrong
 	// base class and
@@ -238,19 +238,27 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.BACKGROUND, malformedInput);
 	}
 
+	@Test(expected = InvalidCharacterClassException.class)
+	public void testSetInvalidBackgroundApostateForClassWarrior() {
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR,
+				SpecializationClasses.BERSERKER);
+		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+	}
+
 	@Test
 	public void testGetDefaultBackground() {
 		Background background = defaultCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.ANDER_SURVIVOR, background);
 	}
 
+	// TODO implement background baseclasses lists! and follow up on
+	// parametrization!
 	@Test
 	public void testSetBackgroundApostate() {
-		testCharacterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+		testCharacterSheet.setData(Fields.BACKGROUND, Background.CHASIND_WILDER);
 		Background background = testCharacterSheet.getData(Fields.BACKGROUND);
-		assertEquals(Background.APOSTATE, background);
+		assertEquals(Background.CHASIND_WILDER, background);
 	}
-	// TODO test that background knows which class it allows
 
 	// private methods
 
@@ -261,20 +269,9 @@ public class CharacterSheetUnitTests {
 		return characterSheet;
 	}
 
-	private void setBaseClassOfCharacterSheet(CharacterSheet characterSheet, BaseClasses baseClass) {
-		CharacterClass characterSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		characterSheetClass.setBaseClass(baseClass);
-	}
-
 	private BaseClasses getBaseClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
 		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		return actualSheetClass.getBaseClass();
-	}
-
-	private void setSpecializationClassOfCharacterSheet(CharacterSheet characterSheet,
-			SpecializationClasses specializationClass) {
-		CharacterClass characterSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		characterSheetClass.setSpecializationClass(specializationClass);
 	}
 
 	private SpecializationClasses getSpecializationClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
