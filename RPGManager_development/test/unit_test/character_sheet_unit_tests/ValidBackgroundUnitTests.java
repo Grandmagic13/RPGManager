@@ -31,14 +31,16 @@ public class ValidBackgroundUnitTests {
 	public static Collection<Object[]> data() {
 		ArrayList<Object[]> parameters = new ArrayList<>();
 		for (BaseClasses baseClass : BaseClasses.values()) {
-			if (baseClass.equals(BaseClasses.MAGE)) {
+			switch (baseClass) {
+			case MAGE:
 				for (Background background : BackgroundUnitTestData.mageOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
 				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
-			} else if (baseClass.equals(BaseClasses.ROGUE)) {
+				break;
+			case ROGUE:
 				for (Background background : BackgroundUnitTestData.rogueOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
@@ -48,13 +50,15 @@ public class ValidBackgroundUnitTests {
 				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
-			} else if (baseClass.equals(BaseClasses.WARRIOR)) {
+				break;
+			case WARRIOR:
 				for (Background background : BackgroundUnitTestData.rogueAndWarriorBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
 				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
+				break;
 			}
 		}
 		return parameters;

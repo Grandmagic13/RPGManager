@@ -167,8 +167,7 @@ public class CharacterSheetUnitTests {
 
 	@Test
 	public void testSetCharacterClass_Rogue_Assassin() {
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.ROGUE,
-				SpecializationClasses.ASSASSIN);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.ROGUE, SpecializationClasses.ASSASSIN);
 		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		assertEquals(new CharacterClass(BaseClasses.ROGUE, SpecializationClasses.ASSASSIN), characterClass);
 	}
@@ -217,15 +216,13 @@ public class CharacterSheetUnitTests {
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
-				SpecializationClasses.ARCANE_WARRIOR);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
-				SpecializationClasses.ARCANE_WARRIOR);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.ASSASSIN);
 	}
 	// TODO parameterized exception handling when setting spec class for wrong
@@ -240,8 +237,7 @@ public class CharacterSheetUnitTests {
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetInvalidBackgroundApostateForClassWarrior() {
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR,
-				SpecializationClasses.BERSERKER);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
 		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
 	}
 
@@ -251,8 +247,6 @@ public class CharacterSheetUnitTests {
 		assertEquals(Background.ANDER_SURVIVOR, background);
 	}
 
-	// TODO implement background baseclasses lists! and follow up on
-	// parametrization!
 	@Test
 	public void testSetBackgroundApostate() {
 		testCharacterSheet.setData(Fields.BACKGROUND, Background.CHASIND_WILDER);
@@ -262,8 +256,7 @@ public class CharacterSheetUnitTests {
 
 	// private methods
 
-	private CharacterSheet createCharacterSheetWithCustomClasses(BaseClasses baseClass,
-			SpecializationClasses specializationClass) {
+	private CharacterSheet createCharacterSheetWithCustomClasses(BaseClasses baseClass, SpecializationClasses specializationClass) {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(baseClass, specializationClass));
 		return characterSheet;

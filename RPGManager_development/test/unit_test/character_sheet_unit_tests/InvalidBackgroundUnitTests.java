@@ -1,9 +1,6 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -34,24 +31,28 @@ public class InvalidBackgroundUnitTests {
 		ArrayList<Object[]> parameters = new ArrayList<>();
 
 		for (BaseClasses baseClass : BaseClasses.values()) {
-			if (baseClass.equals(BaseClasses.MAGE)) {
+			switch (baseClass) {
+			case MAGE:
 				for (Background background : BackgroundUnitTestData.rogueOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
 				for (Background background : BackgroundUnitTestData.rogueAndWarriorBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
-			} else if (baseClass.equals(BaseClasses.ROGUE)) {
+				break;
+			case ROGUE:
 				for (Background background : BackgroundUnitTestData.mageOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
-			} else if (baseClass.equals(BaseClasses.WARRIOR)) {
+				break;
+			case WARRIOR:
 				for (Background background : BackgroundUnitTestData.mageOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
 				for (Background background : BackgroundUnitTestData.rogueOnlyBackgrounds) {
 					parameters.add(new Object[] { background, baseClass });
 				}
+				break;
 			}
 		}
 		return parameters;
