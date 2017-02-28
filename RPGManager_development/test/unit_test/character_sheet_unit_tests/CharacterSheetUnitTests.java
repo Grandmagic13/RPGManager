@@ -16,9 +16,12 @@ import rpg_database.character_sheet.character_class.InvalidCharacterClassExcepti
 import rpg_database.character_sheet.character_class.SpecializationClasses;
 
 public class CharacterSheetUnitTests {
+	// fields
 
 	final CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
 	CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
+
+	// test methods
 
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
@@ -164,86 +167,70 @@ public class CharacterSheetUnitTests {
 
 	@Test
 	public void testSetCharacterClass_Rogue_Assassin() {
-		testCharacterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.ROGUE,
-				SpecializationClasses.ASSASSIN));
-		CharacterClass characterClass = testCharacterSheet.getData(Fields.CHARACTERCLASS);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.ROGUE,
+				SpecializationClasses.ASSASSIN);
+		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		assertEquals(new CharacterClass(BaseClasses.ROGUE, SpecializationClasses.ASSASSIN), characterClass);
 	}
 
 	@Test
 	public void testSetCharacterBaseClassMage() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		CharacterClass testSheetClass = (characterSheet.getData(Fields.CHARACTERCLASS));
-		testSheetClass.setBaseClass(BaseClasses.MAGE);
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		BaseClasses actualClass = actualSheetClass.getBaseClass();
+		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.MAGE);
+		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(BaseClasses.MAGE, actualClass);
 	}
 
 	@Test
 	public void testSetCharacterBaseClassRogue() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setBaseClass(BaseClasses.ROGUE);
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		BaseClasses actualClass = actualSheetClass.getBaseClass();
+		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.ROGUE);
+		BaseClasses actualClass = getBaseClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(BaseClasses.ROGUE, actualClass);
 	}
 
 	@Test
 	public void testSetCharacterSpecClassChampion() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setSpecializationClass(SpecializationClasses.CHAMPION);
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		SpecializationClasses actualClass = actualSheetClass.getSpecializationClass();
+		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.CHAMPION);
+		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(SpecializationClasses.CHAMPION, actualClass);
 	}
 
 	@Test
 	public void testSetCharacterSpecClassBerserker() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setSpecializationClass(SpecializationClasses.BERSERKER);
-		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		SpecializationClasses actualClass = actualSheetClass.getSpecializationClass();
+		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.BERSERKER);
+		SpecializationClasses actualClass = getSpecializationClassOfCharacterCharacterSheet(characterSheet);
 		assertEquals(SpecializationClasses.BERSERKER, actualClass);
 	}
 
-	// TODO exception handling when setting spec class for wrong base class and
-	// vice versa
-
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testCreateMalformedCharacterClass_MageAssassin() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.MAGE,
-				SpecializationClasses.ASSASSIN));
+		createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ASSASSIN);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testCreateMalformedCharacterClass_RogueChampion() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.ROGUE,
-				SpecializationClasses.CHAMPION));
+		createCharacterSheetWithCustomClasses(BaseClasses.ROGUE, SpecializationClasses.CHAMPION);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.MAGE,
-				SpecializationClasses.ARCANE_WARRIOR));
-		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setBaseClass(BaseClasses.WARRIOR);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
+				SpecializationClasses.ARCANE_WARRIOR);
+		setBaseClassOfCharacterSheet(characterSheet, BaseClasses.WARRIOR);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
 	public void testSetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.MAGE,
-				SpecializationClasses.ARCANE_WARRIOR));
-		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setSpecializationClass(SpecializationClasses.ASSASSIN);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE,
+				SpecializationClasses.ARCANE_WARRIOR);
+		setSpecializationClassOfCharacterSheet(characterSheet, SpecializationClasses.ASSASSIN);
 	}
+	// TODO parameterized exception handling when setting spec class for wrong
+	// base class and
+	// vice versa
 
 	@Test(expected = InvalidParameterException.class)
 	public void testSetCharacterBackgroundMalformedInput() {
@@ -265,4 +252,33 @@ public class CharacterSheetUnitTests {
 	}
 	// TODO test that background knows which class it allows
 
+	// private methods
+
+	private CharacterSheet createCharacterSheetWithCustomClasses(BaseClasses baseClass,
+			SpecializationClasses specializationClass) {
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(baseClass, specializationClass));
+		return characterSheet;
+	}
+
+	private void setBaseClassOfCharacterSheet(CharacterSheet characterSheet, BaseClasses baseClass) {
+		CharacterClass characterSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		characterSheetClass.setBaseClass(baseClass);
+	}
+
+	private BaseClasses getBaseClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
+		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		return actualSheetClass.getBaseClass();
+	}
+
+	private void setSpecializationClassOfCharacterSheet(CharacterSheet characterSheet,
+			SpecializationClasses specializationClass) {
+		CharacterClass characterSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		characterSheetClass.setSpecializationClass(specializationClass);
+	}
+
+	private SpecializationClasses getSpecializationClassOfCharacterCharacterSheet(CharacterSheet characterSheet) {
+		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		return actualSheetClass.getSpecializationClass();
+	}
 }
