@@ -3,7 +3,7 @@ package rpg_database.character_sheet.character_class;
 public enum SpecializationClasses {
 	// TODO specializationClasses!
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
-	CHAMPION("Champion", BaseClasses.WARRIOR);
+	BERSERKER("Berserker", BaseClasses.WARRIOR), CHAMPION("Champion", BaseClasses.WARRIOR);
 
 	private final String text;
 	private final BaseClasses baseClass;

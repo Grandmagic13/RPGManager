@@ -6,14 +6,19 @@ public class CharacterClass {
 	private SpecializationClasses specializationClass;
 
 	public CharacterClass(BaseClasses baseClass, SpecializationClasses specializationClass) {
-		if ((specializationClass.hasBase() && specializationClass.getBaseClass().equals(baseClass))
-				|| !specializationClass.hasBase()) {
+		if (isSpecializationCompatibleWithBaseClass(baseClass, specializationClass)) {
 			this.baseClass = baseClass;
 			this.specializationClass = specializationClass;
 		} else {
 			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass,
 					specializationClass));
 		}
+	}
+
+	private boolean isSpecializationCompatibleWithBaseClass(BaseClasses baseClass,
+			SpecializationClasses specializationClass) {
+		return (specializationClass.hasBase() && specializationClass.getBaseClass().equals(baseClass))
+				|| !specializationClass.hasBase();
 	}
 
 	public BaseClasses getBaseClass() {
@@ -25,11 +30,21 @@ public class CharacterClass {
 	}
 
 	public void setBaseClass(BaseClasses baseClass) {
-		this.baseClass = baseClass;
+		if (isSpecializationCompatibleWithBaseClass(baseClass, this.specializationClass)) {
+			this.baseClass = baseClass;
+		} else {
+			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass,
+					specializationClass));
+		}
 	}
 
 	public void setSpecializationClass(SpecializationClasses specializationClass) {
-		this.specializationClass = specializationClass;
+		if (isSpecializationCompatibleWithBaseClass(this.baseClass, specializationClass)) {
+			this.specializationClass = specializationClass;
+		} else {
+			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass,
+					specializationClass));
+		}
 	}
 
 	public boolean equals(Object obj) {

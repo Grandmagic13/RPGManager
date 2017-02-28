@@ -191,23 +191,23 @@ public class CharacterSheetUnitTests {
 	}
 
 	@Test
-	public void testSetCharacterSpecClassAssassin() {
+	public void testSetCharacterSpecClassChampion() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setSpecializationClass(SpecializationClasses.ASSASSIN);
+		testSheetClass.setSpecializationClass(SpecializationClasses.CHAMPION);
 		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		SpecializationClasses actualClass = actualSheetClass.getSpecializationClass();
-		assertEquals(SpecializationClasses.ASSASSIN, actualClass);
+		assertEquals(SpecializationClasses.CHAMPION, actualClass);
 	}
 
 	@Test
-	public void testSetCharacterSpecClassArcaneWarrior() {
+	public void testSetCharacterSpecClassBerserker() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		testSheetClass.setSpecializationClass(SpecializationClasses.ARCANE_WARRIOR);
+		testSheetClass.setSpecializationClass(SpecializationClasses.BERSERKER);
 		CharacterClass actualSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		SpecializationClasses actualClass = actualSheetClass.getSpecializationClass();
-		assertEquals(SpecializationClasses.ARCANE_WARRIOR, actualClass);
+		assertEquals(SpecializationClasses.BERSERKER, actualClass);
 	}
 
 	// TODO exception handling when setting spec class for wrong base class and
@@ -227,14 +227,22 @@ public class CharacterSheetUnitTests {
 				SpecializationClasses.CHAMPION));
 	}
 
-	// TODO make this test pass!
 	@Test(expected = InvalidCharacterClassException.class)
-	public void testSetCharacterBaseClassFromMageToWarriorArcaneWarrior() {
+	public void testSetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.MAGE,
 				SpecializationClasses.ARCANE_WARRIOR));
 		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
 		testSheetClass.setBaseClass(BaseClasses.WARRIOR);
+	}
+
+	@Test(expected = InvalidCharacterClassException.class)
+	public void testSetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(BaseClasses.MAGE,
+				SpecializationClasses.ARCANE_WARRIOR));
+		CharacterClass testSheetClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		testSheetClass.setSpecializationClass(SpecializationClasses.ASSASSIN);
 	}
 
 	@Test(expected = InvalidParameterException.class)
@@ -255,4 +263,6 @@ public class CharacterSheetUnitTests {
 		Background background = testCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.APOSTATE, background);
 	}
+	// TODO test that background knows which class it allows
+
 }
