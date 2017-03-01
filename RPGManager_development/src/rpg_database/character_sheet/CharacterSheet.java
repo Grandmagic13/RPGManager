@@ -1,20 +1,19 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import rpg_database.character_sheet.character_class.BaseClasses;
 import rpg_database.character_sheet.character_class.CharacterClass;
-import rpg_database.character_sheet.character_class.InvalidCharacterClassException;
 import rpg_database.character_sheet.character_class.SpecializationClasses;
 
 public class CharacterSheet {
 
-	private final HashMap<Class, Object> defaultData = initializeDefaultData();
+	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";
+	private final HashMap<Class<?>, Object> defaultData = initializeDefaultData();
 
-	private HashMap<Class, Object> initializeDefaultData() {
-		HashMap<Class, Object> defaultData = new HashMap<Class, Object>();
+	private HashMap<Class<?>, Object> initializeDefaultData() {
+		HashMap<Class<?>, Object> defaultData = new HashMap<Class<?>, Object>();
 		CharacterClass defaultClass = new CharacterClass(BaseClasses.WARRIOR, SpecializationClasses.NOT_APPLICABLE);
 
 		defaultData.put(String.class, "");
@@ -26,7 +25,7 @@ public class CharacterSheet {
 	}
 
 	private String entryName;
-	private HashMap<Fields, Object> characterData;
+	protected HashMap<Fields, Object> characterData;
 
 	public CharacterSheet(String entryName) {
 		this.entryName = entryName;
@@ -38,7 +37,7 @@ public class CharacterSheet {
 	}
 
 	private void putDefaultValueByFieldAllowedType(Fields field) {
-		Class allowedType = field.getAllowedClass();
+		Class<?> allowedType = field.getAllowedClass();
 		Object defaultValue = defaultData.get(allowedType);
 		characterData.put(field, allowedType.cast(defaultValue));
 	}
@@ -68,29 +67,22 @@ public class CharacterSheet {
 	// there?
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
-			switch (field) {
-			case BASECLASS:
-				setBaseClass((BaseClasses) value);
-				break;
-			case SPECIALIZATIONCLASS:
-				setSpecializationClass((SpecializationClasses) value);
-				break;
-			case BACKGROUND:
-				setBackground((Background) value);
-				break;
-			default:
-				this.characterData.put(field, value);
-				break;
-			}
+			this.characterData.put(field, value);
 		} else {
-			throw new InvalidParameterException(String.format("%s value is not an instance of %s", value.getClass().toString(), field
-					.getAllowedClass().toString()));
+			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}
 	}
 
-	private void setBaseClass(BaseClasses baseClass) {
-		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-		characterClass.setBaseClass(baseClass);
+	public void setData(Fields field, Setter value) {
+		if (value.getImplementingClass() == field.getAllowedClass()) {
+			value.setDataInSheet(this, value);
+		} else {
+			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
+		}
+	}
+
+	private String createInvalidParameterExceptionMessage(Fields field, Class<?> valueClass) {
+		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(), field.getAllowedClass().toString());
 	}
 
 	private BaseClasses getBaseClass() {
@@ -98,25 +90,8 @@ public class CharacterSheet {
 		return characterClass.getBaseClass();
 	}
 
-	private void setSpecializationClass(SpecializationClasses specializationClass) {
-		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-		characterClass.setSpecializationClass(specializationClass);
-	}
-
 	private SpecializationClasses getSpecializationClass() {
 		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
 		return characterClass.getSpecializationClass();
-	}
-
-	private void setBackground(Background background) {
-		if (!isCharacterBaseClassAllowed(background.getAllowedBaseClasses())) {
-			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", background.toString(), getData(Fields.BASECLASS)
-					.toString()));
-		}
-		this.characterData.put(Fields.BACKGROUND, background);
-	}
-
-	private boolean isCharacterBaseClassAllowed(ArrayList<BaseClasses> baseClass) {
-		return baseClass.contains(getData(Fields.BASECLASS));
 	}
 }

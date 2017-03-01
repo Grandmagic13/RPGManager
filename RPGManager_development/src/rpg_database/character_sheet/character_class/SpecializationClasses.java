@@ -1,6 +1,10 @@
 package rpg_database.character_sheet.character_class;
 
-public enum SpecializationClasses {
+import rpg_database.character_sheet.CharacterSheet;
+import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Setter;
+
+public enum SpecializationClasses implements Setter<SpecializationClasses> {
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
 	BARD("Bard", BaseClasses.ROGUE), BERSERKER("Berserker", BaseClasses.WARRIOR), BLOOD_MAGE("Blood Mage", BaseClasses.MAGE),
 	CHAMPION("Champion", BaseClasses.WARRIOR), CHEVALIER("Chevalier", BaseClasses.WARRIOR), DUELIST("Duelist", BaseClasses.ROGUE),
@@ -36,5 +40,17 @@ public enum SpecializationClasses {
 	@Override
 	public String toString() {
 		return text;
+	}
+
+	@Override
+	public void setDataInSheet(CharacterSheet characterSheet, SpecializationClasses specializationClass) {
+		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
+		characterClass.setSpecializationClass(specializationClass);
+
+	}
+
+	@Override
+	public Class<SpecializationClasses> getImplementingClass() {
+		return SpecializationClasses.class;
 	}
 }
