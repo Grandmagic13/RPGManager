@@ -248,6 +248,25 @@ public class CharacterSheetUnitTests {
 		Background background = testCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.CHASIND_WILDER, background);
 	}
+	
+	@Test(expected = InvalidParameterException.class)
+	public void testSetCharacterMoneyMalformedInput() {
+		final String malformedInput = "MALFORMED INPUT";
+		testCharacterSheet.setData(Fields.MONEY, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterMoney() {
+		int money = defaultCharacterSheet.getData(Fields.MONEY);
+		assertEquals(0, money);
+	}
+
+	@Test
+	public void testSetCharacterMoney1200() {
+		testCharacterSheet.setData(Fields.MONEY, 1200);
+		int money = testCharacterSheet.getData(Fields.MONEY);
+		assertEquals(1200, money);
+	}
 
 	// private methods
 
