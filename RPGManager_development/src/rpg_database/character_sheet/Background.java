@@ -3,9 +3,7 @@ package rpg_database.character_sheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import rpg_database.character_sheet.character_class.BaseClasses;
-
-public enum Background {
+public enum Background implements CustomSetter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?
 	ANDER_SURVIVOR("Ander Survivor", playAs_Mage_Warrior_Rogue()), APOSTATE("Apostate", playAs_Mage()),
 	ANTIVAN_WAYFARER("Antivan Wayfarer", playAs_Warrior_Rogue()), AVVAR("Avvar", playAs_Mage_Warrior_Rogue()),
@@ -54,5 +52,23 @@ public enum Background {
 	@Override
 	public String toString() {
 		return text;
+	}
+
+	@Override
+	public Class<Background> getImplementingClass() {
+		return Background.class;
+	}
+
+	@Override
+	public void setSelfInSheet(CharacterSheet characterSheet) {
+		if (!isCharacterBaseClassAllowed(characterSheet)) {
+			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", this.toString(), characterSheet.getData(
+					Fields.BASECLASS).toString()));
+		}
+		characterSheet.characterData.put(Fields.BACKGROUND, this);
+	}
+
+	private boolean isCharacterBaseClassAllowed(CharacterSheet characterSheet) {
+		return baseClasses.contains(characterSheet.getData(Fields.BASECLASS));
 	}
 }

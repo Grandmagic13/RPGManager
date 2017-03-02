@@ -1,6 +1,6 @@
-package rpg_database.character_sheet.character_class;
+package rpg_database.character_sheet;
 
-public enum SpecializationClasses {
+public enum SpecializationClasses implements CustomSetter<SpecializationClasses> {
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
 	BARD("Bard", BaseClasses.ROGUE), BERSERKER("Berserker", BaseClasses.WARRIOR), BLOOD_MAGE("Blood Mage", BaseClasses.MAGE),
 	CHAMPION("Champion", BaseClasses.WARRIOR), CHEVALIER("Chevalier", BaseClasses.WARRIOR), DUELIST("Duelist", BaseClasses.ROGUE),
@@ -36,5 +36,24 @@ public enum SpecializationClasses {
 	@Override
 	public String toString() {
 		return text;
+	}
+
+	@Override
+	public void setSelfInSheet(CharacterSheet characterSheet) {
+		BaseClasses baseClass = characterSheet.getData(Fields.BASECLASS);
+		if (isBaseClassCompatible(baseClass)) {
+			characterSheet.characterData.put(Fields.SPECIALIZATIONCLASS, this);
+		} else {
+			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass, this));
+		}
+	}
+
+	public boolean isBaseClassCompatible(BaseClasses baseClass) {
+		return (hasBase() && getBaseClass().equals(baseClass)) || !hasBase();
+	}
+
+	@Override
+	public Class<SpecializationClasses> getImplementingClass() {
+		return SpecializationClasses.class;
 	}
 }
