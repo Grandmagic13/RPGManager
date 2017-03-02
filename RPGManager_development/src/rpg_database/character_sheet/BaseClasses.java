@@ -1,6 +1,6 @@
 package rpg_database.character_sheet;
 
-public enum BaseClasses implements Setter<BaseClasses> {
+public enum BaseClasses implements CustomSetter<BaseClasses> {
 	WARRIOR("Warrior"), ROGUE("Rogue"), MAGE("Mage");
 
 	private final String text;

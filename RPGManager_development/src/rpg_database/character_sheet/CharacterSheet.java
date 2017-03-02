@@ -54,7 +54,7 @@ public class CharacterSheet {
 		}
 	}
 
-	public void setData(Fields field, Setter<?> value) {
+	public void setData(Fields field, CustomSetter<?> value) {
 		if (value.getImplementingClass() == field.getAllowedClass()) {
 			value.setSelfInSheet(this);
 		} else {

@@ -1,6 +1,6 @@
 package rpg_database.character_sheet;
 
-public enum SpecializationClasses implements Setter<SpecializationClasses> {
+public enum SpecializationClasses implements CustomSetter<SpecializationClasses> {
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
 	BARD("Bard", BaseClasses.ROGUE), BERSERKER("Berserker", BaseClasses.WARRIOR), BLOOD_MAGE("Blood Mage", BaseClasses.MAGE),
 	CHAMPION("Champion", BaseClasses.WARRIOR), CHEVALIER("Chevalier", BaseClasses.WARRIOR), DUELIST("Duelist", BaseClasses.ROGUE),
