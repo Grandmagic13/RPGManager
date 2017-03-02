@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.security.InvalidParameterException;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
@@ -21,6 +23,8 @@ public class CharacterSheetUnitTests {
 	CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
 
 	// test methods
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
@@ -40,8 +44,9 @@ public class CharacterSheetUnitTests {
 		assertEquals(expectedCharacterName, entryName);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterNameMalformedInput() {
+	@Test
+	public void expectException_SetCharacterNameMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
 		final double malformedInput = 26.12;
 		testCharacterSheet.setData(Fields.NAME, malformedInput);
 	}
@@ -61,8 +66,9 @@ public class CharacterSheetUnitTests {
 		assertEquals(expectedCharacterName, characterName);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterAgeMalformedInput() {
+	@Test
+	public void expectException_SetCharacterAgeMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.AGE, malformedInput);
 	}
@@ -82,8 +88,10 @@ public class CharacterSheetUnitTests {
 		assertEquals(expectedAge, age);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterGenderMalformedInput() {
+	@Test
+	public void expectException_SetCharacterGenderMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class java.lang.Double value is not an instance of class rpg_database.character_sheet.Gender");
 		final double malformedInput = 26.12;
 		testCharacterSheet.setData(Fields.GENDER, malformedInput);
 	}
@@ -101,8 +109,9 @@ public class CharacterSheetUnitTests {
 		assertEquals(Gender.FEMALE, gender);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterXPMalformedInput() {
+	@Test
+	public void expectException_SetCharacterXPMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.XP, malformedInput);
 	}
@@ -127,8 +136,9 @@ public class CharacterSheetUnitTests {
 		assertEquals(2500, xp);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterSpeedMalformedInput() {
+	@Test
+	public void expectException_SetCharacterSpeedMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.SPEED, malformedInput);
 	}
@@ -188,28 +198,54 @@ public class CharacterSheetUnitTests {
 		assertEquals(SpecializationClasses.BERSERKER, actualClass);
 	}
 
-	@Test(expected = InvalidCharacterClassException.class)
-	public void testSetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
+	@Test
+	public void expectException_SetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Arcane Warrior");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
 
-	@Test(expected = InvalidCharacterClassException.class)
-	public void testSetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
+	@Test
+	public void expectException_SetCharacterBaseClassFromWarriorToMage_Berserker() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Mage is not a base class of Berserker");
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
+	}
+
+	@Test
+	public void expectException_SetCharacterSpecializationClassFromArcaneWarriorToAssassin_Mage() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Mage is not a base class of Assassin");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.ASSASSIN);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterBackgroundMalformedInput() {
+	@Test
+	public void expectException_SetCharacterSpecializationClassFromBerserkerToKeeper_Warrior() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Keeper");
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.KEEPER);
+	}
+
+	@Test
+	public void expectException_SetCharacterBackgroundMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class java.lang.String value is not an instance of class rpg_database.character_sheet.Background");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.BACKGROUND, malformedInput);
 	}
 
-	@Test(expected = InvalidCharacterClassException.class)
-	public void testSetInvalidBackgroundApostateForClassWarrior() {
+	@Test
+	public void expectException_SetInvalidBackgroundApostateForClassWarrior() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Apostate is not a Warrior background!");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
 		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+	}
+
+	@Test
+	public void expectException_SetInvalidBackgroundFereldanFreemanForClassMage() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.KEEPER);
+		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
 	}
 
 	@Test
@@ -225,8 +261,9 @@ public class CharacterSheetUnitTests {
 		assertEquals(Background.CHASIND_WILDER, background);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterMoneyMalformedInput() {
+	@Test
+	public void expectException_SetCharacterMoneyMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.MONEY, malformedInput);
 	}
@@ -251,5 +288,10 @@ public class CharacterSheetUnitTests {
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
 		return characterSheet;
+	}
+
+	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
+		thrown.expect(exceptionClass);
+		thrown.expectMessage(message);
 	}
 }
