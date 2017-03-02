@@ -42,6 +42,7 @@ public class CharacterSheet {
 		return entryName;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <DataType extends Object> DataType getData(Fields field) {
 		return (DataType) (characterData.get(field));
 	}

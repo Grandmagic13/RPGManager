@@ -17,15 +17,11 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
 		SpecializationClasses specializationClass = characterSheet.getData(Fields.SPECIALIZATIONCLASS);
-		if (isSpecializationCompatible(specializationClass)) {
+		if (specializationClass.isBaseClassCompatible(this)) {
 			characterSheet.characterData.put(Fields.BASECLASS, this);
 		} else {
 			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", this, specializationClass));
 		}
-	}
-
-	private boolean isSpecializationCompatible(SpecializationClasses specializationClass) {
-		return (specializationClass.hasBase() && specializationClass.getBaseClass().equals(this)) || !specializationClass.hasBase();
 	}
 
 	@Override

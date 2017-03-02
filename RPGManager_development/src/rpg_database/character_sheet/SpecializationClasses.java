@@ -48,7 +48,7 @@ public enum SpecializationClasses implements CustomSetter<SpecializationClasses>
 		}
 	}
 
-	private boolean isBaseClassCompatible(BaseClasses baseClass) {
+	public boolean isBaseClassCompatible(BaseClasses baseClass) {
 		return (hasBase() && getBaseClass().equals(baseClass)) || !hasBase();
 	}
 
