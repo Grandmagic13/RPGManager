@@ -7,13 +7,12 @@ import java.security.InvalidParameterException;
 import org.junit.Test;
 
 import rpg_database.character_sheet.Background;
+import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
-import rpg_database.character_sheet.character_class.BaseClasses;
-import rpg_database.character_sheet.character_class.CharacterClass;
-import rpg_database.character_sheet.character_class.InvalidCharacterClassException;
-import rpg_database.character_sheet.character_class.SpecializationClasses;
+import rpg_database.character_sheet.InvalidCharacterClassException;
+import rpg_database.character_sheet.SpecializationClasses;
 
 public class CharacterSheetUnitTests {
 	// fields
@@ -147,12 +146,6 @@ public class CharacterSheetUnitTests {
 		assertEquals(12, speed);
 	}
 
-	@Test(expected = InvalidParameterException.class)
-	public void testSetCharacterClassMalformedInput() {
-		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.CHARACTERCLASS, malformedInput);
-	}
-
 	@Test
 	public void testGetDefaultCharacterBaseClass() {
 		assertEquals(BaseClasses.WARRIOR, defaultCharacterSheet.getData(Fields.BASECLASS));
@@ -161,13 +154,6 @@ public class CharacterSheetUnitTests {
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
 		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
-	}
-
-	@Test
-	public void testSetCharacterClass_Rogue_Assassin() {
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.ROGUE, SpecializationClasses.ASSASSIN);
-		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		assertEquals(new CharacterClass(BaseClasses.ROGUE, SpecializationClasses.ASSASSIN), characterClass);
 	}
 
 	@Test
@@ -200,16 +186,6 @@ public class CharacterSheetUnitTests {
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, SpecializationClasses.BERSERKER);
 		SpecializationClasses actualClass = characterSheet.getData(Fields.SPECIALIZATIONCLASS);
 		assertEquals(SpecializationClasses.BERSERKER, actualClass);
-	}
-
-	@Test(expected = InvalidCharacterClassException.class)
-	public void testCreateMalformedCharacterClass_MageAssassin() {
-		createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ASSASSIN);
-	}
-
-	@Test(expected = InvalidCharacterClassException.class)
-	public void testCreateMalformedCharacterClass_RogueChampion() {
-		createCharacterSheetWithCustomClasses(BaseClasses.ROGUE, SpecializationClasses.CHAMPION);
 	}
 
 	@Test(expected = InvalidCharacterClassException.class)
@@ -248,7 +224,7 @@ public class CharacterSheetUnitTests {
 		Background background = testCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.CHASIND_WILDER, background);
 	}
-	
+
 	@Test(expected = InvalidParameterException.class)
 	public void testSetCharacterMoneyMalformedInput() {
 		final String malformedInput = "MALFORMED INPUT";
@@ -272,7 +248,8 @@ public class CharacterSheetUnitTests {
 
 	private CharacterSheet createCharacterSheetWithCustomClasses(BaseClasses baseClass, SpecializationClasses specializationClass) {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
-		characterSheet.setData(Fields.CHARACTERCLASS, new CharacterClass(baseClass, specializationClass));
+		characterSheet.setData(Fields.BASECLASS, baseClass);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
 		return characterSheet;
 	}
 }

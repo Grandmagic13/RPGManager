@@ -1,8 +1,4 @@
-package rpg_database.character_sheet.character_class;
-
-import rpg_database.character_sheet.CharacterSheet;
-import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.Setter;
+package rpg_database.character_sheet;
 
 public enum SpecializationClasses implements Setter<SpecializationClasses> {
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),
@@ -43,10 +39,17 @@ public enum SpecializationClasses implements Setter<SpecializationClasses> {
 	}
 
 	@Override
-	public void setDataInSheet(CharacterSheet characterSheet, SpecializationClasses specializationClass) {
-		CharacterClass characterClass = characterSheet.getData(Fields.CHARACTERCLASS);
-		characterClass.setSpecializationClass(specializationClass);
+	public void setSelfInSheet(CharacterSheet characterSheet) {
+		BaseClasses baseClass = characterSheet.getData(Fields.BASECLASS);
+		if (isBaseClassCompatible(baseClass)) {
+			characterSheet.characterData.put(Fields.SPECIALIZATIONCLASS, this);
+		} else {
+			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass, this));
+		}
+	}
 
+	private boolean isBaseClassCompatible(BaseClasses baseClass) {
+		return (hasBase() && getBaseClass().equals(baseClass)) || !hasBase();
 	}
 
 	@Override

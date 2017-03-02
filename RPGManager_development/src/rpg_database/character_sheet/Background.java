@@ -3,9 +3,6 @@ package rpg_database.character_sheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import rpg_database.character_sheet.character_class.BaseClasses;
-import rpg_database.character_sheet.character_class.InvalidCharacterClassException;
-
 public enum Background implements Setter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?
 	ANDER_SURVIVOR("Ander Survivor", playAs_Mage_Warrior_Rogue()), APOSTATE("Apostate", playAs_Mage()),
@@ -63,12 +60,12 @@ public enum Background implements Setter<Background> {
 	}
 
 	@Override
-	public void setDataInSheet(CharacterSheet characterSheet, Background data) {
+	public void setSelfInSheet(CharacterSheet characterSheet) {
 		if (!isCharacterBaseClassAllowed(characterSheet)) {
-			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", data.toString(), characterSheet.getData(
+			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", this.toString(), characterSheet.getData(
 					Fields.BASECLASS).toString()));
 		}
-		characterSheet.characterData.put(Fields.BACKGROUND, data);
+		characterSheet.characterData.put(Fields.BACKGROUND, this);
 	}
 
 	private boolean isCharacterBaseClassAllowed(CharacterSheet characterSheet) {

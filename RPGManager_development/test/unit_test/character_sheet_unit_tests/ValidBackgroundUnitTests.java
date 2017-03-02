@@ -12,9 +12,9 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import rpg_database.character_sheet.Background;
+import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.character_class.BaseClasses;
 import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)

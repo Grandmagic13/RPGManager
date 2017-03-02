@@ -3,10 +3,6 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
-import rpg_database.character_sheet.character_class.BaseClasses;
-import rpg_database.character_sheet.character_class.CharacterClass;
-import rpg_database.character_sheet.character_class.SpecializationClasses;
-
 public class CharacterSheet {
 
 	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";
@@ -14,12 +10,12 @@ public class CharacterSheet {
 
 	private HashMap<Class<?>, Object> initializeDefaultData() {
 		HashMap<Class<?>, Object> defaultData = new HashMap<Class<?>, Object>();
-		CharacterClass defaultClass = new CharacterClass(BaseClasses.WARRIOR, SpecializationClasses.NOT_APPLICABLE);
 
 		defaultData.put(String.class, "");
 		defaultData.put(Integer.class, 0);
 		defaultData.put(Gender.class, Gender.MALE);
-		defaultData.put(CharacterClass.class, defaultClass);
+		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
+		defaultData.put(SpecializationClasses.class, SpecializationClasses.NOT_APPLICABLE);
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		return defaultData;
 	}
@@ -47,24 +43,9 @@ public class CharacterSheet {
 	}
 
 	public <DataType extends Object> DataType getData(Fields field) {
-		DataType data;
-		switch (field) {
-		case BASECLASS:
-			data = (DataType) getBaseClass();
-			break;
-		case SPECIALIZATIONCLASS:
-			data = (DataType) getSpecializationClass();
-			break;
-		default:
-			data = (DataType) (characterData.get(field));
-			break;
-		}
-		return data;
+		return (DataType) (characterData.get(field));
 	}
 
-	// TODO if DataType implements some interface, switch case can be
-	// implemented
-	// there?
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
 			this.characterData.put(field, value);
@@ -73,9 +54,9 @@ public class CharacterSheet {
 		}
 	}
 
-	public void setData(Fields field, Setter value) {
+	public void setData(Fields field, Setter<?> value) {
 		if (value.getImplementingClass() == field.getAllowedClass()) {
-			value.setDataInSheet(this, value);
+			value.setSelfInSheet(this);
 		} else {
 			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}
@@ -83,15 +64,5 @@ public class CharacterSheet {
 
 	private String createInvalidParameterExceptionMessage(Fields field, Class<?> valueClass) {
 		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(), field.getAllowedClass().toString());
-	}
-
-	private BaseClasses getBaseClass() {
-		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-		return characterClass.getBaseClass();
-	}
-
-	private SpecializationClasses getSpecializationClass() {
-		CharacterClass characterClass = getData(Fields.CHARACTERCLASS);
-		return characterClass.getSpecializationClass();
 	}
 }
