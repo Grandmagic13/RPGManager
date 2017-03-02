@@ -3,7 +3,9 @@ package unit_test.character_sheet_unit_tests;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
@@ -64,8 +66,13 @@ public class InvalidBackgroundUnitTests {
 	@Parameter(1)
 	public BaseClasses baseClass;
 
-	@Test(expected = InvalidCharacterClassException.class)
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
 	public void testSetInvalidBackground() {
+		thrown.expect(InvalidCharacterClassException.class);
+		thrown.expectMessage(String.format("%s is not a %s background!", background.toString(), baseClass.toString()));
 		CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
 		testCharacterSheet.setData(Fields.BASECLASS, baseClass);
 		testCharacterSheet.setData(Fields.BACKGROUND, background);

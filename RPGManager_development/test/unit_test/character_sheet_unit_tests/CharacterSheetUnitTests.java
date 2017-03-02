@@ -26,11 +26,6 @@ public class CharacterSheetUnitTests {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
-	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
-		thrown.expect(exceptionClass);
-		thrown.expectMessage(message);
-	}
-
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
 		final String expectedCharacterName = "Tibor_karilapja";
@@ -293,5 +288,10 @@ public class CharacterSheetUnitTests {
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
 		return characterSheet;
+	}
+
+	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
+		thrown.expect(exceptionClass);
+		thrown.expectMessage(message);
 	}
 }

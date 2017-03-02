@@ -3,7 +3,9 @@ package unit_test.character_sheet_unit_tests;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
@@ -66,8 +68,13 @@ public class InvalidClassAndSpecializationPairingsTests {
 	@Parameter(1)
 	public BaseClasses baseClass;
 
-	@Test(expected = InvalidCharacterClassException.class)
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
 	public void testSetInvalidSpecializationClass() {
+		thrown.expect(InvalidCharacterClassException.class);
+		thrown.expectMessage(String.format("%s is not a base class of %s", baseClass.toString(), specializationClass.toString()));
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
