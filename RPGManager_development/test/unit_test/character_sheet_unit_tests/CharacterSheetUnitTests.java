@@ -380,6 +380,106 @@ public class CharacterSheetUnitTests {
 		int mana = testCharacterSheet.getData(Fields.MANA_POINTS);
 		assertEquals(50, mana);
 	}
+	
+	@Test
+	public void expectException_SetCharacterAppearanceMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.APPEARANCE, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterAppearance() {
+		String appearance = defaultCharacterSheet.getData(Fields.APPEARANCE);
+		assertEquals("", appearance);
+	}
+
+	@Test
+	public void testSetCharacterAppearanceHandsome() {
+		testCharacterSheet.setData(Fields.APPEARANCE, "Handsome");
+		String appearance = testCharacterSheet.getData(Fields.APPEARANCE);
+		assertEquals("Handsome", appearance);
+	}
+	
+	@Test
+	public void expectException_SetCharacterDistinguishingFeaturesMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.DISTINGUISHING_FEATURES, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterDistinguishingFeatures() {
+		String distinguishingFeatures = defaultCharacterSheet.getData(Fields.DISTINGUISHING_FEATURES);
+		assertEquals("", distinguishingFeatures);
+	}
+
+	@Test
+	public void testSetCharacterDistinguishingFeaturesScarOnLeftCheek() {
+		testCharacterSheet.setData(Fields.DISTINGUISHING_FEATURES, "ScarOnLeftCheek");
+		String distinguishingFeatures = testCharacterSheet.getData(Fields.DISTINGUISHING_FEATURES);
+		assertEquals("ScarOnLeftCheek", distinguishingFeatures);
+	}
+	
+	@Test
+	public void expectException_SetCharacterOftenUsedEquipmentMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.OFTEN_USED_EQUIPMENT, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterOftenUsedEquipment() {
+		String oftenUsedEquipment = defaultCharacterSheet.getData(Fields.OFTEN_USED_EQUIPMENT);
+		assertEquals("", oftenUsedEquipment);
+	}
+
+	@Test
+	public void testSetCharacterOftenUsedEquipmentPipe() {
+		testCharacterSheet.setData(Fields.OFTEN_USED_EQUIPMENT, "Pipe");
+		String oftenUsedEquipment = testCharacterSheet.getData(Fields.OFTEN_USED_EQUIPMENT);
+		assertEquals("Pipe", oftenUsedEquipment);
+	}
+	
+	@Test
+	public void expectException_SetCharacterGoalsAndTiesMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.GOALS_AND_TIES, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterGoalsAndTies() {
+		String goalsAndTies = defaultCharacterSheet.getData(Fields.GOALS_AND_TIES);
+		assertEquals("", goalsAndTies);
+	}
+
+	@Test
+	public void testSetCharacterGoalsAndTiesHasAVengeance() {
+		testCharacterSheet.setData(Fields.GOALS_AND_TIES, "HasAVengeance");
+		String goalsAndTies = testCharacterSheet.getData(Fields.GOALS_AND_TIES);
+		assertEquals("HasAVengeance", goalsAndTies);
+	}
+	
+	@Test
+	public void expectException_SetCharacterEquipmentMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.EQUIPMENT, malformedInput);
+	}
+
+	@Test
+	public void testGetDefaultCharacterEquipment() {
+		String equipment = defaultCharacterSheet.getData(Fields.EQUIPMENT);
+		assertEquals("", equipment);
+	}
+
+	@Test
+	public void testSetCharacterEquipmentHasABackpack() {
+		testCharacterSheet.setData(Fields.EQUIPMENT, "HasABackpack");
+		String equipment = testCharacterSheet.getData(Fields.EQUIPMENT);
+		assertEquals("HasABackpack", equipment);
+	}
 
 	// private methods
 
