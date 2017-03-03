@@ -14,6 +14,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.InvalidCharacterClassException;
+import rpg_database.character_sheet.Money;
 import rpg_database.character_sheet.SpecializationClasses;
 
 public class CharacterSheetUnitTests {
@@ -279,6 +280,21 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.MONEY, 1200);
 		int money = testCharacterSheet.getData(Fields.MONEY);
 		assertEquals(1200, money);
+	}
+	
+	@Test
+	public void testGetDefaultCharacterMoneyCoins() {
+		int money = defaultCharacterSheet.getData(Fields.MONEY);
+		Money coins = new Money(money);
+		assertEquals("You have 0 gold, 0 silver and 0 copper coins", coins.toWriteConsole());
+	}
+
+	@Test
+	public void testSetCharacterMoneyCoins124576() {
+		testCharacterSheet.setData(Fields.MONEY, 124576);
+		int money = testCharacterSheet.getData(Fields.MONEY);
+		Money coins = new Money(money);
+		assertEquals("You have 12 gold, 45 silver and 76 copper coins", coins.toWriteConsole());
 	}
 	
 	@Test
