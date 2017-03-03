@@ -325,19 +325,19 @@ public class CharacterSheetUnitTests {
 	public void expectException_SetCharacterArmorMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.ARMOR, malformedInput);
+		testCharacterSheet.setData(Fields.ARMOR_RATING, malformedInput);
 	}
 
 	@Test
 	public void testGetDefaultCharacterArmor() {
-		int armor = defaultCharacterSheet.getData(Fields.ARMOR);
+		int armor = defaultCharacterSheet.getData(Fields.ARMOR_RATING);
 		assertEquals(0, armor);
 	}
 
 	@Test
 	public void testSetCharacterArmor6() {
-		testCharacterSheet.setData(Fields.ARMOR, 6);
-		int armor = testCharacterSheet.getData(Fields.ARMOR);
+		testCharacterSheet.setData(Fields.ARMOR_RATING, 6);
+		int armor = testCharacterSheet.getData(Fields.ARMOR_RATING);
 		assertEquals(6, armor);
 	}
 	
@@ -345,19 +345,19 @@ public class CharacterSheetUnitTests {
 	public void expectException_SetCharacterHealthMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.HEALTH, malformedInput);
+		testCharacterSheet.setData(Fields.HEALTH_POINTS, malformedInput);
 	}
 
 	@Test
 	public void testGetDefaultCharacterHealth() {
-		int health = defaultCharacterSheet.getData(Fields.HEALTH);
+		int health = defaultCharacterSheet.getData(Fields.HEALTH_POINTS);
 		assertEquals(0, health);
 	}
 
 	@Test
 	public void testSetCharacterHealth80() {
-		testCharacterSheet.setData(Fields.HEALTH, 80);
-		int health = testCharacterSheet.getData(Fields.HEALTH);
+		testCharacterSheet.setData(Fields.HEALTH_POINTS, 80);
+		int health = testCharacterSheet.getData(Fields.HEALTH_POINTS);
 		assertEquals(80, health);
 	}
 	
@@ -365,19 +365,19 @@ public class CharacterSheetUnitTests {
 	public void expectException_SetCharacterManaMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.MANA, malformedInput);
+		testCharacterSheet.setData(Fields.MANA_POINTS, malformedInput);
 	}
 
 	@Test
 	public void testGetDefaultCharacterMana() {
-		int mana = defaultCharacterSheet.getData(Fields.MANA);
+		int mana = defaultCharacterSheet.getData(Fields.MANA_POINTS);
 		assertEquals(0, mana);
 	}
 
 	@Test
 	public void testSetCharacterMana50() {
-		testCharacterSheet.setData(Fields.MANA, 50);
-		int mana = testCharacterSheet.getData(Fields.MANA);
+		testCharacterSheet.setData(Fields.MANA_POINTS, 50);
+		int mana = testCharacterSheet.getData(Fields.MANA_POINTS);
 		assertEquals(50, mana);
 	}
 
