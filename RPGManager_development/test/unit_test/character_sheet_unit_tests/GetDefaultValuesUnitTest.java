@@ -53,6 +53,18 @@ public class GetDefaultValuesUnitTest {
 	}
 
 	@Test
+	public void testGetDefaultSilverCoins() {
+		int coppers = defaultCharacterSheet.getData(Fields.SILVER_COIN);
+		assertEquals(0, coppers);
+	}
+
+	@Test
+	public void testGetDefaultGoldCoins() {
+		int coppers = defaultCharacterSheet.getData(Fields.GOLD_COIN);
+		assertEquals(0, coppers);
+	}
+
+	@Test
 	public void testGetDefaultCharacterLevel() {
 		int level = defaultCharacterSheet.getData(Fields.LEVEL);
 		assertEquals(0, level);

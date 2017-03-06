@@ -1,30 +1,34 @@
 package rpg_database.character_sheet;
 
-import rpg_database.character_sheet.exceptions.CoinOutOfBoundsException;
-import rpg_database.character_sheet.interfaces.MultipleFieldsSetter;
+import java.security.InvalidParameterException;
 
-public class Money implements MultipleFieldsSetter<Money, Integer> {
+import rpg_database.character_sheet.exceptions.CoinOutOfBoundsException;
+import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
+
+public class Money implements MultipleFieldsGetterSetter<Money, Integer> {
 	int money;
+	final static int COPPER_EXCHANGE = 1;
+	final static int SILVER_EXCHANGE = 100;
+	final static int GOLD_EXCHANGE = 10000;
 
 	public Money() {
 		money = 0;
 	}
 
 	public void setMoney(Fields field, int sum) {
-		if (sum > 99 || sum < 0) {
-			String endOfMessage = sum < 0 ? "negative numbers" : "larger than 99";
-			throw new CoinOutOfBoundsException(String.format("Copper coins cannot be %s!", endOfMessage));
+		if (sumExceedsDigitThreshold(field, sum)) {
+			throw new CoinOutOfBoundsException(String.format("%s cannot be %s!", field.toString(), getMessageCloser(sum)));
 		}
-		// switch (field) {
-		// case GOLD_COIN:
-		// break;
-		// case SILVER_COIN:
-		// break;
-		// case COPPER_COIN:
-		// break;
-		// default:
-		// throw new RuntimeException("FUCK");
-		// }
+		money -= (getStoredValueByField(field) * getPlaceValueByField(field));
+		money += sum * getPlaceValueByField(field);
+	}
+
+	private String getMessageCloser(int sum) {
+		return sum < 0 ? "negative number" : "larger than 99";
+	}
+
+	private boolean sumExceedsDigitThreshold(Fields field, int sum) {
+		return (sum > 99 && !field.equals(Fields.GOLD_COIN)) || sum < 0;
 	}
 
 	@Override
@@ -40,5 +44,27 @@ public class Money implements MultipleFieldsSetter<Money, Integer> {
 	@Override
 	public Class<Integer> getDataTypeClass() {
 		return Integer.class;
+	}
+
+	@Override
+	public Integer getStoredValueByField(Fields field) {
+		return getPlaceOrStoredValueByField(field, true);
+	}
+
+	private int getPlaceValueByField(Fields field) {
+		return getPlaceOrStoredValueByField(field, false);
+	}
+
+	private int getPlaceOrStoredValueByField(Fields field, boolean isGetStoredValue) {
+		switch (field) {
+		case GOLD_COIN:
+			return isGetStoredValue ? money / GOLD_EXCHANGE : GOLD_EXCHANGE;
+		case SILVER_COIN:
+			return isGetStoredValue ? (money % GOLD_EXCHANGE) / SILVER_EXCHANGE : SILVER_EXCHANGE;
+		case COPPER_COIN:
+			return isGetStoredValue ? money % SILVER_EXCHANGE : COPPER_EXCHANGE;
+		default:
+			throw new InvalidParameterException(String.format("Unknown field type: '%s'", field.toString()));
+		}
 	}
 }

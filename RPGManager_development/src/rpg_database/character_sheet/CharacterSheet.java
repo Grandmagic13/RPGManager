@@ -4,7 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.HashMap;
 
 import rpg_database.character_sheet.interfaces.CustomSetter;
-import rpg_database.character_sheet.interfaces.MultipleFieldsSetter;
+import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
 public class CharacterSheet {
 
@@ -50,14 +50,20 @@ public class CharacterSheet {
 
 	@SuppressWarnings("unchecked")
 	public <DataType extends Object> DataType getData(Fields field) {
-		return (DataType) (characterData.get(field));
+		if (field.isContainted()) {
+			Object containerObject = this.characterData.get(field.getContainingField());
+			return (DataType) MultipleFieldsGetterSetter.class.cast(containerObject).getStoredValueByField(field);
+		} else {
+			return (DataType) (characterData.get(field));
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
 			if (field.isContainted()) {
 				Object containerObject = this.characterData.get(field.getContainingField());
-				MultipleFieldsSetter.class.cast(containerObject).setSelfValueByField(field, value);
+				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
 			} else {
 				this.characterData.put(field, value);
 			}
