@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
+import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum Background implements CustomSetter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?

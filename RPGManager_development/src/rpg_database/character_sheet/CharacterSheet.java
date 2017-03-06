@@ -3,6 +3,9 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.interfaces.CustomSetter;
+import rpg_database.character_sheet.interfaces.MultipleFieldsSetter;
+
 public class CharacterSheet {
 
 	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";

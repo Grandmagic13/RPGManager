@@ -1,6 +1,7 @@
 package rpg_database.character_sheet;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
+import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum SpecializationClasses implements CustomSetter<SpecializationClasses> {
 	NOT_APPLICABLE("N/A"), ARCANE_WARRIOR("Arcane Warrior", BaseClasses.MAGE), ASSASSIN("Assassin", BaseClasses.ROGUE),

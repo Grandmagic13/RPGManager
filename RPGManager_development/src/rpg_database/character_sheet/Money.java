@@ -1,6 +1,7 @@
 package rpg_database.character_sheet;
 
 import rpg_database.character_sheet.exceptions.CoinOutOfBoundsException;
+import rpg_database.character_sheet.interfaces.MultipleFieldsSetter;
 
 public class Money implements MultipleFieldsSetter<Money, Integer> {
 	int money;

@@ -1,4 +1,6 @@
-package rpg_database.character_sheet;
+package rpg_database.character_sheet.interfaces;
+
+import rpg_database.character_sheet.Fields;
 
 public interface MultipleFieldsSetter<DATA extends MultipleFieldsSetter<DATA, DATATYPE>, DATATYPE> {
 	public Class<DATA> getImplementingClass();
