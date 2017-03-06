@@ -17,6 +17,7 @@ public class CharacterSheet {
 		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
 		defaultData.put(SpecializationClasses.class, SpecializationClasses.NOT_APPLICABLE);
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
+		defaultData.put(Money.class, new Money());
 		return defaultData;
 	}
 
@@ -28,7 +29,9 @@ public class CharacterSheet {
 		this.characterData = new HashMap<>();
 
 		for (Fields field : Fields.values()) {
-			putDefaultValueByFieldAllowedType(field);
+			if (!field.isContainted()) {
+				putDefaultValueByFieldAllowedType(field);
+			}
 		}
 	}
 
@@ -49,7 +52,12 @@ public class CharacterSheet {
 
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
-			this.characterData.put(field, value);
+			if (field.isContainted()) {
+				Object containerObject = this.characterData.get(field.getContainingField());
+				MultipleFieldsSetter.class.cast(containerObject).setSelfValueByField(field, value);
+			} else {
+				this.characterData.put(field, value);
+			}
 		} else {
 			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}

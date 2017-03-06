@@ -1,25 +1,43 @@
 package rpg_database.character_sheet;
 
-public class Money {
-	int gold;
-	int silver;
-	int copper;
-	int money_temp;
-	public Money(int money){
-		while(money >= 10000){
-			money_temp = money / 10000;
-			money = money % 10000;
-			gold = money_temp;
-		}
-		while(money >= 100){
-			money_temp = money / 100;
-			money = money % 100;
-			silver = money_temp;
-		}
-		copper = money;
+import rpg_database.character_sheet.exceptions.CoinOutOfBoundsException;
+
+public class Money implements MultipleFieldsSetter<Money, Integer> {
+	int money;
+
+	public Money() {
+		money = 0;
 	}
-	public String toWriteConsole(){
-		String coins = String.format("You have %s gold, %s silver and %s copper coins", gold, silver, copper);
-		return coins;
+
+	public void setMoney(Fields field, int sum) {
+		if (sum > 99 || sum < 0) {
+			String endOfMessage = sum < 0 ? "negative numbers" : "larger than 99";
+			throw new CoinOutOfBoundsException(String.format("Copper coins cannot be %s!", endOfMessage));
+		}
+		// switch (field) {
+		// case GOLD_COIN:
+		// break;
+		// case SILVER_COIN:
+		// break;
+		// case COPPER_COIN:
+		// break;
+		// default:
+		// throw new RuntimeException("FUCK");
+		// }
+	}
+
+	@Override
+	public Class<Money> getImplementingClass() {
+		return Money.class;
+	}
+
+	@Override
+	public void setSelfValueByField(Fields field, Integer value) {
+		setMoney(field, value);
+	}
+
+	@Override
+	public Class<Integer> getDataTypeClass() {
+		return Integer.class;
 	}
 }
