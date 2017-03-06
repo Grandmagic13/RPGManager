@@ -15,7 +15,7 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.InvalidCharacterClassException;
+import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)

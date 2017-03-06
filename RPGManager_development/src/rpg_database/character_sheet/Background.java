@@ -3,6 +3,8 @@ package rpg_database.character_sheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
+
 public enum Background implements CustomSetter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?
 	ANDER_SURVIVOR("Ander Survivor", playAs_Mage_Warrior_Rogue()), APOSTATE("Apostate", playAs_Mage()),

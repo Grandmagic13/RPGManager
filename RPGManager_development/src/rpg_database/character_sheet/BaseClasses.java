@@ -1,5 +1,7 @@
 package rpg_database.character_sheet;
 
+import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
+
 public enum BaseClasses implements CustomSetter<BaseClasses> {
 	WARRIOR("Warrior"), ROGUE("Rogue"), MAGE("Mage");
 

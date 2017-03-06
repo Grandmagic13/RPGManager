@@ -12,28 +12,16 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.InvalidCharacterClassException;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
+
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 public class BaseClassDependentUnitTests {
-	// fields
-
-	final CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
 
 	// test methods
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-
-	@Test
-	public void testGetDefaultCharacterBaseClass() {
-		assertEquals(BaseClasses.WARRIOR, defaultCharacterSheet.getData(Fields.BASECLASS));
-	}
-
-	@Test
-	public void testGetDefaultCharacterSpecializationClass() {
-		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
-	}
 
 	@Test
 	public void testSetCharacterBaseClassMage() {
@@ -115,12 +103,6 @@ public class BaseClassDependentUnitTests {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.KEEPER);
 		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
-	}
-
-	@Test
-	public void testGetDefaultBackground() {
-		Background background = defaultCharacterSheet.getData(Fields.BACKGROUND);
-		assertEquals(Background.ANDER_SURVIVOR, background);
 	}
 
 	@Test
