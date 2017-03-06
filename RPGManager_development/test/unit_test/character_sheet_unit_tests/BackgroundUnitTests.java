@@ -18,11 +18,11 @@ import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 public class BackgroundUnitTests {
-
-	// test methods
+	// test set up
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
+	// test methods
 	@Test
 	public void expectException_SetCharacterBackgroundMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class,

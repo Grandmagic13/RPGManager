@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.security.InvalidParameterException;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,12 +15,18 @@ import rpg_database.character_sheet.Gender;
 
 public class CharacterSheetUnitTests {
 	// fields
-	CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
+	CharacterSheet testCharacterSheet;
 
-	// test methods
+	// test set-up
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
+	@Before
+	public void clearCharacterSheet() {
+		testCharacterSheet = new CharacterSheet("TestCharacterSheet");
+	}
+
+	// test methods
 	// exception tests
 	@Test
 	public void expectException_SetCharacterNameMalformedInput() {
@@ -126,9 +133,8 @@ public class CharacterSheetUnitTests {
 		final double malformedInput = 21.10;
 		testCharacterSheet.setData(Fields.EQUIPMENT, malformedInput);
 	}
-	// functional unit tests
 
-	// TODO! Character exceptions? special characters? @&!%? system unallowed
+	// functional unit tests
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
 		final String expectedCharacterName = "Tibor_karilapja";
