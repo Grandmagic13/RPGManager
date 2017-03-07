@@ -3,6 +3,9 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.interfaces.CustomSetter;
+import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
+
 public class CharacterSheet {
 
 	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";
@@ -17,6 +20,7 @@ public class CharacterSheet {
 		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
 		defaultData.put(SpecializationClasses.class, SpecializationClasses.NOT_APPLICABLE);
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
+		defaultData.put(Money.class, new Money());
 		return defaultData;
 	}
 
@@ -28,7 +32,9 @@ public class CharacterSheet {
 		this.characterData = new HashMap<>();
 
 		for (Fields field : Fields.values()) {
-			putDefaultValueByFieldAllowedType(field);
+			if (!field.isContainted()) {
+				putDefaultValueByFieldAllowedType(field);
+			}
 		}
 	}
 
@@ -44,12 +50,23 @@ public class CharacterSheet {
 
 	@SuppressWarnings("unchecked")
 	public <DataType extends Object> DataType getData(Fields field) {
-		return (DataType) (characterData.get(field));
+		if (field.isContainted()) {
+			Object containerObject = this.characterData.get(field.getContainingField());
+			return (DataType) MultipleFieldsGetterSetter.class.cast(containerObject).getStoredValueByField(field);
+		} else {
+			return (DataType) (characterData.get(field));
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
-			this.characterData.put(field, value);
+			if (field.isContainted()) {
+				Object containerObject = this.characterData.get(field.getContainingField());
+				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
+			} else {
+				this.characterData.put(field, value);
+			}
 		} else {
 			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}
