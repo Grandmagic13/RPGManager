@@ -25,7 +25,10 @@ public enum Fields {
 	}
 
 	public Fields getContainingField() {
-		return containingField;
+		if (containingField == null)
+			throw new NullPointerException(String.format("%s is not contained by another field!", this.toString()));
+		else
+			return containingField;
 	}
 
 	public boolean isContainted() {
