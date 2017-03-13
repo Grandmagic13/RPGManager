@@ -134,6 +134,14 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.EQUIPMENT, malformedInput);
 	}
 
+	@Test
+	public void expectException_SetCharacterAttributeMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class java.lang.Double value is not an instance of class rpg_database.character_sheet.CharacterAttribute");
+		final double malformedInput = 21.10;
+		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH, malformedInput);
+	}
+
 	// functional unit tests
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
