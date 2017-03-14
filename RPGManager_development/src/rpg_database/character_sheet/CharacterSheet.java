@@ -11,7 +11,6 @@ public class CharacterSheet {
 	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";
 	private final HashMap<Class<?>, Object> defaultData = initializeDefaultData();
 
-	@Deprecated
 	private HashMap<Class<?>, Object> initializeDefaultData() {
 		HashMap<Class<?>, Object> defaultData = new HashMap<Class<?>, Object>();
 
@@ -19,7 +18,7 @@ public class CharacterSheet {
 		defaultData.put(Integer.class, 0);
 		defaultData.put(Gender.class, Gender.MALE);
 		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
-		defaultData.put(SpecializationClassesSet.class, new SpecializationClassesSet(SpecializationClasses.NOT_APPLICABLE));
+		defaultData.put(SpecializationClassesSet.class, new SpecializationClassesSet());
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
 		return defaultData;

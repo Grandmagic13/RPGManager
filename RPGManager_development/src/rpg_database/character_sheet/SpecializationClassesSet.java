@@ -13,6 +13,10 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 
 	private HashSet<SpecializationClasses> specClassesSet;
 
+	public SpecializationClassesSet() {
+		specClassesSet = new HashSet<>();
+	}
+
 	public SpecializationClassesSet(SpecializationClasses specializationClass) {
 		specClassesSet = new HashSet<>();
 		specClassesSet.add(specializationClass);

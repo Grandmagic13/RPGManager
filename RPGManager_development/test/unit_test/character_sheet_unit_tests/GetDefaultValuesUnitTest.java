@@ -130,10 +130,9 @@ public class GetDefaultValuesUnitTest {
 		assertEquals(BaseClasses.WARRIOR, defaultCharacterSheet.getData(Fields.BASECLASS));
 	}
 
-	@Deprecated
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
-		assertEquals(new SpecializationClassesSet(SpecializationClasses.NOT_APPLICABLE), defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASSES));
+		assertEquals(new SpecializationClassesSet(), defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
 
 	@Test
