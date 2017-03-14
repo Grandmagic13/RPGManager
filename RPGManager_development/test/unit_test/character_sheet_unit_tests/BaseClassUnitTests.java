@@ -14,11 +14,22 @@ import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
+import java.security.InvalidParameterException;
+
 public class BaseClassUnitTests {
 
 	// test methods
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void expectException_SetBaseClassesMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class java.lang.String value is not an instance of class rpg_database.character_sheet.BaseClasses");
+		final String malformedInput = "MALFORMED INPUT";
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.BASECLASS, malformedInput);
+	}
 
 	@Test
 	public void testSetCharacterBaseClassMage() {
