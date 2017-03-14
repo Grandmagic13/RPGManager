@@ -10,6 +10,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class GetDefaultValuesUnitTest {
 	// fields
@@ -129,9 +130,10 @@ public class GetDefaultValuesUnitTest {
 		assertEquals(BaseClasses.WARRIOR, defaultCharacterSheet.getData(Fields.BASECLASS));
 	}
 
+	@Deprecated
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
-		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
+		assertEquals(new SpecializationClassesSet(SpecializationClasses.NOT_APPLICABLE), defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
 
 	@Test

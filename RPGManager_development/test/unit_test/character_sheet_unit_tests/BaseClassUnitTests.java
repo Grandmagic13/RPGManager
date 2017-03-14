@@ -10,6 +10,7 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
@@ -50,14 +51,16 @@ public class BaseClassUnitTests {
 	@Test
 	public void expectException_SetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Arcane Warrior");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, new SpecializationClassesSet(
+				SpecializationClasses.ARCANE_WARRIOR));
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
 
 	@Test
 	public void expectException_SetCharacterBaseClassFromWarriorToMage_Berserker() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Mage is not a base class of Berserker");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, new SpecializationClassesSet(
+				SpecializationClasses.BERSERKER));
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 	}
 
