@@ -62,6 +62,7 @@ public class ValidClassAndSpecializationPairingsTests {
 	@Test
 	public void testSetSpecializationClass() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.LEVEL, 6);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, specializationClassSingleton);
 		assertEquals(specializationClassSingleton, characterSheet.getData(Fields.SPECIALIZATIONCLASSES));

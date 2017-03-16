@@ -35,16 +35,16 @@ public class BackgroundUnitTests {
 	@Test
 	public void expectException_SetInvalidBackgroundApostateForClassWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Apostate is not a Warrior background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, new SpecializationClassesSet(
-				SpecializationClasses.BERSERKER));
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
 	}
 
 	@Test
 	public void expectException_SetInvalidBackgroundFereldanFreemanForClassMage() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, new SpecializationClassesSet(
-				SpecializationClasses.KEEPER));
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
+				SpecializationClasses.KEEPER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
 	}
 
