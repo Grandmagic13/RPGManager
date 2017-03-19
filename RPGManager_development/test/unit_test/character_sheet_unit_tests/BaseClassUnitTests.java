@@ -1,6 +1,20 @@
 package unit_test.character_sheet_unit_tests;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_COMMUNICATION_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_CONSTITUTION_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_CUNNING_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_DEXTERITY_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_MAGIC_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_PERCEPTION_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_STRENGTH_MAJORITY;
+import static rpg_database.character_sheet.Fields.ATTRIBUTE_WILLPOWER_MAJORITY;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClasses;
+
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,10 +25,6 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
-
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
-
-import java.security.InvalidParameterException;
 
 public class BaseClassUnitTests {
 
@@ -61,7 +71,49 @@ public class BaseClassUnitTests {
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 	}
 
+	@Test
+	public void testSetCharacterBaseClassModifiesMajorityMage() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
+		ArrayList<Boolean> expectedMajorities = new ArrayList<Boolean>(Arrays.asList(false, false, true, false, true, false, false, true));
+		ArrayList<Boolean> actualMajorities = getActualMajorities(characterSheet);
+		assertEquals(expectedMajorities, actualMajorities);
+	}
+
+	@Test
+	public void testSetCharacterBaseClassModifiesMajorityWarrior() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
+		ArrayList<Boolean> expectedMajorities = new ArrayList<Boolean>(Arrays.asList(false, true, false, true, false, false, true, false));
+		ArrayList<Boolean> actualMajorities = getActualMajorities(characterSheet);
+		assertEquals(expectedMajorities, actualMajorities);
+	}
+
+	@Test
+	public void testSetCharacterBaseClassModifiesMajorityRogue() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
+		ArrayList<Boolean> expectedMajorities = new ArrayList<Boolean>(Arrays.asList(true, false, false, true, false, true, false, false));
+		ArrayList<Boolean> actualMajorities = getActualMajorities(characterSheet);
+		assertEquals(expectedMajorities, actualMajorities);
+	}
+
 	// private methods
+
+	private ArrayList<Boolean> getActualMajorities(CharacterSheet characterSheet) {
+		ArrayList<Fields> attributeMajorities = new ArrayList<>(Arrays.asList(ATTRIBUTE_COMMUNICATION_MAJORITY, ATTRIBUTE_CONSTITUTION_MAJORITY,
+				ATTRIBUTE_CUNNING_MAJORITY, ATTRIBUTE_DEXTERITY_MAJORITY, ATTRIBUTE_MAGIC_MAJORITY, ATTRIBUTE_PERCEPTION_MAJORITY,
+				ATTRIBUTE_STRENGTH_MAJORITY, ATTRIBUTE_WILLPOWER_MAJORITY));
+		ArrayList<Boolean> actualMajorities = new ArrayList<>();
+		for (Fields attributeMajority : attributeMajorities) {
+			actualMajorities.add(getMajority(characterSheet, attributeMajority));
+		}
+		return actualMajorities;
+	}
+
+	private Boolean getMajority(CharacterSheet characterSheet, Fields field) {
+		return characterSheet.<Boolean>getData(field);
+	}
 
 	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
 		thrown.expect(exceptionClass);

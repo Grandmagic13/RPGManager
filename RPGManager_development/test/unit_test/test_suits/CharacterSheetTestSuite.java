@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 import unit_test.character_sheet_unit_tests.BackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.BaseClassUnitTests;
+import unit_test.character_sheet_unit_tests.CharacterAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.CharacterSheetUnitTests;
 import unit_test.character_sheet_unit_tests.FieldsUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
@@ -20,7 +21,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 @Suite.SuiteClasses({ GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class, CharacterSheetUnitTests.class, FieldsUnitTests.class,
 		BaseClassUnitTests.class, SpecializationClassUnitTests.class, BackgroundUnitTests.class, InvalidBackgroundUnitTests.class,
 		InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class,
-		MoneyUnitTests.class })
+		MoneyUnitTests.class, CharacterAttributeUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

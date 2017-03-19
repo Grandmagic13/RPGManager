@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
+import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 public class CharacterSheetUnitTests {
 	// fields
@@ -135,11 +136,23 @@ public class CharacterSheetUnitTests {
 	}
 
 	@Test
-	public void expectException_SetCharacterAttributeMalformedInput() {
-		expectExceptionWithMessage(InvalidParameterException.class,
-				"class java.lang.Double value is not an instance of class rpg_database.character_sheet.CharacterAttribute");
-		final double malformedInput = 21.10;
-		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH, malformedInput);
+	public void expectException_SetCharacterAttributeValueMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
+		final String malformedInput = "MALFORMED INPUT";
+		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH_VALUE, malformedInput);
+	}
+
+	@Test
+	public void expectException_SetCharacterAttributeMajorityMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Boolean");
+		final String malformedInput = "MALFORMED INPUT";
+		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH_MAJORITY, malformedInput);
+	}
+
+	@Test
+	public void expectException_SetCharacterAttributeMajority() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "To change majority please modify the base class!");
+		testCharacterSheet.setData(Fields.ATTRIBUTE_CUNNING_MAJORITY, true);
 	}
 
 	// functional unit tests
