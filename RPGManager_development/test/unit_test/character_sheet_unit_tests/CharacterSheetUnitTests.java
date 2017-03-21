@@ -30,6 +30,18 @@ public class CharacterSheetUnitTests {
 	// test methods
 	// exception tests
 	@Test
+	public void expectException_SetCharacterEntryNameMalformedInputSpecialCharacters() {
+		expectExceptionWithMessage(IllegalArgumentException.class, "Only alphabet characters and '_' are allowed!");
+		new CharacterSheet("T%bor_k!ri*lpja}");
+	}
+
+	@Test
+	public void expectException_SetCharacterEntryNameMalformedInputSpace() {
+		expectExceptionWithMessage(IllegalArgumentException.class, "Only alphabet characters and '_' are allowed!");
+		new CharacterSheet("Tibor Karilapja");
+	}
+
+	@Test
 	public void expectException_SetCharacterNameMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.Double value is not an instance of class java.lang.String");
 		final double malformedInput = 26.12;
