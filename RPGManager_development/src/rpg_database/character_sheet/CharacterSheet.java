@@ -44,7 +44,12 @@ public class CharacterSheet {
 
 	private void putDefaultValueByFieldAllowedType(Fields field) {
 		Class<?> allowedType = field.getAllowedClass();
-		Object defaultValue = defaultData.get(allowedType);
+		Object defaultValue;
+		if (allowedType == CharacterAttribute.class) {
+			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field));
+		} else {
+			defaultValue = defaultData.get(allowedType);
+		}
 		characterData.put(field, allowedType.cast(defaultValue));
 	}
 
