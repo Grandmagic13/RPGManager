@@ -32,7 +32,11 @@ public class CharacterSheet {
 	protected HashMap<Fields, Object> characterData;
 
 	public CharacterSheet(String entryName) {
-		this.entryName = entryName;
+		if (entryName.matches("^(?U)[\\p{Alpha}_]+")) {
+			this.entryName = entryName;
+		} else {
+			throw new IllegalArgumentException("Only alphabet characters and '_' are allowed!");
+		}
 		this.characterData = new HashMap<>();
 
 		for (Fields field : Fields.values()) {
