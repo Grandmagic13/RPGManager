@@ -2,6 +2,9 @@ package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashSet;
+import java.util.List;
+
 import org.junit.Test;
 
 import rpg_database.character_sheet.Background;
@@ -9,6 +12,7 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
+import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.SpecializationClasses;
 
 public class GetDefaultValuesUnitTest {
@@ -138,5 +142,14 @@ public class GetDefaultValuesUnitTest {
 	public void testGetDefaultBackground() {
 		Background background = defaultCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.ANDER_SURVIVOR, background);
+	}
+	
+	@Test
+	public void testGetDefaultLanguages() {
+		HashSet<Languages> defaultLanguages = new HashSet<Languages>(); 
+		defaultLanguages.add(Languages.TRADE_TONGUE);
+		defaultLanguages.add(Languages.ANDER);
+		HashSet<Languages> language = defaultCharacterSheet.getData(Fields.LANGUAGES);
+		assertEquals(defaultLanguages, language);
 	}
 }

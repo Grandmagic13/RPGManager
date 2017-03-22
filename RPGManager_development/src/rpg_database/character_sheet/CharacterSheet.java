@@ -1,7 +1,10 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
@@ -21,6 +24,7 @@ public class CharacterSheet {
 		defaultData.put(SpecializationClasses.class, SpecializationClasses.NOT_APPLICABLE);
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
+		defaultData.put(LanguagesSetter.class, new LanguagesSetter());
 		return defaultData;
 	}
 
@@ -53,7 +57,7 @@ public class CharacterSheet {
 		if (field.isContainted()) {
 			Object containerObject = this.characterData.get(field.getContainingField());
 			return (DataType) MultipleFieldsGetterSetter.class.cast(containerObject).getStoredValueByField(field);
-		} else {
+		}else {
 			return (DataType) (characterData.get(field));
 		}
 	}
@@ -66,7 +70,7 @@ public class CharacterSheet {
 				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
 			} else {
 				this.characterData.put(field, value);
-			}
+			} 
 		} else {
 			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}
