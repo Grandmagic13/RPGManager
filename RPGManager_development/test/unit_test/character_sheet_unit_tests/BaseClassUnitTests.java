@@ -1,6 +1,5 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static rpg_database.character_sheet.Fields.ATTRIBUTE_COMMUNICATION_MAJORITY;
 import static rpg_database.character_sheet.Fields.ATTRIBUTE_CONSTITUTION_MAJORITY;
@@ -10,7 +9,7 @@ import static rpg_database.character_sheet.Fields.ATTRIBUTE_MAGIC_MAJORITY;
 import static rpg_database.character_sheet.Fields.ATTRIBUTE_PERCEPTION_MAJORITY;
 import static rpg_database.character_sheet.Fields.ATTRIBUTE_STRENGTH_MAJORITY;
 import static rpg_database.character_sheet.Fields.ATTRIBUTE_WILLPOWER_MAJORITY;
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClasses;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 public class BaseClassUnitTests {
@@ -60,14 +60,16 @@ public class BaseClassUnitTests {
 	@Test
 	public void expectException_SetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Arcane Warrior");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.ARCANE_WARRIOR);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
+				SpecializationClasses.ARCANE_WARRIOR), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
 
 	@Test
 	public void expectException_SetCharacterBaseClassFromWarriorToMage_Berserker() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Mage is not a base class of Berserker");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 	}
 

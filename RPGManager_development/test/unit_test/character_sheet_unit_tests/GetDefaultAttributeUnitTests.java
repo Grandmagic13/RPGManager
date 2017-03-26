@@ -11,7 +11,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import rpg_database.character_sheet.CharacterAttribute;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 

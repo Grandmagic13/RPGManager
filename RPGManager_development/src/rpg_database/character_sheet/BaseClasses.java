@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
-import unit_test.character_sheet_unit_tests.CharacterAttributeUnitTests;
 
 public enum BaseClasses implements CustomSetter<BaseClasses> {
 	WARRIOR("Warrior"), ROGUE("Rogue"), MAGE("Mage");
@@ -41,15 +40,16 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
-		SpecializationClasses specializationClass = characterSheet.getData(Fields.SPECIALIZATIONCLASS);
-		if (specializationClass.isBaseClassCompatible(this)) {
-			characterSheet.characterData.put(Fields.BASECLASS, this);
-			for (Fields attribute : CharacterAttribute.ATTRIBUTES) {
-				CharacterAttribute characterAttribute = (CharacterAttribute) characterSheet.characterData.get(attribute);
-				characterAttribute.setMajority(isAttributeMajor(attribute));
+		SpecializationClassesSet specializationClassesSet = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		for (SpecializationClasses specializationClass : specializationClassesSet) {
+			if (!specializationClass.isBaseClassCompatible(this)) {
+				throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", this, specializationClass.toString()));
 			}
-		} else {
-			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", this, specializationClass));
+		}
+		characterSheet.characterData.put(Fields.BASECLASS, this);
+		for (Fields attribute : CharacterAttribute.ATTRIBUTES) {
+			CharacterAttribute characterAttribute = (CharacterAttribute) characterSheet.characterData.get(attribute);
+			characterAttribute.setMajority(isAttributeMajor(attribute));
 		}
 	}
 

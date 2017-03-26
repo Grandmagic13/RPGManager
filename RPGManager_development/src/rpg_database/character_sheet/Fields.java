@@ -2,7 +2,7 @@ package rpg_database.character_sheet;
 
 public enum Fields {
 	NAME(String.class), AGE(Integer.class), XP(Integer.class), GENDER(Gender.class), SPEED(Integer.class), BACKGROUND(Background.class),
-	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASS(SpecializationClasses.class), LEVEL(Integer.class), DEFENSE(Integer.class),
+	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASSES(SpecializationClassesSet.class), LEVEL(Integer.class), DEFENSE(Integer.class),
 	ARMOR_RATING(Integer.class), HEALTH_POINTS(Integer.class), MANA_POINTS(Integer.class), APPEARANCE(String.class),
 	DISTINGUISHING_FEATURES(String.class), OFTEN_USED_EQUIPMENT(String.class), GOALS_AND_TIES(String.class), EQUIPMENT(String.class),
 	MONEY(Money.class), GOLD_COIN(Integer.class, MONEY), SILVER_COIN(Integer.class, MONEY), COPPER_COIN(Integer.class, MONEY),

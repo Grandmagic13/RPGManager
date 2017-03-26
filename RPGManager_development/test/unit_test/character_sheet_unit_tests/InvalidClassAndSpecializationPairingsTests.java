@@ -15,6 +15,7 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import unit_test.character_sheet_unit_tests.resources.SpecializationCompatibilityData;
 
@@ -34,36 +35,30 @@ public class InvalidClassAndSpecializationPairingsTests {
 		for (BaseClasses baseClass : BaseClasses.values()) {
 			switch (baseClass) {
 			case MAGE:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.warriorSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.rogueSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.warriorSpecializations);
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.rogueSpecializations);
 				break;
 			case ROGUE:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.mageSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.warriorSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.mageSpecializations);
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.warriorSpecializations);
 				break;
 			case WARRIOR:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.rogueSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.mageSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.rogueSpecializations);
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.mageSpecializations);
 				break;
 			}
 		}
 		return parameters;
 	}
 
+	private static void addParameters(ArrayList<Object[]> parameters, BaseClasses baseClass, SpecializationClasses[] specializationClasses) {
+		for (SpecializationClasses specializationClass : specializationClasses) {
+			parameters.add(new Object[] { new SpecializationClassesSet(specializationClass), baseClass });
+		}
+	}
+
 	@Parameter(0)
-	public SpecializationClasses specializationClass;
+	public SpecializationClassesSet specializationClassSingleton;
 
 	@Parameter(1)
 	public BaseClasses baseClass;
@@ -74,9 +69,9 @@ public class InvalidClassAndSpecializationPairingsTests {
 	@Test
 	public void testSetInvalidSpecializationClass() {
 		thrown.expect(InvalidCharacterClassException.class);
-		thrown.expectMessage(String.format("%s is not a base class of %s", baseClass.toString(), specializationClass.toString()));
+		thrown.expectMessage(String.format("%s is not a base class of %s", baseClass.toString(), specializationClassSingleton.toString()));
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, baseClass);
-		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, specializationClassSingleton);
 	}
 }

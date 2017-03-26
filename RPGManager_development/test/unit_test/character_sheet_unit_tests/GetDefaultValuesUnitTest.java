@@ -9,11 +9,11 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
-import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class GetDefaultValuesUnitTest {
 	// fields
-	final CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
+	final private CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
 
 	// test methods
 	@Test
@@ -131,7 +131,7 @@ public class GetDefaultValuesUnitTest {
 
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
-		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
+		assertEquals(new SpecializationClassesSet(), defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
 
 	@Test
