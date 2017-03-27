@@ -1,10 +1,16 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_THIRD_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevel;
 
 import java.security.InvalidParameterException;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,7 +39,6 @@ public class SpecializationClassUnitTests {
 	private final String MESSAGE_CAN_NOT_TAKE_1_SPECIALIZATION = "Character can't take 1 specialization(s) until level 6!";
 	private final String MESSAGE_CAN_NOT_TAKE_2_SPECIALIZATIONS = "Character can't take 2 specialization(s) until level 14!";
 	private final String MESSAGE_CAN_NOT_TAKE_3_SPECIALIZATIONS = "Character can't take 3 specialization(s) until level 22!";
-	private final String MESSAGE_WARRIOR_NOT_BASECLASS_OF_KEEPER = "Warrior is not a base class of Keeper";
 
 	// test methods
 	@Rule
@@ -85,7 +90,7 @@ public class SpecializationClassUnitTests {
 
 	@Test
 	public void expectException_SetCharacterSpecializationClassFromBerserkerToKeeper_Warrior() {
-		expectExceptionWithMessage(InvalidCharacterClassException.class, MESSAGE_WARRIOR_NOT_BASECLASS_OF_KEEPER);
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Keeper");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
 				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, KEEPER);
@@ -93,7 +98,9 @@ public class SpecializationClassUnitTests {
 
 	@Test
 	public void expectException_SetAllFalseCharacterSpecializationClassKeeperAndSpiritHealer_Warrior() {
-		expectExceptionWithMessage(InvalidCharacterClassException.class, MESSAGE_WARRIOR_NOT_BASECLASS_OF_KEEPER);
+		String regexPattern = "\\QWarrior is not a base class of Keeper\\E|\\QWarrior is not a base class of Arcane Warrior\\E";
+		thrown.expect(InvalidCharacterClassException.class);
+		thrown.expectMessage(matchesRegex(regexPattern));
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(),
 				LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, KEEPER_ARCANE_WARRIOR);
@@ -210,11 +217,30 @@ public class SpecializationClassUnitTests {
 		thrown.expectMessage(message);
 	}
 
-	public static CharacterSheet createCharacterSheetWithCustomLevelBaseClass(int level, BaseClasses baseClass) {
+	private static CharacterSheet createCharacterSheetWithCustomLevelBaseClass(int level, BaseClasses baseClass) {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.LEVEL, level);
 		return characterSheet;
+	}
+
+	private Matcher<String> matchesRegex(final String regex) {
+		return new TypeSafeMatcher<String>() {
+			@Override
+			protected boolean matchesSafely(final String item) {
+				return item.matches(regex);
+			}
+
+			@Override
+			public void describeTo(Description description) {
+				description.appendText("matches pattern ").appendValue(regex);
+			}
+
+			@Override
+			protected void describeMismatchSafely(String item, Description mismatchDescription) {
+				mismatchDescription.appendText("does not match");
+			}
+		};
 	}
 
 }
