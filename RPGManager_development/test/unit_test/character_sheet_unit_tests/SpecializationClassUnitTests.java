@@ -7,6 +7,7 @@ import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_RE
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevel;
 
 import java.security.InvalidParameterException;
+import java.util.Arrays;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -110,9 +111,36 @@ public class SpecializationClassUnitTests {
 	public void expectException_SetOnlyOneFalseCharacterSpecializationClassBerserkerAndSpiritHealer_Warrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Spirit Healer");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(),
-				LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
+				LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, new SpecializationClassesSet(SpecializationClasses.BERSERKER,
 				SpecializationClasses.SPIRIT_HEALER));
+	}
+
+	@Test
+	public void expectException_AddOnlyOneFalseCharacterSpecializationClassBerserkerAndSpiritHealer_Warrior() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Spirit Healer");
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(),
+				LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, new SpecializationClassesSet(SpecializationClasses.BERSERKER));
+		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.SPIRIT_HEALER);
+	}
+
+	@Test
+	public void expectException_AddAllOnlyOneFalseCharacterSpecializationClassBerserkerAndSpiritHealer_Warrior() {
+		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Spirit Healer");
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(),
+				LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION);
+		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).addAll(Arrays.asList(SpecializationClasses.BERSERKER,
+				SpecializationClasses.SPIRIT_HEALER));
+	}
+
+	@Test
+	public void expectException_AddAllMoreSpecializationsThanPermitted() {
+		expectExceptionWithMessage(InvalidLevelException.class, MESSAGE_CAN_NOT_TAKE_3_SPECIALIZATIONS);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION);
+		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).addAll(Arrays.asList(SpecializationClasses.CHEVALIER,
+				SpecializationClasses.CHAMPION));
 	}
 
 	@Test
@@ -126,7 +154,7 @@ public class SpecializationClassUnitTests {
 	public void expectException_AddCharacterSpecializationClassForLevel1Character() {
 		expectExceptionWithMessage(InvalidLevelException.class, MESSAGE_CAN_NOT_TAKE_1_SPECIALIZATION);
 		CharacterSheet characterSheet = createCharacterSheetWithCustomLevelBaseClass(1, BaseClasses.MAGE);
-		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.ASSASSIN);
+		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.BLOOD_MAGE);
 	}
 
 	@Test
@@ -141,7 +169,7 @@ public class SpecializationClassUnitTests {
 		expectExceptionWithMessage(InvalidLevelException.class, MESSAGE_CAN_NOT_TAKE_2_SPECIALIZATIONS);
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
 				SpecializationClasses.KEEPER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
-		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.ASSASSIN);
+		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.BLOOD_MAGE);
 	}
 
 	@Test

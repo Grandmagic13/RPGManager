@@ -32,18 +32,18 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 
 	@Override
 	public boolean add(SpecializationClasses specializationClass) {
-		if (characterSheet == null || isLevelMatchingNumberOfSpecializations(specClassesSet.size() + 1, characterSheet))
-			return specClassesSet.add(specializationClass);
-		else
-			throw new InvalidLevelException(generateInvalidLevelMessage(specClassesSet.size() + 1));
+		if (characterSheet != null) {
+			checkCharacterSheetInconsistencies(characterSheet, specializationClass);
+		}
+		return specClassesSet.add(specializationClass);
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends SpecializationClasses> specClassCollection) {
-		if (characterSheet == null || isLevelMatchingNumberOfSpecializations(specClassCollection.size(), characterSheet))
-			return specClassesSet.addAll(specClassCollection);
-		else
-			throw new InvalidLevelException(generateInvalidLevelMessage(specClassCollection.size()));
+		if (characterSheet != null) {
+			checkCharacterSheetInconsistencies(characterSheet, specClassCollection);
+		}
+		return specClassesSet.addAll(specClassCollection);
 	}
 
 	@Override
@@ -113,17 +113,34 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
+		checkCharacterSheetInconsistencies(characterSheet);
+		characterSheet.characterData.put(Fields.SPECIALIZATIONCLASSES, this);
+		this.characterSheet = characterSheet;
+	}
+
+	private void checkCharacterSheetInconsistencies(CharacterSheet characterSheet) {
+		checkCharacterSheetInconsistencies(specClassesSet.size(), characterSheet, specClassesSet);
+	}
+
+	private void checkCharacterSheetInconsistencies(CharacterSheet characterSheet, SpecializationClasses specializationClass) {
+		checkCharacterSheetInconsistencies(specClassesSet.size() + 1, characterSheet, Arrays.asList(specializationClass));
+	}
+
+	private void checkCharacterSheetInconsistencies(CharacterSheet characterSheet, Collection<? extends SpecializationClasses> specClassCollection) {
+		checkCharacterSheetInconsistencies(specClassesSet.size() + specClassCollection.size(), characterSheet, specClassCollection);
+	}
+
+	private void checkCharacterSheetInconsistencies(int numberOfSpecializations, CharacterSheet characterSheet,
+			Collection<? extends SpecializationClasses> specClassCollection) {
 		BaseClasses baseClass = characterSheet.getData(Fields.BASECLASS);
-		for (SpecializationClasses specializationClass : specClassesSet) {
+		for (SpecializationClasses specializationClass : specClassCollection) {
 			if (!specializationClass.isBaseClassCompatible(baseClass)) {
 				throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass, specializationClass.toString()));
 			}
 		}
-		if (!isLevelMatchingNumberOfSpecializations(specClassesSet.size(), characterSheet)) {
-			throw new InvalidLevelException(generateInvalidLevelMessage(specClassesSet.size()));
+		if (!isLevelMatchingNumberOfSpecializations(numberOfSpecializations, characterSheet)) {
+			throw new InvalidLevelException(generateInvalidLevelMessage(numberOfSpecializations));
 		}
-		characterSheet.characterData.put(Fields.SPECIALIZATIONCLASSES, this);
-		this.characterSheet = characterSheet;
 	}
 
 	private String generateInvalidLevelMessage(int numberOfSpecializations) {
