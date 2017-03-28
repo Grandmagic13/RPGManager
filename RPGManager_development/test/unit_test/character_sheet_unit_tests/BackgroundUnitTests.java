@@ -37,7 +37,7 @@ public class BackgroundUnitTests {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Apostate is not a Warrior background!");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
 				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
-		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+		characterSheet.setData(Fields.BACKGROUND, Background.HUMAN_APOSTATE);
 	}
 
 	@Test
