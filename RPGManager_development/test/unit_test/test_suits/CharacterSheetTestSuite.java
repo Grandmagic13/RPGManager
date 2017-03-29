@@ -13,6 +13,9 @@ import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
 import unit_test.character_sheet_unit_tests.MoneyUnitTests;
+import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ContentTests;
+import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
+import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ValidBackgroundsTests;
 import unit_test.character_sheet_unit_tests.SpecializationClassUnitTests;
 import unit_test.character_sheet_unit_tests.ValidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsTests;
@@ -21,7 +24,8 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 @Suite.SuiteClasses({ GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class, CharacterSheetUnitTests.class, FieldsUnitTests.class,
 		BaseClassUnitTests.class, SpecializationClassUnitTests.class, BackgroundUnitTests.class, InvalidBackgroundUnitTests.class,
 		InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class,
-		MoneyUnitTests.class, CharacterAttributeUnitTests.class })
+		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
+		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class })
 
 public class CharacterSheetTestSuite {
 

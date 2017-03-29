@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import rpg_database.character_sheet.exceptions.InvalidBackgroundException;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.exceptions.InvalidLevelException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
@@ -134,12 +135,25 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 			Collection<? extends SpecializationClasses> specClassCollection) {
 		BaseClasses baseClass = characterSheet.getData(Fields.BASECLASS);
 		for (SpecializationClasses specializationClass : specClassCollection) {
-			if (!specializationClass.isBaseClassCompatible(baseClass)) {
-				throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass, specializationClass.toString()));
-			}
+			checkBaseClassCompatibility(baseClass, specializationClass);
+			checkBackgroundCompatibility(characterSheet, specializationClass);
 		}
-		if (!isLevelMatchingNumberOfSpecializations(numberOfSpecializations, characterSheet)) {
-			throw new InvalidLevelException(generateInvalidLevelMessage(numberOfSpecializations));
+		checkIfLevelMatchesNumberOfSpecializations(numberOfSpecializations, characterSheet);
+	}
+
+	private void checkBaseClassCompatibility(BaseClasses baseClass, SpecializationClasses specializationClass) {
+		if (!specializationClass.isBaseClassCompatible(baseClass)) {
+			throw new InvalidCharacterClassException(String.format("%s is not a base class of %s", baseClass, specializationClass.toString()));
+		}
+	}
+
+	private void checkBackgroundCompatibility(CharacterSheet characterSheet, SpecializationClasses specializationClass) {
+		if (specializationClass.isBackgroundRestricted()) {
+			Background characterBackground = characterSheet.getData(Fields.BACKGROUND);
+			if (!specializationClass.getRestrictedBackgrounds().contains(characterBackground)) {
+				throw new InvalidBackgroundException(String.format("Can not take %s specialization with the %s background!", specializationClass
+						.toString(), characterBackground.toString()));
+			}
 		}
 	}
 
@@ -148,7 +162,7 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 				requiredLevelsForSpecializations[numberOfSpecializations]);
 	}
 
-	private boolean isLevelMatchingNumberOfSpecializations(int numberOfSpecializations, CharacterSheet characterSheet) {
+	private void checkIfLevelMatchesNumberOfSpecializations(int numberOfSpecializations, CharacterSheet characterSheet) {
 		int requiredLevel;
 		try {
 			requiredLevel = requiredLevelsForSpecializations[numberOfSpecializations];
@@ -156,7 +170,9 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 			String message = String.format("Character can't take more specializations than %s!", requiredLevelsForSpecializations.length - 1);
 			throw new InvalidLevelException(message);
 		}
-		return getCharacterLevel(characterSheet) >= requiredLevel;
+		if (getCharacterLevel(characterSheet) < requiredLevel) {
+			throw new InvalidLevelException(generateInvalidLevelMessage(numberOfSpecializations));
+		}
 	}
 
 	private Integer getCharacterLevel(CharacterSheet characterSheet) {

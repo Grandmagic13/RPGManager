@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
@@ -49,8 +50,14 @@ public class ValidClassAndSpecializationPairingsTests {
 
 	private static void addParameters(ArrayList<Object[]> parameters, BaseClasses baseClass, SpecializationClasses[] specializationClasses) {
 		for (SpecializationClasses specializationClass : specializationClasses) {
-			parameters.add(new Object[] { new SpecializationClassesSet(specializationClass), baseClass });
+			Background background = specializationClass.isBackgroundRestricted() ? getAnyRequiredBackground(specializationClass)
+					: Background.ANDER_SURVIVOR;
+			parameters.add(new Object[] { new SpecializationClassesSet(specializationClass), baseClass, background });
 		}
+	}
+
+	private static Background getAnyRequiredBackground(SpecializationClasses specializationClass) {
+		return specializationClass.getRestrictedBackgrounds().iterator().next();
 	}
 
 	@Parameter(0)
@@ -59,11 +66,15 @@ public class ValidClassAndSpecializationPairingsTests {
 	@Parameter(1)
 	public BaseClasses baseClass;
 
+	@Parameter(2)
+	public Background background;
+
 	@Test
 	public void testSetSpecializationClass() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.LEVEL, 6);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
+		characterSheet.setData(Fields.BACKGROUND, background);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, specializationClassSingleton);
 		assertEquals(specializationClassSingleton, characterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}

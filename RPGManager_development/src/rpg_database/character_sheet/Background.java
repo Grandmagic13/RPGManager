@@ -29,6 +29,32 @@ public enum Background implements CustomSetter<Background> {
 	private final String text;
 	private final ArrayList<BaseClasses> baseClasses;
 
+	public static final HashSet<Background> elfMages() {
+		Background[] backgrounds = { DALISH_ELF, ELF_APOSTATE, ELF_CIRCLE_MAGE, ELF_CIRCLE_MAGE, ESCAPED_ELVEN_SLAVE };
+		return new HashSet<Background>(Arrays.asList(backgrounds));
+	}
+
+	public static final HashSet<Background> dwarfRogues() {
+		Background[] backgrounds = { DWARF_DUSTER, HIGH_BORN_DWARF, LOW_BORN_DWARF, SURFACE_DWARF };
+		return new HashSet<Background>(Arrays.asList(backgrounds));
+	}
+
+	public static final HashSet<Background> dwarfWarriors() {
+		Background[] backgrounds = { HIGH_BORN_DWARF, LOW_BORN_DWARF, SURFACE_DWARF };
+		return new HashSet<Background>(Arrays.asList(backgrounds));
+	}
+
+	public static final HashSet<Background> humanAndElfWarriors() {
+		Background[] backgrounds = { ANDER_SURVIVOR, ANTIVAN_WAYFARER, AVVAR, CHASIND_WILDER, CITY_ELF, DALISH_ELF, ESCAPED_ELVEN_SLAVE,
+				FERELDAN_CRAFTSMEN, FERELDAN_FREEMAN, FERELDAN_NOBLE, FREE_MARCHER, NEVARRAN_ADVENTURER, ORLESIAN_COMMONER, ORLESIAN_EXILE,
+				ORLESIAN_NOBLE, ORLESIAN_STUDENT, RIVAINI_MERCHANT, SEHERON_CONVERT, TEVINTER_SOPORATI, WAKING_SEA_RAIDER };
+		return new HashSet<Background>(Arrays.asList(backgrounds));
+	}
+
+	public static final HashSet<Background> qunariMages() {
+		return new HashSet<Background>(Arrays.asList(Background.TAL_VASHOTH));
+	}
+
 	private Background(final String text, BaseClasses[] baseClasses) {
 		this.text = text;
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
