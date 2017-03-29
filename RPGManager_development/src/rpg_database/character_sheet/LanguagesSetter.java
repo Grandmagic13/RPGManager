@@ -1,10 +1,6 @@
 package rpg_database.character_sheet;
 
 import java.util.HashSet;
-import java.util.List;
-
-import rpg_database.character_sheet.interfaces.CustomSetter;
-import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetterLanguages;
 
 public class LanguagesSetter implements MultipleFieldsGetterSetterLanguages<LanguagesSetter,Languages>{
@@ -38,7 +34,7 @@ public class LanguagesSetter implements MultipleFieldsGetterSetterLanguages<Lang
 	@Override
 	public void setSelfValueByField(Languages language, Languages value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

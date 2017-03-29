@@ -1,6 +1,5 @@
 package rpg_database.character_sheet;
 
-import java.text.MessageFormat.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,15 +16,15 @@ public enum Background implements CustomSetter<Background> {
 	CHASIND_WILDER("Chasind Wilder", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }), 
 	CIRCLE_MAGE("Circle Mage", playAs_Mage(), new Languages[] {Languages.ANCIENT_TEVENE,Languages.TRADE_TONGUE }),
 	CITY_ELF("City Elf", playAs_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }),
-	DALISH_ELF("Dalish Elf", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.ELVISH,Languages.TRADE_TONGUE }), 
-	DWARF_DUSTER("Dwarf Duster", playAs_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGES,Languages.TRADE_TONGUE }), 
+	DALISH_ELF("Dalish Elf", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.ELVEN,Languages.TRADE_TONGUE }), 
+	DWARF_DUSTER("Dwarf Duster", playAs_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGE,Languages.TRADE_TONGUE }), 
 	ESCAPED_ELVEN_SLAVE("Escaped Elven Slave", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.TEVENE,Languages.TRADE_TONGUE }), 
 	FERELDAN_CRAFTSMEN("Fereldan Craftsmen", playAs_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }),
 	FERELDAN_FREEMAN("Fereldan Freeman", playAs_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }), 
 	FERELDAN_NOBLE("Fereldan Noble", playAs_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }),
 	FREE_MARCHER("Free Marcher", playAs_Warrior_Rogue(), new Languages[] {Languages.TRADE_TONGUE }), 
-	HIGH_BORN_DWARF("High Born Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGES,Languages.TRADE_TONGUE }), 
-	LOW_BORN_DWARF("Low Born Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGES,Languages.TRADE_TONGUE }), 
+	HIGH_BORN_DWARF("High Born Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGE,Languages.TRADE_TONGUE }), 
+	LOW_BORN_DWARF("Low Born Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGE,Languages.TRADE_TONGUE }), 
 	NEVARRAN_ADVENTURER("Nevarran Adventurer", playAs_Warrior_Rogue(), new Languages[] {Languages.ORLESIAN,Languages.TRADE_TONGUE }), 
 	ORLESIAN_COMMONER("Orlesian Commoner", playAs_Warrior_Rogue(), new Languages[] {Languages.ORLESIAN,Languages.TRADE_TONGUE }), 
 	ORLESIAN_EXILE("Orlesian Exile", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.ORLESIAN,Languages.TRADE_TONGUE }), 
@@ -34,7 +33,7 @@ public enum Background implements CustomSetter<Background> {
 	QUNARI_BERESAAD("Qunari Beresaad", playAs_Warrior_Rogue(), new Languages[] {Languages.QUNLAT,Languages.TRADE_TONGUE }), 
 	RIVAINI_MERCHANT("Rivaini Merchant", playAs_Warrior_Rogue(), new Languages[] {Languages.RIVAINI,Languages.TRADE_TONGUE }), 
 	SEHERON_CONVERT("Seheron Convert", playAs_Warrior_Rogue(), new Languages[] {Languages.QUNLAT,Languages.TEVENE,Languages.TRADE_TONGUE }),  
-	SURFACE_DWARF("Surface Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGES,Languages.TRADE_TONGUE }), 
+	SURFACE_DWARF("Surface Dwarf", playAs_Warrior_Rogue(), new Languages[] {Languages.DWARVEN_LANGUAGE,Languages.TRADE_TONGUE }), 
 	TAL_VASHOTH("Tal-Vashoth", playAs_Mage_Warrior_Rogue(), new Languages[] {Languages.QUNLAT,Languages.TRADE_TONGUE }), 
 	TEVINTER_ALTUS("Tevinter Altus", playAs_Mage(), new Languages[] {Languages.TEVENE,Languages.TRADE_TONGUE }), 
 	TEVINTER_LAETAN("Tevinter Laetan", playAs_Mage(), new Languages[] {Languages.TEVENE,Languages.TRADE_TONGUE }), 
