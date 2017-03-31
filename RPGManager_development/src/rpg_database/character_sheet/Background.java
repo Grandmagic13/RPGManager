@@ -3,32 +3,29 @@ package rpg_database.character_sheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum Background implements CustomSetter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?
-	ANDER_SURVIVOR("Ander Survivor", playAs_Mage_Warrior_Rogue()), ANTIVAN_WAYFARER("Antivan Wayfarer", playAs_Warrior_Rogue()),
-	AVVAR("Avvar", playAs_Mage_Warrior_Rogue()), CHASIND_WILDER("Chasind Wilder", playAs_Mage_Warrior_Rogue()),
-	CIRCLE_MAGE("Circle Mage", playAs_Mage()), CITY_ELF("City Elf", playAs_Warrior_Rogue()), DALISH_ELF("Dalish Elf", playAs_Mage_Warrior_Rogue()),
-	DWARF_DUSTER("Dwarf Duster", playAs_Rogue()), ELF_APOSTATE("Elf Apostate", playAs_Mage()),
-	ESCAPED_ELVEN_SLAVE("Escaped Elven Slave", playAs_Mage_Warrior_Rogue()), FERELDAN_CRAFTSMEN("Fereldan Craftsmen", playAs_Warrior_Rogue()),
-	FERELDAN_FREEMAN("Fereldan Freeman", playAs_Warrior_Rogue()), FERELDAN_NOBLE("Fereldan Noble", playAs_Warrior_Rogue()),
-	FREE_MARCHER("Free Marcher", playAs_Warrior_Rogue()), HIGH_BORN_DWARF("High Born Dwarf", playAs_Warrior_Rogue()),
-	HUMAN_APOSTATE("Human Apostate", playAs_Mage()), LOW_BORN_DWARF("Low Born Dwarf", playAs_Warrior_Rogue()),
-	NEVARRAN_ADVENTURER("Nevarran Adventurer", playAs_Warrior_Rogue()), ORLESIAN_COMMONER("Orlesian Commoner", playAs_Warrior_Rogue()),
-	ORLESIAN_EXILE("Orlesian Exile", playAs_Mage_Warrior_Rogue()), ORLESIAN_NOBLE("Orlesian Noble", playAs_Warrior_Rogue()),
-	ORLESIAN_STUDENT("Orlesian Student", playAs_Warrior_Rogue()), QUNARI_BERESAAD("Qunari Beresaad", playAs_Warrior_Rogue()),
-	RIVAINI_MERCHANT("Rivaini Merchant", playAs_Warrior_Rogue()), SEHERON_CONVERT("Seheron Convert", playAs_Warrior_Rogue()),
-	SURFACE_DWARF("Surface Dwarf", playAs_Warrior_Rogue()), TAL_VASHOTH("Tal-Vashoth", playAs_Mage_Warrior_Rogue()),
-	TEVINTER_ALTUS("Tevinter Altus", playAs_Mage()), TEVINTER_LAETAN("Tevinter Laetan", playAs_Mage()),
-	TEVINTER_SOPORATI("Tevinter Soporati", playAs_Warrior_Rogue()), WAKING_SEA_RAIDER("Waking Sea Raider", playAs_Warrior_Rogue());
+	ANDER_SURVIVOR(playAs_Mage_Warrior_Rogue()), ANTIVAN_WAYFARER(playAs_Warrior_Rogue()), AVVAR(playAs_Mage_Warrior_Rogue()),
+	CHASIND_WILDER(playAs_Mage_Warrior_Rogue()), CIRCLE_MAGE(playAs_Mage()), CITY_ELF(playAs_Warrior_Rogue()),
+	DALISH_ELF(playAs_Mage_Warrior_Rogue()), DWARF_DUSTER(playAs_Rogue()), ELF_APOSTATE(playAs_Mage()),
+	ESCAPED_ELVEN_SLAVE(playAs_Mage_Warrior_Rogue()), FERELDAN_CRAFTSMEN(playAs_Warrior_Rogue()), FERELDAN_FREEMAN(playAs_Warrior_Rogue()),
+	FERELDAN_NOBLE(playAs_Warrior_Rogue()), FREE_MARCHER(playAs_Warrior_Rogue()), HIGH_BORN_DWARF(playAs_Warrior_Rogue()),
+	HUMAN_APOSTATE(playAs_Mage()), LOW_BORN_DWARF(playAs_Warrior_Rogue()), NEVARRAN_ADVENTURER(playAs_Warrior_Rogue()),
+	ORLESIAN_COMMONER(playAs_Warrior_Rogue()), ORLESIAN_EXILE(playAs_Mage_Warrior_Rogue()), ORLESIAN_NOBLE(playAs_Warrior_Rogue()),
+	ORLESIAN_STUDENT(playAs_Warrior_Rogue()), QUNARI_BERESAAD(playAs_Warrior_Rogue()), RIVAINI_MERCHANT(playAs_Warrior_Rogue()),
+	SEHERON_CONVERT(playAs_Warrior_Rogue()), SURFACE_DWARF(playAs_Warrior_Rogue()), TAL_VASHOTH(playAs_Mage_Warrior_Rogue()),
+	TEVINTER_ALTUS(playAs_Mage()), TEVINTER_LAETAN(playAs_Mage()), TEVINTER_SOPORATI(playAs_Warrior_Rogue()),
+	WAKING_SEA_RAIDER(playAs_Warrior_Rogue());
 
 	private final String text;
 	private final ArrayList<BaseClasses> baseClasses;
 
-	private Background(final String text, BaseClasses[] baseClasses) {
-		this.text = text;
+	private Background(BaseClasses[] baseClasses) {
+		this.text = generateEnumText(this.name());
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
 	}
 

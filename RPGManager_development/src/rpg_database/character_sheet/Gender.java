@@ -1,12 +1,14 @@
 package rpg_database.character_sheet;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
+
 public enum Gender {
-	MALE("Male"), FEMALE("Female");
+	MALE, FEMALE;
 
 	private final String text;
 
-	private Gender(final String text) {
-		this.text = text;
+	private Gender() {
+		this.text = generateEnumText(this.name());
 	}
 
 	@Override
