@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum BaseClasses implements CustomSetter<BaseClasses> {
-	WARRIOR("Warrior"), ROGUE("Rogue"), MAGE("Mage");
+	WARRIOR, ROGUE, MAGE;
 
 	private final String text;
 
@@ -29,8 +30,8 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 		}
 	};
 
-	private BaseClasses(final String text) {
-		this.text = text;
+	private BaseClasses() {
+		this.text = generateEnumText(this.name());
 	}
 
 	@Override
