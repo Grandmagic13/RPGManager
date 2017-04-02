@@ -13,6 +13,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
+import rpg_database.character_sheet.LanguagesSet;
 import rpg_database.character_sheet.SpecializationClasses;
 
 public class GetDefaultValuesUnitTest {
@@ -149,7 +150,7 @@ public class GetDefaultValuesUnitTest {
 		HashSet<Languages> defaultLanguages = new HashSet<Languages>(); 
 		defaultLanguages.add(Languages.TRADE_TONGUE);
 		defaultLanguages.add(Languages.ANDER);
-		HashSet<Languages> language = defaultCharacterSheet.getData(Fields.LANGUAGES);
+		LanguagesSet language = defaultCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(defaultLanguages, language);
 	}
 }

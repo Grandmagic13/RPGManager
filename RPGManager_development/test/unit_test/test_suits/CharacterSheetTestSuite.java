@@ -9,6 +9,7 @@ import unit_test.character_sheet_unit_tests.CharacterAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.CharacterSheetUnitTests;
 import unit_test.character_sheet_unit_tests.FieldsUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
+import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
@@ -22,7 +23,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 @Suite.SuiteClasses({ GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class, CharacterSheetUnitTests.class, FieldsUnitTests.class,
 		BaseClassUnitTests.class, SpecializationClassUnitTests.class, BackgroundUnitTests.class, InvalidBackgroundUnitTests.class,
 		InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class,
-		MoneyUnitTests.class, CharacterAttributeUnitTests.class, LanguagesUnitTests.class })
+		MoneyUnitTests.class, CharacterAttributeUnitTests.class, LanguagesUnitTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

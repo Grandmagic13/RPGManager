@@ -1,61 +1,28 @@
 package rpg_database.character_sheet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-
 public enum Languages {
-	ANDER("Ander", speakAnder()), ANTIVAN("Antivan", speakAntivan()), TRADE_TONGUE("Trade tongue", speakTradeTongue()),
-	DWARVEN_LANGUAGE("Dwarven language", speakDwarven()), ELVEN("Elven", speakElvish()), 
-	QUNLAT("Qunlat", speakQunlat()), ORLESIAN("Orlesian", speakOrlesian()), RIVAINI("Rivaini", speakRivaini()), 
-	TEVENE("Tevene", speakTevene()), ANCIENT_TEVENE("Ancient Tevene", speakAncientTevene());
+	ANDER("Ander"), ANTIVAN("Antivan"), TRADE_TONGUE("Trade tongue"),
+	DWARVEN_LANGUAGE("Dwarven language"), ELVEN("Elven"), 
+	QUNLAT("Qunlat"), ORLESIAN("Orlesian"), RIVAINI("Rivaini"), 
+	TEVENE("Tevene"), ANCIENT_TEVENE("Ancient Tevene");
 	
+	public final static LanguagesSet TRADE = new LanguagesSet(Languages.TRADE_TONGUE);
+	public final static LanguagesSet ANDER_TRADE = new LanguagesSet(Languages.ANDER,Languages.TRADE_TONGUE);
+	public final static LanguagesSet ANTIVAN_TRADE = new LanguagesSet(Languages.ANTIVAN,Languages.TRADE_TONGUE);
+	public final static LanguagesSet DWARVEN_TRADE = new LanguagesSet(Languages.DWARVEN_LANGUAGE,Languages.TRADE_TONGUE);
+	public final static LanguagesSet ELVEN_TRADE = new LanguagesSet(Languages.ELVEN,Languages.TRADE_TONGUE);
+	public final static LanguagesSet QUNLAT_TRADE = new LanguagesSet(Languages.QUNLAT,Languages.TRADE_TONGUE);
+	public final static LanguagesSet ORLESIAN_TRADE = new LanguagesSet(Languages.ORLESIAN,Languages.TRADE_TONGUE);
+	public final static LanguagesSet RIVAINI_TRADE = new LanguagesSet(Languages.RIVAINI,Languages.TRADE_TONGUE);
+	public final static LanguagesSet TEVENE_TRADE = new LanguagesSet(Languages.TEVENE,Languages.TRADE_TONGUE);
+	public final static LanguagesSet ANCIENT_TEVENE_TRADE = new LanguagesSet(Languages.ANCIENT_TEVENE,Languages.TRADE_TONGUE);
+	public final static LanguagesSet QUNLAT_TEVENE_TRADE = new LanguagesSet(Languages.TEVENE,Languages.QUNLAT,Languages.TRADE_TONGUE);
+
 	private final String text;
-	private final ArrayList<Background> backgrounds;
 	
-	private Languages(final String text, Background[] backgrounds){
+	private Languages(final String text){
 		this.text = text;
-		this.backgrounds = new ArrayList<>(Arrays.asList(backgrounds));
 	}
-	private static Background[] speakAncientTevene() {
-		return new Background[] {Background.CIRCLE_MAGE };
-	}
-	
-	private static Background[] speakTevene() {
-		return new Background[] {Background.ESCAPED_ELVEN_SLAVE, Background.SEHERON_CONVERT, Background.TEVINTER_ALTUS, Background.TEVINTER_LAETAN, Background.TEVINTER_SOPORATI };
-	}
-	
-	private static Background[] speakRivaini() {
-		return new Background[] {Background.RIVAINI_MERCHANT };
-	}
-	
-	private static Background[] speakOrlesian() {
-		return new Background[] {Background.NEVARRAN_ADVENTURER, Background.ORLESIAN_COMMONER, Background.ORLESIAN_EXILE, Background.ORLESIAN_NOBLE, Background.ORLESIAN_STUDENT };
-	}
-	
-	private static Background[] speakQunlat() {
-		return new Background[] {Background.QUNARI_BERESAAD, Background.SEHERON_CONVERT, Background.TAL_VASHOTH };
-	}
-	
-	private static Background[] speakElvish() {
-		return new Background[] {Background.DALISH_ELF};
-	}
-	
-	private static Background[] speakDwarven() {
-		return new Background[] {Background.DWARF_DUSTER, Background.HIGH_BORN_DWARF, Background.LOW_BORN_DWARF, Background.SURFACE_DWARF };
-	}
-	
-	private static Background[] speakTradeTongue() {
-		return new Background[] {Background.ANDER_SURVIVOR, Background.APOSTATE };
-	}
-	
-	private static Background[] speakAntivan() {
-		return new Background[] {Background.ANTIVAN_WAYFARER, Background.WAKING_SEA_RAIDER };
-	}
-	
-	private static Background[] speakAnder() {
-		return new Background[] {Background.ANDER_SURVIVOR, };
-	}
-	
+
 	//TODO WAKING_SEA_RAIDER' default languages depends on the land where he is from, can be Antivan, Rivaine or Orlesian
 }

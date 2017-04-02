@@ -24,7 +24,7 @@ public class CharacterSheet {
 		defaultData.put(SpecializationClasses.class, SpecializationClasses.NOT_APPLICABLE);
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
-		defaultData.put(LanguagesSetter.class, new LanguagesSetter());
+		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
 		return defaultData;
 	}
 

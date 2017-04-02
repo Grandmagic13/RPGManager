@@ -8,7 +8,7 @@ public enum Fields {
 	ARMOR_RATING(Integer.class), HEALTH_POINTS(Integer.class), MANA_POINTS(Integer.class), APPEARANCE(String.class),
 	DISTINGUISHING_FEATURES(String.class), OFTEN_USED_EQUIPMENT(String.class), GOALS_AND_TIES(String.class), EQUIPMENT(String.class),
 	MONEY(Money.class), GOLD_COIN(Integer.class, MONEY), SILVER_COIN(Integer.class, MONEY), COPPER_COIN(Integer.class, MONEY),
-	LANGUAGES_SETTER(LanguagesSetter.class), LANGUAGES(HashSet.class, LANGUAGES_SETTER),
+	LANGUAGES(LanguagesSet.class),
 	ATTRIBUTE_STRENGTH(CharacterAttribute.class), ATTRIBUTE_COMMUNICATION(CharacterAttribute.class), ATTRIBUTE_CONSTITUTION(CharacterAttribute.class),
 	ATTRIBUTE_CUNNING(CharacterAttribute.class), ATTRIBUTE_DEXTERITY(CharacterAttribute.class), ATTRIBUTE_MAGIC(CharacterAttribute.class),
 	ATTRIBUTE_PERCEPTION(CharacterAttribute.class), ATTRIBUTE_WILLPOWER(CharacterAttribute.class),
