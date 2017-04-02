@@ -1,6 +1,8 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevel;
 
 import java.security.InvalidParameterException;
 
@@ -15,8 +17,6 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
-
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 public class BackgroundUnitTests {
 	// test set up
@@ -44,7 +44,7 @@ public class BackgroundUnitTests {
 	public void expectException_SetInvalidBackgroundFereldanFreemanForClassMage() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
 		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
-				SpecializationClasses.KEEPER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
+				SpecializationClasses.FORCE_MAGE), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
 	}
 
