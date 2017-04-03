@@ -3,7 +3,6 @@ package unit_test.character_sheet_unit_tests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -14,11 +13,12 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
-import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
+
 
 public class GetDefaultValuesUnitTest {
 	// fields
-	final CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
+	final private CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
 
 	// test methods
 	@Test
@@ -136,7 +136,7 @@ public class GetDefaultValuesUnitTest {
 
 	@Test
 	public void testGetDefaultCharacterSpecializationClass() {
-		assertEquals(SpecializationClasses.NOT_APPLICABLE, defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASS));
+		assertEquals(new SpecializationClassesSet(), defaultCharacterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
 
 	@Test

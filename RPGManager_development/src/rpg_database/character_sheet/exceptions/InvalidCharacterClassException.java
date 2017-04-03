@@ -1,6 +1,7 @@
 package rpg_database.character_sheet.exceptions;
 
-public class InvalidCharacterClassException extends RuntimeException {
+@SuppressWarnings("serial")
+public class InvalidCharacterClassException extends CharacterSheetException {
 	public InvalidCharacterClassException(String message) {
 		super(message);
 	}

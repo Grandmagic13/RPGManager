@@ -1,6 +1,8 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevel;
 
 import java.security.InvalidParameterException;
 
@@ -13,9 +15,8 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
-
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 public class BackgroundUnitTests {
 	// test set up
@@ -34,14 +35,16 @@ public class BackgroundUnitTests {
 	@Test
 	public void expectException_SetInvalidBackgroundApostateForClassWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Apostate is not a Warrior background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.WARRIOR, SpecializationClasses.BERSERKER);
-		characterSheet.setData(Fields.BACKGROUND, Background.APOSTATE);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
+		characterSheet.setData(Fields.BACKGROUND, Background.HUMAN_APOSTATE);
 	}
 
 	@Test
 	public void expectException_SetInvalidBackgroundFereldanFreemanForClassMage() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClasses(BaseClasses.MAGE, SpecializationClasses.KEEPER);
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
+				SpecializationClasses.FORCE_MAGE), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
 	}
 

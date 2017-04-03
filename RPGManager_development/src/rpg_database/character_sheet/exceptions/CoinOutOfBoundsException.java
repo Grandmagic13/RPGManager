@@ -1,6 +1,7 @@
 package rpg_database.character_sheet.exceptions;
 
-public class CoinOutOfBoundsException extends RuntimeException {
+@SuppressWarnings("serial")
+public class CoinOutOfBoundsException extends CharacterSheetException {
 	public CoinOutOfBoundsException(String message) {
 		super(message);
 	}

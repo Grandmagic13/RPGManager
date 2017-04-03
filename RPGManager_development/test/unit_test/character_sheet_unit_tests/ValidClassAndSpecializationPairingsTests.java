@@ -11,10 +11,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.SpecializationClassesSet;
 import unit_test.character_sheet_unit_tests.resources.SpecializationCompatibilityData;
 
 @RunWith(Parameterized.class)
@@ -33,36 +35,47 @@ public class ValidClassAndSpecializationPairingsTests {
 		for (BaseClasses baseClass : BaseClasses.values()) {
 			switch (baseClass) {
 			case MAGE:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.mageSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.mageSpecializations);
 				break;
 			case ROGUE:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.rogueSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.rogueSpecializations);
 				break;
 			case WARRIOR:
-				for (SpecializationClasses specializationClass : SpecializationCompatibilityData.warriorSpecializations) {
-					parameters.add(new Object[] { specializationClass, baseClass });
-				}
+				addParameters(parameters, baseClass, SpecializationCompatibilityData.warriorSpecializations);
 				break;
 			}
 		}
 		return parameters;
 	}
 
+	private static void addParameters(ArrayList<Object[]> parameters, BaseClasses baseClass, SpecializationClasses[] specializationClasses) {
+		for (SpecializationClasses specializationClass : specializationClasses) {
+			Background background = specializationClass.isBackgroundRestricted() ? getAnyRequiredBackground(specializationClass)
+					: Background.ANDER_SURVIVOR;
+			parameters.add(new Object[] { new SpecializationClassesSet(specializationClass), baseClass, background });
+		}
+	}
+
+	private static Background getAnyRequiredBackground(SpecializationClasses specializationClass) {
+		return specializationClass.getRestrictedBackgrounds().iterator().next();
+	}
+
 	@Parameter(0)
-	public SpecializationClasses specializationClass;
+	public SpecializationClassesSet specializationClassSingleton;
 
 	@Parameter(1)
 	public BaseClasses baseClass;
 
+	@Parameter(2)
+	public Background background;
+
 	@Test
 	public void testSetSpecializationClass() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.LEVEL, 6);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
-		characterSheet.setData(Fields.SPECIALIZATIONCLASS, specializationClass);
-		assertEquals(specializationClass, characterSheet.getData(Fields.SPECIALIZATIONCLASS));
+		characterSheet.setData(Fields.BACKGROUND, background);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, specializationClassSingleton);
+		assertEquals(specializationClassSingleton, characterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
 }
