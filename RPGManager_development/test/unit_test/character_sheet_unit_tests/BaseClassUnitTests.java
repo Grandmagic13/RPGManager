@@ -1,14 +1,14 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_COMMUNICATION_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_CONSTITUTION_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_CUNNING_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_DEXTERITY_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_MAGIC_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_PERCEPTION_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_STRENGTH_MAJORITY;
-import static rpg_database.character_sheet.Fields.ATTRIBUTE_WILLPOWER_MAJORITY;
+import static rpg_database.character_sheet.Fields.COMMUNICATION_MAJORITY;
+import static rpg_database.character_sheet.Fields.CONSTITUTION_MAJORITY;
+import static rpg_database.character_sheet.Fields.CUNNING_MAJORITY;
+import static rpg_database.character_sheet.Fields.DEXTERITY_MAJORITY;
+import static rpg_database.character_sheet.Fields.MAGIC_MAJORITY;
+import static rpg_database.character_sheet.Fields.PERCEPTION_MAJORITY;
+import static rpg_database.character_sheet.Fields.STRENGTH_MAJORITY;
+import static rpg_database.character_sheet.Fields.WILLPOWER_MAJORITY;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
 import java.security.InvalidParameterException;
@@ -103,9 +103,9 @@ public class BaseClassUnitTests {
 	// private methods
 
 	private ArrayList<Boolean> getActualMajorities(CharacterSheet characterSheet) {
-		ArrayList<Fields> attributeMajorities = new ArrayList<>(Arrays.asList(ATTRIBUTE_COMMUNICATION_MAJORITY, ATTRIBUTE_CONSTITUTION_MAJORITY,
-				ATTRIBUTE_CUNNING_MAJORITY, ATTRIBUTE_DEXTERITY_MAJORITY, ATTRIBUTE_MAGIC_MAJORITY, ATTRIBUTE_PERCEPTION_MAJORITY,
-				ATTRIBUTE_STRENGTH_MAJORITY, ATTRIBUTE_WILLPOWER_MAJORITY));
+		ArrayList<Fields> attributeMajorities = new ArrayList<>(Arrays.asList(COMMUNICATION_MAJORITY, CONSTITUTION_MAJORITY,
+				CUNNING_MAJORITY, DEXTERITY_MAJORITY, MAGIC_MAJORITY, PERCEPTION_MAJORITY,
+				STRENGTH_MAJORITY, WILLPOWER_MAJORITY));
 		ArrayList<Boolean> actualMajorities = new ArrayList<>();
 		for (Fields attributeMajority : attributeMajorities) {
 			actualMajorities.add(getMajority(characterSheet, attributeMajority));

@@ -19,13 +19,11 @@ public class GetDefaultAttributeUnitTests {
 
 	@Parameters(name = "Attribute fields: ''{0}'', ''{2}'' Expected Majority:''{1}'' Expected Value: 0")
 	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { Fields.ATTRIBUTE_COMMUNICATION_MAJORITY, false, Fields.ATTRIBUTE_COMMUNICATION_VALUE }, {
-				Fields.ATTRIBUTE_CONSTITUTION_MAJORITY, true, Fields.ATTRIBUTE_CONSTITUTION_VALUE }, { Fields.ATTRIBUTE_CUNNING_MAJORITY, false,
-						Fields.ATTRIBUTE_CUNNING_VALUE }, { Fields.ATTRIBUTE_DEXTERITY_MAJORITY, true, Fields.ATTRIBUTE_DEXTERITY_VALUE }, {
-								Fields.ATTRIBUTE_MAGIC_MAJORITY, false, Fields.ATTRIBUTE_MAGIC_VALUE }, { Fields.ATTRIBUTE_PERCEPTION_MAJORITY, false,
-										Fields.ATTRIBUTE_PERCEPTION_VALUE }, { Fields.ATTRIBUTE_STRENGTH_MAJORITY, true,
-												Fields.ATTRIBUTE_STRENGTH_VALUE }, { Fields.ATTRIBUTE_WILLPOWER_MAJORITY, false,
-														Fields.ATTRIBUTE_WILLPOWER_VALUE } });
+		return Arrays.asList(new Object[][] { { Fields.COMMUNICATION_MAJORITY, false, Fields.COMMUNICATION_VALUE }, { Fields.CONSTITUTION_MAJORITY,
+				true, Fields.CONSTITUTION_VALUE }, { Fields.CUNNING_MAJORITY, false, Fields.CUNNING_VALUE }, { Fields.DEXTERITY_MAJORITY, true,
+						Fields.DEXTERITY_VALUE }, { Fields.MAGIC_MAJORITY, false, Fields.MAGIC_VALUE }, { Fields.PERCEPTION_MAJORITY, false,
+								Fields.PERCEPTION_VALUE }, { Fields.STRENGTH_MAJORITY, true, Fields.STRENGTH_VALUE }, { Fields.WILLPOWER_MAJORITY,
+										false, Fields.WILLPOWER_VALUE } });
 	}
 
 	@Parameter(0)

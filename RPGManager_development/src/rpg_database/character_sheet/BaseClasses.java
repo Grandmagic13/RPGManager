@@ -14,12 +14,12 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 
 	private final String text;
 
-	private final static ArrayList<Fields> warriorMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.ATTRIBUTE_STRENGTH,
-			Fields.ATTRIBUTE_DEXTERITY, Fields.ATTRIBUTE_CONSTITUTION }));
-	private final static ArrayList<Fields> mageMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.ATTRIBUTE_CUNNING, Fields.ATTRIBUTE_MAGIC,
-			Fields.ATTRIBUTE_WILLPOWER }));
-	private final static ArrayList<Fields> rogueMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.ATTRIBUTE_COMMUNICATION,
-			Fields.ATTRIBUTE_DEXTERITY, Fields.ATTRIBUTE_PERCEPTION }));
+	private final static ArrayList<Fields> warriorMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.STRENGTH,
+			Fields.DEXTERITY, Fields.CONSTITUTION }));
+	private final static ArrayList<Fields> mageMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.CUNNING, Fields.MAGIC,
+			Fields.WILLPOWER }));
+	private final static ArrayList<Fields> rogueMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.COMMUNICATION,
+			Fields.DEXTERITY, Fields.PERCEPTION }));
 
 	@SuppressWarnings("serial")
 	private final static HashMap<BaseClasses, ArrayList<Fields>> majorAttributes = new HashMap<BaseClasses, ArrayList<Fields>>() {

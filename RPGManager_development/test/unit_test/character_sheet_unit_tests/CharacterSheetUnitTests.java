@@ -151,20 +151,20 @@ public class CharacterSheetUnitTests {
 	public void expectException_SetCharacterAttributeValueMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH_VALUE, malformedInput);
+		testCharacterSheet.setData(Fields.STRENGTH_VALUE, malformedInput);
 	}
 
 	@Test
 	public void expectException_SetCharacterAttributeMajorityMalformedInput() {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Boolean");
 		final String malformedInput = "MALFORMED INPUT";
-		testCharacterSheet.setData(Fields.ATTRIBUTE_STRENGTH_MAJORITY, malformedInput);
+		testCharacterSheet.setData(Fields.STRENGTH_MAJORITY, malformedInput);
 	}
 
 	@Test
 	public void expectException_SetCharacterAttributeMajority() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "To change majority please modify the base class!");
-		testCharacterSheet.setData(Fields.ATTRIBUTE_CUNNING_MAJORITY, true);
+		testCharacterSheet.setData(Fields.CUNNING_MAJORITY, true);
 	}
 
 	// functional unit tests

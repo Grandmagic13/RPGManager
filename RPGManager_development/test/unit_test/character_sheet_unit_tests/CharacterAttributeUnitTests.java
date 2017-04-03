@@ -13,8 +13,8 @@ public class CharacterAttributeUnitTests {
 	public void testSetCharacterAttribute_Value1() {
 		int expectedValue = 1;
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ATTRIBUTE_MAGIC_VALUE, expectedValue);
-		int actualValue = characterSheet.getData(Fields.ATTRIBUTE_MAGIC_VALUE);
+		characterSheet.setData(Fields.MAGIC_VALUE, expectedValue);
+		int actualValue = characterSheet.getData(Fields.MAGIC_VALUE);
 		assertEquals(expectedValue, actualValue);
 	}
 
