@@ -37,7 +37,7 @@ public enum Background implements CustomSetter<Background> {
 	ORLESIAN_STUDENT(playAs_Warrior_Rogue(), ORLESIAN_TRADE), 
 	QUNARI_BERESAAD(playAs_Warrior_Rogue(), QUNLAT_TRADE), 
 	RIVAINI_MERCHANT(playAs_Warrior_Rogue(), RIVAINI_TRADE), 
-	SEHERON_CONVERT(playAs_Warrior_Rogue(), QUNLAT_TEVENE_TRADE),  
+	SEHERON_CONVERT(playAs_Warrior_Rogue(), TRADE),  
 	SURFACE_DWARF(playAs_Warrior_Rogue(), DWARVEN_TRADE), 
 	TAL_VASHOTH(playAs_Mage_Warrior_Rogue(), QUNLAT_TRADE), 
 	TEVINTER_ALTUS(playAs_Mage(), TEVENE_TRADE), 
@@ -47,7 +47,7 @@ public enum Background implements CustomSetter<Background> {
 	
 	private final String text;
 	private final ArrayList<BaseClasses> baseClasses;
-	private final LanguagesSet language;
+	private final LanguagesSet languages;
 	private final HashSet<Background> restrictedBackgrounds;
 	
 	public static final HashSet<Background> elfMages() {
@@ -79,14 +79,14 @@ public enum Background implements CustomSetter<Background> {
 	private Background(BaseClasses[] baseClasses, final LanguagesSet languages){
 		this.text = generateEnumText(this.name());
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
-		this.language = languages;
+		this.languages = languages;
 		this.restrictedBackgrounds = new HashSet<Background>();
 	}
 	
 	private Background(BaseClasses[] baseClasses, final LanguagesSet languages, HashSet<Background> restrictedBackgrounds){
 		this.text = generateEnumText(this.name());
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
-		this.language = languages;
+		this.languages = languages;
 		this.restrictedBackgrounds = restrictedBackgrounds;
 	}
 	
@@ -129,7 +129,7 @@ public enum Background implements CustomSetter<Background> {
 		characterSheet.characterData.remove(Fields.LANGUAGES);
 		characterSheet.characterData.put(Fields.BACKGROUND, this);
 		LanguagesSet thisLanguages = new LanguagesSet();
-		thisLanguages.addAll(this.language);
+		thisLanguages.addAll(this.languages);
 		characterSheet.characterData.put(Fields.LANGUAGES, thisLanguages);
 	}
 

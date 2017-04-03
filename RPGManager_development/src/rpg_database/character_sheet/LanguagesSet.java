@@ -17,6 +17,7 @@ public class LanguagesSet implements Set<Languages>, CustomSetter<LanguagesSet>{
 		languagesSet = new HashSet<Languages>();
 		languagesSet.addAll(Arrays.asList(languages));
 	}
+	
 	@Override
 	public Class<LanguagesSet> getImplementingClass() {
 		return LanguagesSet.class;
@@ -24,9 +25,13 @@ public class LanguagesSet implements Set<Languages>, CustomSetter<LanguagesSet>{
 	
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
-		LanguagesSet temp = (LanguagesSet) characterSheet.characterData.get(Fields.LANGUAGES);
-		temp.addAll(this);
-		characterSheet.characterData.put(Fields.LANGUAGES, temp);
+		LanguagesSet characterSheetLanguages = (LanguagesSet) characterSheet.characterData.get(Fields.LANGUAGES);
+		LanguagesSet characterSheetAddedLanguages = new LanguagesSet();
+		for(Languages languages : characterSheetLanguages){
+			characterSheetAddedLanguages.add(languages);
+		}
+		characterSheetAddedLanguages.addAll(this);
+		characterSheet.characterData.put(Fields.LANGUAGES, characterSheetAddedLanguages);
 	}
 	@Override
 	public boolean add(Languages languages) {
@@ -101,8 +106,8 @@ public class LanguagesSet implements Set<Languages>, CustomSetter<LanguagesSet>{
 	@Override
 	 public String toString() {
 		ArrayList<String> languagesNames = new ArrayList<>();
-			for (Languages languages : languagesSet) {
-				languagesNames.add(languages.toString());
+			for (Languages language : languagesSet) {
+				languagesNames.add(language.toString());
 		}
 		return String.join(", ", languagesNames);
 	}

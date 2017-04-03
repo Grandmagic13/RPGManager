@@ -147,10 +147,10 @@ public class GetDefaultValuesUnitTest {
 	
 	@Test
 	public void testGetDefaultLanguages() {
-		HashSet<Languages> defaultLanguages = new HashSet<Languages>(); 
-		defaultLanguages.add(Languages.TRADE_TONGUE);
-		defaultLanguages.add(Languages.ANDER);
-		LanguagesSet language = defaultCharacterSheet.getData(Fields.LANGUAGES);
-		assertEquals(defaultLanguages, language);
+		HashSet<Languages> expectedLanguages = new HashSet<Languages>(); 
+		expectedLanguages.add(Languages.TRADE_TONGUE);
+		expectedLanguages.add(Languages.ANDER);
+		LanguagesSet actualLanguage = defaultCharacterSheet.getData(Fields.LANGUAGES);
+		assertEquals(expectedLanguages, actualLanguage);
 	}
 }

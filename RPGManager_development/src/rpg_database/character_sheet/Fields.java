@@ -1,7 +1,5 @@
 package rpg_database.character_sheet;
 
-import java.util.HashSet;
-
 public enum Fields {
 	NAME(String.class), AGE(Integer.class), XP(Integer.class), GENDER(Gender.class), SPEED(Integer.class), BACKGROUND(Background.class),
 	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASSES(SpecializationClassesSet.class), LEVEL(Integer.class), DEFENSE(Integer.class),

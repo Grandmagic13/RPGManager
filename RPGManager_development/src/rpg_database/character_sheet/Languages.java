@@ -1,10 +1,10 @@
 package rpg_database.character_sheet;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
+
 public enum Languages {
-	ANDER("Ander"), ANTIVAN("Antivan"), TRADE_TONGUE("Trade tongue"),
-	DWARVEN_LANGUAGE("Dwarven language"), ELVEN("Elven"), 
-	QUNLAT("Qunlat"), ORLESIAN("Orlesian"), RIVAINI("Rivaini"), 
-	TEVENE("Tevene"), ANCIENT_TEVENE("Ancient Tevene");
+	ANDER, ANTIVAN, TRADE_TONGUE, DWARVEN_LANGUAGE, ELVEN, 
+	QUNLAT, ORLESIAN, RIVAINI, TEVENE, ANCIENT_TEVENE;
 	
 	public final static LanguagesSet TRADE = new LanguagesSet(Languages.TRADE_TONGUE);
 	public final static LanguagesSet ANDER_TRADE = new LanguagesSet(Languages.ANDER,Languages.TRADE_TONGUE);
@@ -16,13 +16,11 @@ public enum Languages {
 	public final static LanguagesSet RIVAINI_TRADE = new LanguagesSet(Languages.RIVAINI,Languages.TRADE_TONGUE);
 	public final static LanguagesSet TEVENE_TRADE = new LanguagesSet(Languages.TEVENE,Languages.TRADE_TONGUE);
 	public final static LanguagesSet ANCIENT_TEVENE_TRADE = new LanguagesSet(Languages.ANCIENT_TEVENE,Languages.TRADE_TONGUE);
-	public final static LanguagesSet QUNLAT_TEVENE_TRADE = new LanguagesSet(Languages.TEVENE,Languages.QUNLAT,Languages.TRADE_TONGUE);
 
 	private final String text;
 	
-	private Languages(final String text){
-		this.text = text;
+	private Languages(){
+		this.text = generateEnumText(this.name());
 	}
 
-	//TODO WAKING_SEA_RAIDER' default languages depends on the land where he is from, can be Antivan, Rivaine or Orlesian
 }

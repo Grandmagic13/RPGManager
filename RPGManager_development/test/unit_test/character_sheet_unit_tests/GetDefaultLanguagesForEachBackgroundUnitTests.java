@@ -12,6 +12,7 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import rpg_database.character_sheet.Background;
+import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Languages;
@@ -48,7 +49,7 @@ public class GetDefaultLanguagesForEachBackgroundUnitTests {
 				{ Background.ORLESIAN_STUDENT, new LanguagesSet(Languages.ORLESIAN, Languages.TRADE_TONGUE) },
 				{ Background.QUNARI_BERESAAD, new LanguagesSet(Languages.QUNLAT, Languages.TRADE_TONGUE) },
 				{ Background.RIVAINI_MERCHANT, new LanguagesSet(Languages.RIVAINI, Languages.TRADE_TONGUE) },
-				{ Background.SEHERON_CONVERT, new LanguagesSet(Languages.QUNLAT, Languages.TEVENE, Languages.TRADE_TONGUE) },
+				{ Background.SEHERON_CONVERT, new LanguagesSet(Languages.TRADE_TONGUE) },
 				{ Background.SURFACE_DWARF, new LanguagesSet(Languages.DWARVEN_LANGUAGE, Languages.TRADE_TONGUE) },
 				{ Background.TAL_VASHOTH, new LanguagesSet(Languages.QUNLAT, Languages.TRADE_TONGUE) },
 				{ Background.TEVINTER_ALTUS, new LanguagesSet(Languages.TEVENE, Languages.TRADE_TONGUE) },
@@ -66,9 +67,14 @@ public class GetDefaultLanguagesForEachBackgroundUnitTests {
 	@Test
 	public void testGetDefaultBackgroundForLanguages() {
 		CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");		
-		testCharacterSheet.setData(Fields.BASECLASS, background.getAllowedBaseClasses().get(0));
+		testCharacterSheet.setData(Fields.BASECLASS, getFirstValidBaseClassByBackground());
 		testCharacterSheet.setData(Fields.BACKGROUND, background);
 		LanguagesSet actualLanguage = testCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(expectedLanguage, actualLanguage);
 	}
+
+	private BaseClasses getFirstValidBaseClassByBackground() {
+		return background.getAllowedBaseClasses().get(0);
+	}
+	
 }

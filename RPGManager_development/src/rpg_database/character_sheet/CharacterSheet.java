@@ -1,10 +1,7 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
