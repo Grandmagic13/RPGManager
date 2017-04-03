@@ -22,7 +22,6 @@ import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)
 public class SpecializationBackgroundFilter_ValidBackgroundsTests {
-	// TODO
 	// Description:
 	//
 	// This class tests setting up various valid specializations to their
