@@ -1,8 +1,6 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
@@ -11,9 +9,8 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private int value;
 	private boolean isMajor;
-	public final static ArrayList<Fields> ATTRIBUTES = new ArrayList<>(Arrays.asList(Fields.ATTRIBUTE_COMMUNICATION, Fields.ATTRIBUTE_CONSTITUTION,
-			Fields.ATTRIBUTE_CUNNING, Fields.ATTRIBUTE_DEXTERITY, Fields.ATTRIBUTE_MAGIC, Fields.ATTRIBUTE_PERCEPTION, Fields.ATTRIBUTE_STRENGTH,
-			Fields.ATTRIBUTE_WILLPOWER));
+	public final static Fields[] ATTRIBUTES = { Fields.COMMUNICATION, Fields.CONSTITUTION, Fields.CUNNING, Fields.DEXTERITY, Fields.MAGIC,
+			Fields.PERCEPTION, Fields.STRENGTH, Fields.WILLPOWER };
 
 	protected CharacterAttribute(int value, boolean isMajor) {
 		this.value = value;
