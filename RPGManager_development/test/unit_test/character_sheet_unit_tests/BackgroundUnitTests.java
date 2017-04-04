@@ -2,7 +2,7 @@ package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevel;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevelAllAttributes5;
 
 import java.security.InvalidParameterException;
 
@@ -35,7 +35,7 @@ public class BackgroundUnitTests {
 	@Test
 	public void expectException_SetInvalidBackgroundApostateForClassWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Apostate is not a Warrior background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses.WARRIOR, new SpecializationClassesSet(
 				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.HUMAN_APOSTATE);
 	}
@@ -43,7 +43,7 @@ public class BackgroundUnitTests {
 	@Test
 	public void expectException_SetInvalidBackgroundFereldanFreemanForClassMage() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Fereldan Freeman is not a Mage background!");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses.MAGE, new SpecializationClassesSet(
 				SpecializationClasses.FORCE_MAGE), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BACKGROUND, Background.FERELDAN_FREEMAN);
 	}

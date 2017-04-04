@@ -1,6 +1,7 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.setAllAttributesTo5;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -71,7 +72,7 @@ public class ValidClassAndSpecializationPairingsTests {
 
 	@Test
 	public void testSetSpecializationClass() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		CharacterSheet characterSheet = setAllAttributesTo5(new CharacterSheet("CharacterSheet"));
 		characterSheet.setData(Fields.LEVEL, 6);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.BACKGROUND, background);

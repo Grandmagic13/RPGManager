@@ -37,31 +37,31 @@ public class MoneyUnitTests {
 
 	@Test
 	public void expectException_SetCopperCoins100() {
-		expectExceptionWithMessage(CoinOutOfBoundsException.class, "COPPER_COIN cannot be larger than 99!");
+		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Copper Coin cannot be larger than 99!");
 		testCharacterSheet.setData(Fields.COPPER_COIN, 100);
 	}
 
 	@Test
 	public void expectException_SetCopperCoinsMinus5() {
-		expectExceptionWithMessage(CoinOutOfBoundsException.class, "COPPER_COIN cannot be negative number!");
+		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Copper Coin cannot be negative number!");
 		testCharacterSheet.setData(Fields.COPPER_COIN, -5);
 	}
 
 	@Test
 	public void expectException_SetSilverCoins100() {
-		expectExceptionWithMessage(CoinOutOfBoundsException.class, "SILVER_COIN cannot be larger than 99!");
+		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Silver Coin cannot be larger than 99!");
 		testCharacterSheet.setData(Fields.SILVER_COIN, 100);
 	}
 
 	@Test
 	public void expectException_SetSilverCoinsMinus5() {
-		expectExceptionWithMessage(CoinOutOfBoundsException.class, "SILVER_COIN cannot be negative number!");
+		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Silver Coin cannot be negative number!");
 		testCharacterSheet.setData(Fields.SILVER_COIN, -5);
 	}
 
 	@Test
 	public void expectException_SetGoldCoinsMinus5() {
-		expectExceptionWithMessage(CoinOutOfBoundsException.class, "GOLD_COIN cannot be negative number!");
+		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Gold Coin cannot be negative number!");
 		testCharacterSheet.setData(Fields.GOLD_COIN, -5);
 	}
 
