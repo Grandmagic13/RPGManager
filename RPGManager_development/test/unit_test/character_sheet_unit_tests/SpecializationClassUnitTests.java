@@ -361,6 +361,8 @@ public class SpecializationClassUnitTests {
 		setMagicTo3(characterSheet);
 		setWillpower3(characterSheet);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, FORCE_MAGE);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(FORCE_MAGE, actualSpecializations);
 	}
 
 	@Test
@@ -369,6 +371,9 @@ public class SpecializationClassUnitTests {
 		setMagicTo3(characterSheet);
 		setWillpower3(characterSheet);
 		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.FORCE_MAGE);
+		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, FORCE_MAGE);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(FORCE_MAGE, actualSpecializations);
 	}
 
 	@Test
@@ -376,6 +381,8 @@ public class SpecializationClassUnitTests {
 		CharacterSheet characterSheet = createCharacterSheetWithCustomLevelBaseClass(LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION, BaseClasses.ROGUE);
 		setDexterityTo(4, characterSheet);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, SHADOW);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(SHADOW, actualSpecializations);
 	}
 
 	@Test
@@ -383,6 +390,8 @@ public class SpecializationClassUnitTests {
 		CharacterSheet characterSheet = createCharacterSheetWithCustomLevelBaseClass(LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION, BaseClasses.ROGUE);
 		setDexterityTo(4, characterSheet);
 		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).add(SpecializationClasses.SHADOW);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(SHADOW, actualSpecializations);
 	}
 
 	@Test
@@ -392,6 +401,8 @@ public class SpecializationClassUnitTests {
 		setWillpower3(characterSheet);
 		setDexterityTo(3, characterSheet);
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, FORCE_MAGE_ARCANE_WARRIOR);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(FORCE_MAGE_ARCANE_WARRIOR, actualSpecializations);
 	}
 
 	@Test
@@ -401,6 +412,8 @@ public class SpecializationClassUnitTests {
 		setWillpower3(characterSheet);
 		setDexterityTo(3, characterSheet);
 		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).addAll(FORCE_MAGE_ARCANE_WARRIOR);
+		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
+		assertEquals(FORCE_MAGE_ARCANE_WARRIOR, actualSpecializations);
 	}
 
 	// private methods
