@@ -6,9 +6,9 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
 
-public class GetDefaultLanguagesForEachBackgroundUnitTestsData {
+public class LanguagesUnitTestData {
 
-	public static HashMap<Background, LanguagesSet> initializeRequiredLanguages() {
+	final static public HashMap<Background, LanguagesSet> initializeRequiredLanguages() {
 		HashMap<Background, LanguagesSet> requiredLanguages = new HashMap<>();
 		requiredLanguages.put(Background.ANDER_SURVIVOR, new LanguagesSet(Languages.ANDER, Languages.TRADE_TONGUE));
 		requiredLanguages.put(Background.ANTIVAN_WAYFARER, new LanguagesSet(Languages.ANTIVAN, Languages.TRADE_TONGUE));

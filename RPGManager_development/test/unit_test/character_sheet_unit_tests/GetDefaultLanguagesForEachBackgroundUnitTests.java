@@ -17,7 +17,7 @@ import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.LanguagesSet;
-import unit_test.character_sheet_unit_tests.resources.GetDefaultLanguagesForEachBackgroundUnitTestsData;
+import unit_test.character_sheet_unit_tests.resources.LanguagesUnitTestData;;
 
 @RunWith(Parameterized.class)
 public class GetDefaultLanguagesForEachBackgroundUnitTests {
@@ -25,8 +25,7 @@ public class GetDefaultLanguagesForEachBackgroundUnitTests {
 	@Parameters(name = "Background : ''{0}'', Expected Language :''{1}'' ")
 	public static Collection<Object[]> data() {
 		ArrayList<Object[]> parameters = new ArrayList<>();
-		HashMap<Background, LanguagesSet> initializeDefaultLanguagesMap = GetDefaultLanguagesForEachBackgroundUnitTestsData
-				.initializeRequiredLanguages();
+		HashMap<Background, LanguagesSet> initializeDefaultLanguagesMap = LanguagesUnitTestData.initializeRequiredLanguages();
 		for (Background background : initializeDefaultLanguagesMap.keySet()) {
 			parameters.add(new Object[] { background, initializeDefaultLanguagesMap.get(background) });
 		}
