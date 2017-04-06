@@ -24,12 +24,14 @@ import unit_test.character_sheet_unit_tests.ValidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsTests;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class, CharacterSheetCommonUnitTests.class,
-		CharacterSheetUnitTests.class, FieldsUnitTests.class, BaseClassUnitTests.class, SpecializationClassUnitTests.class, BackgroundUnitTests.class,
-		InvalidBackgroundUnitTests.class, InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class,
-		ValidClassAndSpecializationPairingsTests.class, MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
-		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class, LanguagesUnitTests.class, 
-		GetDefaultLanguagesForEachBackgroundUnitTests.class })
+@Suite.SuiteClasses({ GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class,
+		CharacterSheetCommonUnitTests.class, CharacterSheetUnitTests.class, FieldsUnitTests.class,
+		BaseClassUnitTests.class, SpecializationClassUnitTests.class, BackgroundUnitTests.class,
+		InvalidBackgroundUnitTests.class, InvalidClassAndSpecializationPairingsTests.class,
+		ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class, MoneyUnitTests.class,
+		CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
+		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
+		LanguagesUnitTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

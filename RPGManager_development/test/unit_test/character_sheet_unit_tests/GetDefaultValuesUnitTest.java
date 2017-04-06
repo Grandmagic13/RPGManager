@@ -15,7 +15,6 @@ import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
-
 public class GetDefaultValuesUnitTest {
 	// fields
 	final private CharacterSheet defaultCharacterSheet = new CharacterSheet("DefultCharacterSheet");
@@ -144,10 +143,10 @@ public class GetDefaultValuesUnitTest {
 		Background background = defaultCharacterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.ANDER_SURVIVOR, background);
 	}
-	
+
 	@Test
 	public void testGetDefaultLanguages() {
-		HashSet<Languages> expectedLanguages = new HashSet<Languages>(); 
+		HashSet<Languages> expectedLanguages = new HashSet<Languages>();
 		expectedLanguages.add(Languages.TRADE_TONGUE);
 		expectedLanguages.add(Languages.ANDER);
 		LanguagesSet actualLanguage = defaultCharacterSheet.getData(Fields.LANGUAGES);

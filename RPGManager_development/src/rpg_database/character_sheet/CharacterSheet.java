@@ -63,7 +63,7 @@ public class CharacterSheet {
 		if (field.isContainted()) {
 			Object containerObject = this.characterData.get(field.getContainingField());
 			return (DataType) MultipleFieldsGetterSetter.class.cast(containerObject).getStoredValueByField(field);
-		}else {
+		} else {
 			return (DataType) (characterData.get(field));
 		}
 	}
@@ -76,7 +76,7 @@ public class CharacterSheet {
 				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
 			} else {
 				this.characterData.put(field, value);
-			} 
+			}
 		} else {
 			throw new InvalidParameterException(createInvalidParameterExceptionMessage(field, value.getClass()));
 		}
@@ -91,6 +91,7 @@ public class CharacterSheet {
 	}
 
 	private String createInvalidParameterExceptionMessage(Fields field, Class<?> valueClass) {
-		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(), field.getAllowedClass().toString());
+		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(),
+				field.getAllowedClass().toString());
 	}
 }
