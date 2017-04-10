@@ -3,13 +3,14 @@ package rpg_database.character_sheet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import rpg_database.character_sheet.exceptions.InvalidBackgroundException;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
-import rpg_database.character_sheet.exceptions.InvalidLevelException;
+import rpg_database.character_sheet.exceptions.InvalidSpecializationRequirementException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public class SpecializationClassesSet implements Set<SpecializationClasses>, CustomSetter<SpecializationClassesSet> {
@@ -138,6 +139,7 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 			checkBaseClassCompatibility(baseClass, specializationClass);
 			checkBackgroundCompatibility(characterSheet, specializationClass);
 		}
+		checkAttributeCompatibility(characterSheet, specClassCollection);
 		checkIfLevelMatchesNumberOfSpecializations(numberOfSpecializations, characterSheet);
 	}
 
@@ -157,6 +159,36 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 		}
 	}
 
+	private void checkAttributeCompatibility(CharacterSheet characterSheet, Collection<? extends SpecializationClasses> specClassCollection) {
+		HashSet<SpecializationClasses> specializationClassesWithUnfullfilledRequirements = new HashSet<>();
+		for (SpecializationClasses specializationClass : specClassCollection) {
+			HashMap<Fields, Integer> requiredAttributeValues = specializationClass.getRequiredAttributeValues();
+			for (Fields attributeValueField : requiredAttributeValues.keySet()) {
+				Integer characterSheetValue = characterSheet.getData(attributeValueField);
+				Integer requiredValue = requiredAttributeValues.get(attributeValueField);
+				if (characterSheetValue < requiredValue) {
+					specializationClassesWithUnfullfilledRequirements.add(specializationClass);
+				}
+			}
+		}
+		if (!specializationClassesWithUnfullfilledRequirements.isEmpty()) {
+			throw new InvalidSpecializationRequirementException(generateInsufficientStatsMessage(specializationClassesWithUnfullfilledRequirements));
+		}
+	}
+
+	private String generateInsufficientStatsMessage(HashSet<SpecializationClasses> specializationClasses) {
+		String specializationClassesString = "";
+		for (SpecializationClasses specializationClass : specializationClasses) {
+			specializationClassesString = String.join(getDelimiter(specializationClassesString), specializationClassesString, specializationClass
+					.toString());
+		}
+		return String.format("Insufficient stats for specialization(s): %s!", specializationClassesString);
+	}
+
+	private CharSequence getDelimiter(String specializationClassesString) {
+		return specializationClassesString.isEmpty() ? "" : ", ";
+	}
+
 	private String generateInvalidLevelMessage(int numberOfSpecializations) {
 		return String.format("Character can't take %s specialization(s) until level %s!", numberOfSpecializations,
 				requiredLevelsForSpecializations[numberOfSpecializations]);
@@ -168,10 +200,10 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 			requiredLevel = requiredLevelsForSpecializations[numberOfSpecializations];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			String message = String.format("Character can't take more specializations than %s!", requiredLevelsForSpecializations.length - 1);
-			throw new InvalidLevelException(message);
+			throw new InvalidSpecializationRequirementException(message);
 		}
 		if (getCharacterLevel(characterSheet) < requiredLevel) {
-			throw new InvalidLevelException(generateInvalidLevelMessage(numberOfSpecializations));
+			throw new InvalidSpecializationRequirementException(generateInvalidLevelMessage(numberOfSpecializations));
 		}
 	}
 

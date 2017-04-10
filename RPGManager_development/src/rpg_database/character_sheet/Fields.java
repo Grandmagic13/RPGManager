@@ -1,5 +1,7 @@
 package rpg_database.character_sheet;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
+
 public enum Fields {
 	NAME(String.class), AGE(Integer.class), XP(Integer.class), GENDER(Gender.class), SPEED(Integer.class), BACKGROUND(Background.class),
 	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASSES(SpecializationClassesSet.class), LEVEL(Integer.class), DEFENSE(Integer.class),
@@ -15,17 +17,18 @@ public enum Fields {
 	CONSTITUTION_MAJORITY(Boolean.class, CONSTITUTION), CUNNING_MAJORITY(Boolean.class, CUNNING), DEXTERITY_MAJORITY(Boolean.class, DEXTERITY),
 	MAGIC_MAJORITY(Boolean.class, MAGIC), PERCEPTION_MAJORITY(Boolean.class, PERCEPTION), WILLPOWER_MAJORITY(Boolean.class, WILLPOWER);
 
-	private Class<?> fieldClass;
-	private Fields containingField;
+	private final Class<?> fieldClass;
+	private final Fields containingField;
+	private final String text;
 
 	private Fields(Class<?> fieldClass) {
-		this.fieldClass = fieldClass;
-		this.containingField = null;
+		this(fieldClass, null);
 	}
 
 	private Fields(Class<?> fieldClass, Fields containingField) {
 		this.fieldClass = fieldClass;
 		this.containingField = containingField;
+		this.text = generateEnumText(this.name());
 	}
 
 	public Class<?> getAllowedClass() {
@@ -34,12 +37,17 @@ public enum Fields {
 
 	public Fields getContainingField() {
 		if (containingField == null)
-			throw new NullPointerException(String.format("%s is not contained by another field!", this.toString()));
+			throw new NullPointerException(String.format("%s is not contained by another field!", this.name()));
 		else
 			return containingField;
 	}
 
 	public boolean isContainted() {
 		return containingField != null;
+	}
+
+	@Override
+	public String toString() {
+		return text;
 	}
 }

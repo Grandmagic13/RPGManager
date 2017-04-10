@@ -1,6 +1,7 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.setAllAttributesTo5;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +23,6 @@ import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 @RunWith(Parameterized.class)
 public class SpecializationBackgroundFilter_ValidBackgroundsTests {
-	// TODO
 	// Description:
 	//
 	// This class tests setting up various valid specializations to their
@@ -68,7 +68,7 @@ public class SpecializationBackgroundFilter_ValidBackgroundsTests {
 
 	@Test
 	public void testSetInvalidSpecializationClassForBackground() {
-		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		CharacterSheet characterSheet = setAllAttributesTo5(new CharacterSheet("CharacterSheet"));
 		characterSheet.setData(Fields.LEVEL, CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
 		characterSheet.setData(Fields.BACKGROUND, background);

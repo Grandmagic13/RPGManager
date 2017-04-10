@@ -60,7 +60,7 @@ public class BaseClassUnitTests {
 	@Test
 	public void expectException_SetCharacterBaseClassFromMageToWarrior_ArcaneWarrior() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Warrior is not a base class of Arcane Warrior");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.MAGE, new SpecializationClassesSet(
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses.MAGE, new SpecializationClassesSet(
 				SpecializationClasses.ARCANE_WARRIOR), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 	}
@@ -68,7 +68,7 @@ public class BaseClassUnitTests {
 	@Test
 	public void expectException_SetCharacterBaseClassFromWarriorToMage_Berserker() {
 		expectExceptionWithMessage(InvalidCharacterClassException.class, "Mage is not a base class of Berserker");
-		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevel(BaseClasses.WARRIOR, new SpecializationClassesSet(
+		CharacterSheet characterSheet = createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses.WARRIOR, new SpecializationClassesSet(
 				SpecializationClasses.BERSERKER), LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 	}
