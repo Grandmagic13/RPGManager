@@ -8,6 +8,7 @@ import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
 public class CharacterSheet {
 
+	private static final String ENTRY_NAME_PATTERN = "^(?U)[\\p{Alpha}_]+";
 	private static final String INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT = "%s value is not an instance of %s";
 	private final HashMap<Class<?>, Object> defaultData = initializeDefaultData();
 
@@ -29,7 +30,7 @@ public class CharacterSheet {
 	protected HashMap<Fields, Object> characterData;
 
 	public CharacterSheet(String entryName) {
-		if (entryName.matches("^(?U)[\\p{Alpha}_]+")) {
+		if (entryName.matches(ENTRY_NAME_PATTERN)) {
 			this.entryName = entryName;
 		} else {
 			throw new IllegalArgumentException("Only alphabet characters and '_' are allowed!");
