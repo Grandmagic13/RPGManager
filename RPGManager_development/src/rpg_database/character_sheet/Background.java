@@ -40,7 +40,6 @@ public enum Background implements CustomSetter<Background> {
 	private final String text;
 	private final ArrayList<BaseClasses> baseClasses;
 	private final LanguagesSet languages;
-	private final HashSet<Background> restrictedBackgrounds;
 
 	public static final HashSet<Background> elfMages() {
 		Background[] backgrounds = { DALISH_ELF, ELF_APOSTATE, ELF_CIRCLE_MAGE, ELF_CIRCLE_MAGE, ESCAPED_ELVEN_SLAVE };
@@ -69,14 +68,9 @@ public enum Background implements CustomSetter<Background> {
 	}
 
 	private Background(BaseClasses[] baseClasses, final LanguagesSet languages) {
-		this(baseClasses, languages, new HashSet<Background>());
-	}
-
-	private Background(BaseClasses[] baseClasses, final LanguagesSet languages, HashSet<Background> restrictedBackgrounds) {
 		this.text = generateEnumText(this.name());
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
 		this.languages = languages;
-		this.restrictedBackgrounds = restrictedBackgrounds;
 	}
 
 	private static BaseClasses[] playAs_Mage() {

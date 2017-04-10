@@ -32,7 +32,8 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class,
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
-		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class })
+		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
+		LanguagesUnitTests.class })
 
 public class CharacterSheetTestSuite {
 
