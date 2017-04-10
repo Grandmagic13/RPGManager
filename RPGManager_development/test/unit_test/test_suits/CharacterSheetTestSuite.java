@@ -11,9 +11,11 @@ import unit_test.character_sheet_unit_tests.CharacterSheetCommonUnitTests;
 import unit_test.character_sheet_unit_tests.CharacterSheetUnitTests;
 import unit_test.character_sheet_unit_tests.FieldsUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
+import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
+import unit_test.character_sheet_unit_tests.LanguagesUnitTests;
 import unit_test.character_sheet_unit_tests.MoneyUnitTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
@@ -28,7 +30,8 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		SpecializationClassUnitTests.class, BackgroundUnitTests.class, InvalidBackgroundUnitTests.class,
 		InvalidClassAndSpecializationPairingsTests.class, ValidBackgroundUnitTests.class, ValidClassAndSpecializationPairingsTests.class,
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
-		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class })
+		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class, LanguagesUnitTests.class,
+		GetDefaultLanguagesForEachBackgroundUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

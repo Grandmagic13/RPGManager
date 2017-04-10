@@ -1,5 +1,16 @@
 package rpg_database.character_sheet;
 
+import static rpg_database.character_sheet.Languages.ANCIENT_TEVENE_TRADE;
+import static rpg_database.character_sheet.Languages.ANDER_TRADE;
+import static rpg_database.character_sheet.Languages.ANTIVAN_TRADE;
+import static rpg_database.character_sheet.Languages.DWARVEN_TRADE;
+import static rpg_database.character_sheet.Languages.ELVEN_TRADE;
+import static rpg_database.character_sheet.Languages.ORLESIAN_TRADE;
+import static rpg_database.character_sheet.Languages.QUNLAT_TEVENE_TRADE;
+import static rpg_database.character_sheet.Languages.QUNLAT_TRADE;
+import static rpg_database.character_sheet.Languages.RIVAINI_TRADE;
+import static rpg_database.character_sheet.Languages.TEVENE_TRADE;
+import static rpg_database.character_sheet.Languages.TRADE;
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
 import java.util.ArrayList;
@@ -11,19 +22,25 @@ import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum Background implements CustomSetter<Background> {
 	// TODO lot of enum information. Factory class for reading from file?
-	ANDER_SURVIVOR(playAs_Mage_Warrior_Rogue()), ANTIVAN_WAYFARER(playAs_Warrior_Rogue()), AVVAR(playAs_Mage_Warrior_Rogue()),
-	CHASIND_WILDER(playAs_Mage_Warrior_Rogue()), CITY_ELF(playAs_Warrior_Rogue()), DALISH_ELF(playAs_Mage_Warrior_Rogue()),
-	DWARF_DUSTER(playAs_Rogue()), ELF_APOSTATE(playAs_Mage()), ELF_CIRCLE_MAGE(playAs_Mage()), ESCAPED_ELVEN_SLAVE(playAs_Mage_Warrior_Rogue()),
-	FERELDAN_CRAFTSMEN(playAs_Warrior_Rogue()), FERELDAN_FREEMAN(playAs_Warrior_Rogue()), FERELDAN_NOBLE(playAs_Warrior_Rogue()),
-	FREE_MARCHER(playAs_Warrior_Rogue()), HIGH_BORN_DWARF(playAs_Warrior_Rogue()), HUMAN_APOSTATE(playAs_Mage()), HUMAN_CIRCLE_MAGE(playAs_Mage()),
-	LOW_BORN_DWARF(playAs_Warrior_Rogue()), NEVARRAN_ADVENTURER(playAs_Warrior_Rogue()), ORLESIAN_COMMONER(playAs_Warrior_Rogue()),
-	ORLESIAN_EXILE(playAs_Mage_Warrior_Rogue()), ORLESIAN_NOBLE(playAs_Warrior_Rogue()), ORLESIAN_STUDENT(playAs_Warrior_Rogue()),
-	QUNARI_BERESAAD(playAs_Warrior_Rogue()), RIVAINI_MERCHANT(playAs_Warrior_Rogue()), SEHERON_CONVERT(playAs_Warrior_Rogue()),
-	SURFACE_DWARF(playAs_Warrior_Rogue()), TAL_VASHOTH(playAs_Mage_Warrior_Rogue()), TEVINTER_ALTUS(playAs_Mage()), TEVINTER_LAETAN(playAs_Mage()),
-	TEVINTER_SOPORATI(playAs_Warrior_Rogue()), WAKING_SEA_RAIDER(playAs_Warrior_Rogue());
+	ANDER_SURVIVOR(playAs_Mage_Warrior_Rogue(), ANDER_TRADE), ANTIVAN_WAYFARER(playAs_Warrior_Rogue(), ANTIVAN_TRADE),
+	AVVAR(playAs_Mage_Warrior_Rogue(), TRADE), CHASIND_WILDER(playAs_Mage_Warrior_Rogue(), TRADE), CITY_ELF(playAs_Warrior_Rogue(), TRADE),
+	DALISH_ELF(playAs_Mage_Warrior_Rogue(), ELVEN_TRADE), DWARF_DUSTER(playAs_Rogue(), DWARVEN_TRADE), ELF_APOSTATE(playAs_Mage(), TRADE),
+	ELF_CIRCLE_MAGE(playAs_Mage(), ANCIENT_TEVENE_TRADE), ESCAPED_ELVEN_SLAVE(playAs_Mage_Warrior_Rogue(), TEVENE_TRADE),
+	FERELDAN_CRAFTSMEN(playAs_Warrior_Rogue(), TRADE), FERELDAN_FREEMAN(playAs_Warrior_Rogue(), TRADE), FERELDAN_NOBLE(playAs_Warrior_Rogue(), TRADE),
+	FREE_MARCHER(playAs_Warrior_Rogue(), TRADE), HIGH_BORN_DWARF(playAs_Warrior_Rogue(), DWARVEN_TRADE), HUMAN_APOSTATE(playAs_Mage(), TRADE),
+	HUMAN_CIRCLE_MAGE(playAs_Mage(), ANCIENT_TEVENE_TRADE), LOW_BORN_DWARF(playAs_Warrior_Rogue(), DWARVEN_TRADE),
+	NEVARRAN_ADVENTURER(playAs_Warrior_Rogue(), ORLESIAN_TRADE), ORLESIAN_COMMONER(playAs_Warrior_Rogue(), ORLESIAN_TRADE),
+	ORLESIAN_EXILE(playAs_Mage_Warrior_Rogue(), ORLESIAN_TRADE), ORLESIAN_NOBLE(playAs_Warrior_Rogue(), ORLESIAN_TRADE),
+	ORLESIAN_STUDENT(playAs_Warrior_Rogue(), ORLESIAN_TRADE), QUNARI_BERESAAD(playAs_Warrior_Rogue(), QUNLAT_TRADE),
+	RIVAINI_MERCHANT(playAs_Warrior_Rogue(), RIVAINI_TRADE), SEHERON_CONVERT(playAs_Warrior_Rogue(), QUNLAT_TEVENE_TRADE),
+	SURFACE_DWARF(playAs_Warrior_Rogue(), DWARVEN_TRADE), TAL_VASHOTH(playAs_Mage_Warrior_Rogue(), QUNLAT_TRADE),
+	TEVINTER_ALTUS(playAs_Mage(), TEVENE_TRADE), TEVINTER_LAETAN(playAs_Mage(), TEVENE_TRADE),
+	TEVINTER_SOPORATI(playAs_Warrior_Rogue(), TEVENE_TRADE), WAKING_SEA_RAIDER(playAs_Warrior_Rogue(), TRADE);
 
 	private final String text;
 	private final ArrayList<BaseClasses> baseClasses;
+	private final LanguagesSet languages;
+	private final HashSet<Background> restrictedBackgrounds;
 
 	public static final HashSet<Background> elfMages() {
 		Background[] backgrounds = { DALISH_ELF, ELF_APOSTATE, ELF_CIRCLE_MAGE, ELF_CIRCLE_MAGE, ESCAPED_ELVEN_SLAVE };
@@ -51,9 +68,15 @@ public enum Background implements CustomSetter<Background> {
 		return new HashSet<Background>(Arrays.asList(Background.TAL_VASHOTH));
 	}
 
-	private Background(BaseClasses[] baseClasses) {
+	private Background(BaseClasses[] baseClasses, final LanguagesSet languages) {
+		this(baseClasses, languages, new HashSet<Background>());
+	}
+
+	private Background(BaseClasses[] baseClasses, final LanguagesSet languages, HashSet<Background> restrictedBackgrounds) {
 		this.text = generateEnumText(this.name());
 		this.baseClasses = new ArrayList<>(Arrays.asList(baseClasses));
+		this.languages = languages;
+		this.restrictedBackgrounds = restrictedBackgrounds;
 	}
 
 	private static BaseClasses[] playAs_Mage() {
@@ -93,6 +116,7 @@ public enum Background implements CustomSetter<Background> {
 					Fields.BASECLASS).toString()));
 		}
 		characterSheet.characterData.put(Fields.BACKGROUND, this);
+		characterSheet.characterData.put(Fields.LANGUAGES, new LanguagesSet(this.languages));
 	}
 
 	private boolean isCharacterBaseClassAllowed(CharacterSheet characterSheet) {
