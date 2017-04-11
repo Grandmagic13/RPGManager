@@ -3,6 +3,7 @@ package unit_test.test_suits;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import unit_test.character_sheet_unit_tests.ArmorsUnitTests;
 import unit_test.character_sheet_unit_tests.AttributeMajorityContentTests;
 import unit_test.character_sheet_unit_tests.BackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.BaseClassUnitTests;
@@ -17,6 +18,7 @@ import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
 import unit_test.character_sheet_unit_tests.LanguagesUnitTests;
 import unit_test.character_sheet_unit_tests.MoneyUnitTests;
+import unit_test.character_sheet_unit_tests.ShieldsUnitTests;
 import unit_test.character_sheet_unit_tests.SpecializationAttributeFilter_AttributeValuesContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
@@ -33,7 +35,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
-		LanguagesUnitTests.class })
+		LanguagesUnitTests.class, ArmorsUnitTests.class, ShieldsUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

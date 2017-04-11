@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
+import rpg_database.character_sheet.Armors;
 import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
@@ -13,6 +14,7 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
+import rpg_database.character_sheet.Shields;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class GetDefaultValuesUnitTest {
@@ -151,5 +153,15 @@ public class GetDefaultValuesUnitTest {
 		expectedLanguages.add(Languages.ANDER);
 		LanguagesSet actualLanguage = defaultCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(expectedLanguages, actualLanguage);
+	}
+
+	@Test
+	public void testGetDefaultArmorType() {
+		assertEquals(Armors.LIGHT_MAIL, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
+	}
+
+	@Test
+	public void testGetDefaultShields() {
+		assertEquals(Shields.NONE, defaultCharacterSheet.getData(Fields.SHIELDS));
 	}
 }
