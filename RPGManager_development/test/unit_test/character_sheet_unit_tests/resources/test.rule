@@ -1,0 +1,10 @@
+{
+	"ASSASSIN": {
+		"someAttribute": true,
+		"someOtherAttribute": "Orcs"
+	},
+	"SOME_OTHER_FIELD": {
+		"otherAttribute": false,
+		"yetAnotherAttribute": 12
+	}
+}
