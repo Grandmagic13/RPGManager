@@ -14,7 +14,6 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
-import rpg_database.character_sheet.Shields;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class GetDefaultValuesUnitTest {
@@ -158,10 +157,5 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultArmorType() {
 		assertEquals(Armors.HEAVY_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
-	}
-
-	@Test
-	public void testGetDefaultShields() {
-		assertEquals(Shields.NONE, defaultCharacterSheet.getData(Fields.SHIELDS));
 	}
 }
