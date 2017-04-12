@@ -157,7 +157,7 @@ public class GetDefaultValuesUnitTest {
 
 	@Test
 	public void testGetDefaultArmorType() {
-		assertEquals(Armors.LIGHT_MAIL, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
+		assertEquals(Armors.HEAVY_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
 	}
 
 	@Test

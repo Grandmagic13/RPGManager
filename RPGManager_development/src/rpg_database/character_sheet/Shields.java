@@ -1,15 +1,19 @@
 package rpg_database.character_sheet;
 
+import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
+
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum Shields implements CustomSetter<Shields> {
 	LIGHT_SHIELD(1, 15), MEDIUM_SHIELD(2, 30), HEAVY_SHIELD(3, 60), NONE(0, 0);
 
+	private final String text;
 	private final int shieldBonus;
 	private final int cost;
 
-	Shields(int shieldBonus, int cost) {
+	private Shields(int shieldBonus, int cost) {
+		this.text = generateEnumText(this.name());
 		this.shieldBonus = shieldBonus;
 		this.cost = cost;
 	}
@@ -34,5 +38,10 @@ public enum Shields implements CustomSetter<Shields> {
 
 	public int getCost() {
 		return cost;
+	}
+
+	@Override
+	public String toString() {
+		return text;
 	}
 }

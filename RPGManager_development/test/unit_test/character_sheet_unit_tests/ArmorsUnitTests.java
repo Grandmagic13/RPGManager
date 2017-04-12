@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.Armors;
-import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
@@ -33,20 +32,14 @@ public class ArmorsUnitTests {
 		thrown.expectMessage(message);
 	}
 
-	@Test
-	public void testSetArmorTypeLightPlate() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.LIGHT_PLATE);
-		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(Armors.LIGHT_PLATE, actualValue);
-	}
+	// default Armors for BaseClasses
 
 	@Test
 	public void testGetDefaultArmorForWarrior() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
 		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(Armors.LIGHT_MAIL, actualValue);
+		assertEquals(Armors.HEAVY_LEATHER, actualValue);
 	}
 
 	@Test
@@ -62,81 +55,91 @@ public class ArmorsUnitTests {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
 		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(Armors.NONE, actualValue);
+		assertEquals(Armors.ROBE, actualValue);
+	}
+
+	// default ArmorRating for BaseClasses
+
+	@Test
+	public void testGetDefaultArmorRating() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
+		assertEquals(4, actualArmorValue + characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorRating());
+	}
+
+	@Test
+	public void testGetDefaultArmorRatingWarrior() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
+		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
+		assertEquals(4, actualArmorValue + characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorRating());
+	}
+
+	@Test
+	public void testGetDefaultArmorRatingRogue() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
+		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
+		assertEquals(3, actualArmorValue + characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorRating());
+	}
+
+	@Test
+	public void testGetDefaultArmorRatingMage() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
+		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
+		assertEquals(0, actualArmorValue + characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorRating());
+	}
+
+	// Functional tests
+
+	@Test
+	public void testSetArmorTypeLightPlate() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		Armors expectedArmor = Armors.LIGHT_PLATE;
+		characterSheet.setData(Fields.ARMOR_TYPE, expectedArmor);
+		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
+		assertEquals(Armors.LIGHT_PLATE, actualValue);
 	}
 
 	@Test
 	public void testSetArmorForWarrior() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.HEAVY_MAIL);
+		Armors expectedArmor = Armors.HEAVY_MAIL;
+		characterSheet.setData(Fields.ARMOR_TYPE, expectedArmor);
 		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
 		assertEquals(Armors.HEAVY_MAIL, actualValue);
 	}
 
 	@Test
-	public void testGetDexterityArmorForWarrior() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.HEAVY_MAIL);
-		int actualValue = characterSheet.getData(Fields.DEXTERITY_VALUE);
-		assertEquals(-3, actualValue + Armors.class.cast(characterSheet.getData(Fields.ARMOR_TYPE)).getArmorPenalty());
-	}
-
-	@Test
-	public void testGetCostArmorForWarrior() {
+	public void testSetArmorForRugue() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
-		Armors armor = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(50, armor.getCost());
+		Armors expectedArmor = Armors.HEAVY_MAIL;
+		characterSheet.setData(Fields.ARMOR_TYPE, expectedArmor);
+		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
+		assertEquals(Armors.HEAVY_MAIL, actualValue);
 	}
 
 	@Test
-	public void testGetCostArmorForMage() {
+	public void testSetArmorForMage() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
-		Armors armor = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(0, armor.getCost());
+		Armors expectedArmor = Armors.HEAVY_MAIL;
+		characterSheet.setData(Fields.ARMOR_TYPE, expectedArmor);
+		Armors actualValue = characterSheet.getData(Fields.ARMOR_TYPE);
+		assertEquals(Armors.HEAVY_MAIL, actualValue);
 	}
 
-	@Test
-	public void testGetDefaultDefenseAnderSurvivor() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.HEAVY_PLATE);
-		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(10, actualArmorValue + Armors.class.cast(characterSheet.getData(Fields.ARMOR_TYPE)).getArmorRating());
-	}
+	// Test attributes with penaltys for warriror
 
 	@Test
-	public void testGetDefaultDefenseAnderSurvivor1() {
+	public void testGetDexterityForWarrior() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.HEAVY_MAIL);
-		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(7, actualArmorValue + Armors.class.cast(characterSheet.getData(Fields.ARMOR_TYPE)).getArmorRating());
-	}
-
-	@Test
-	public void testGetDefaultDefenseAnderSurvivor2() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.ARMOR_TYPE, Armors.LIGHT_PLATE);
-		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(8, actualArmorValue + Armors.class.cast(characterSheet.getData(Fields.ARMOR_TYPE)).getArmorRating());
-	}
-
-	@Test
-	public void testGetDefaultDefenseHumanCircleMage() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.BASECLASS, BaseClasses.MAGE);
-		characterSheet.setData(Fields.BACKGROUND, Background.HUMAN_CIRCLE_MAGE);
-		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(0, actualArmorValue + Armors.class.cast(characterSheet.getData(Fields.ARMOR_TYPE)).getArmorRating());
-	}
-
-	@Test
-	public void testGetDefaultDefenseRogue() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
-		characterSheet.setData(Fields.BACKGROUND, Background.CITY_ELF);
-		Armors armor = characterSheet.getData(Fields.ARMOR_TYPE);
-		assertEquals(3, armor.getArmorRating());
+		Armors expectedArmor = Armors.HEAVY_MAIL;
+		characterSheet.setData(Fields.ARMOR_TYPE, expectedArmor);
+		int actualValue = characterSheet.getData(Fields.DEXTERITY_VALUE);
+		assertEquals(-3, actualValue + characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorPenalty());
 	}
 }

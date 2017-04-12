@@ -23,7 +23,7 @@ public class CharacterSheet {
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
-		defaultData.put(Armors.class, Armors.LIGHT_MAIL);
+		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
 		defaultData.put(Shields.class, Shields.NONE);
 		return defaultData;
 	}

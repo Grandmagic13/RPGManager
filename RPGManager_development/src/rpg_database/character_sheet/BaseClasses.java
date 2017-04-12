@@ -11,11 +11,11 @@ import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum BaseClasses implements CustomSetter<BaseClasses> {
-	WARRIOR(Armors.LIGHT_MAIL), ROGUE(Armors.LIGHT_LEATHER), MAGE(Armors.NONE);
+	WARRIOR(Armors.HEAVY_LEATHER), ROGUE(Armors.LIGHT_LEATHER), MAGE(Armors.ROBE);
 
 	private final String text;
 
-	private final Armors armor;
+	private final Armors defaultArmor;
 
 	private final static ArrayList<Fields> warriorMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.STRENGTH, Fields.DEXTERITY,
 			Fields.CONSTITUTION }));
@@ -35,7 +35,7 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 
 	private BaseClasses(Armors armor) {
 		this.text = generateEnumText(this.name());
-		this.armor = armor;
+		this.defaultArmor = armor;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 			}
 		}
 		characterSheet.characterData.put(Fields.BASECLASS, this);
-		characterSheet.characterData.put(Fields.ARMOR_TYPE, this.armor);
+		characterSheet.characterData.put(Fields.ARMOR_TYPE, this.defaultArmor);
 		for (Fields attribute : CharacterAttribute.ATTRIBUTES) {
 			CharacterAttribute characterAttribute = (CharacterAttribute) characterSheet.characterData.get(attribute);
 			characterAttribute.setMajority(isAttributeMajor(attribute));
