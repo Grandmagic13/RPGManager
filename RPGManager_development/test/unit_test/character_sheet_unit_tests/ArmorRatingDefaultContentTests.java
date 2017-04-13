@@ -18,11 +18,11 @@ public class ArmorRatingDefaultContentTests {
 
 	@Parameters(name = "Amror : ''{0}'' DefaultArmorRating :''{1}'' DefaultArmorPenalty :''{2}''")
 	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { Armors.LIGHT_LEATHER, 3, 0 }, { Armors.HEAVY_LEATHER, 4, -1 }, { Armors.LIGHT_MAIL, 5, -2 }, {
-				Armors.HEAVY_MAIL, 7, -3 }, { Armors.LIGHT_PLATE, 8, -4 }, { Armors.HEAVY_PLATE, 10, -5 }, { Armors.LIGHT_LEATHER_DUSTER, 3, 0 }, {
-						Armors.TAILORED_LEATHER_DUSTER, 4, 0 },
+		return Arrays.asList(new Object[][] { { Armors.LIGHT_LEATHER, 3, 0, 1 }, { Armors.HEAVY_LEATHER, 4, -1, 2 }, { Armors.LIGHT_MAIL, 5, -2, 3 },
+				{ Armors.HEAVY_MAIL, 7, -3, 4 }, { Armors.LIGHT_PLATE, 8, -4, 5 }, { Armors.HEAVY_PLATE, 10, -5, 6 }, { Armors.LIGHT_LEATHER_DUSTER,
+						3, 0, 1 }, { Armors.TAILORED_LEATHER_DUSTER, 4, 0, 2 },
 
-				{ Armors.ROBE, 0, 0 } });
+				{ Armors.ROBE, 0, 0, 0 } });
 	}
 
 	@Parameter(0)
@@ -34,6 +34,9 @@ public class ArmorRatingDefaultContentTests {
 	@Parameter(2)
 	public int defaultArmorPenalty;
 
+	@Parameter(3)
+	public int defaultStrain;
+
 	@Test
 	public void testGetDefaultArmorRating() {
 		int actualValue = armor.getArmorRating();
@@ -44,5 +47,11 @@ public class ArmorRatingDefaultContentTests {
 	public void testGetDefaultAmorPenalty() {
 		int actualValue = armor.getArmorPenalty();
 		assertEquals(defaultArmorPenalty, actualValue);
+	}
+
+	@Test
+	public void testGetDefaultStrain() {
+		int actualValue = armor.getStrain();
+		assertEquals(defaultStrain, actualValue);
 	}
 }

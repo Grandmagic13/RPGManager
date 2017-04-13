@@ -158,4 +158,10 @@ public class GetDefaultValuesUnitTest {
 	public void testGetDefaultArmorType() {
 		assertEquals(Armors.HEAVY_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
 	}
+
+	@Test
+	public void testGetDefaultStrain() {
+		int strain = defaultCharacterSheet.getData(Fields.STRAIN);
+		assertEquals(0, strain);
+	}
 }
