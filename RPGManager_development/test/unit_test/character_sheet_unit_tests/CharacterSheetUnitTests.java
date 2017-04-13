@@ -179,7 +179,7 @@ public class CharacterSheetUnitTests {
 
 	@Test
 	public void testGetCharacterSheetEntryName_Mate() {
-		final String expectedCharacterName = "Máté_karilapja";
+		final String expectedCharacterName = "Mate_karilapja";
 		CharacterSheet characterSheet = new CharacterSheet(expectedCharacterName);
 		String entryName = characterSheet.getEntryName();
 		assertEquals(expectedCharacterName, entryName);
