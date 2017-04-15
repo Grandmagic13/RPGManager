@@ -50,6 +50,8 @@ public class CharacterSheet {
 		Object defaultValue;
 		if (allowedType == CharacterAttribute.class) {
 			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field));
+		} else if (field.name().equals("ARMOR_RATING")) {
+			defaultValue = 4;
 		} else {
 			defaultValue = defaultData.get(allowedType);
 		}

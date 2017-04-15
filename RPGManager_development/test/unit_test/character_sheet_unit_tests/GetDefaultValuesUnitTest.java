@@ -84,7 +84,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterArmor() {
 		int armor = defaultCharacterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(0, armor);
+		assertEquals(4, armor);
 	}
 
 	@Test
@@ -164,4 +164,5 @@ public class GetDefaultValuesUnitTest {
 		int strain = defaultCharacterSheet.getData(Fields.STRAIN);
 		assertEquals(0, strain);
 	}
+
 }

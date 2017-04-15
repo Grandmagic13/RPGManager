@@ -59,7 +59,7 @@ public class ArmorsUnitTests {
 	public void testGetDefaultArmorRating() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(0, actualArmorValue);
+		assertEquals(4, actualArmorValue);
 	}
 
 	@Test
@@ -115,6 +115,14 @@ public class ArmorsUnitTests {
 	}
 
 	// Until the talents yet to added, they'll be just comments.
+
+	// We should check that is the warrior has the armor training talent,
+	// otherwise we need to test how much penalty will he get from wearing an
+	// armor without skill.
+	// We should check that is the rogue wearing the armor that he could without
+	// armor training.
+	// We should check that is the mage has the right specialization to wear
+	// armors without penaltys.
 	/*
 	 * @Test public void testSetArmorForWarrior() { CharacterSheet
 	 * characterSheet = new CharacterSheet("characterSheet");
