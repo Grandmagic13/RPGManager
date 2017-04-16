@@ -23,9 +23,9 @@ public enum Armors implements CustomSetter<Armors> {
 		this.text = generateEnumText(this.name());
 
 		FieldRules armorsRules = FieldRulesFactory.getFieldRules(FieldRulesFactory.ARMORS);
-		this.armorRating = armorsRules.getIntegerForField(this, Keys.ARMOR_RATING);
-		this.armorPenalty = armorsRules.getIntegerForField(this, Keys.ARMOR_PENALTY);
-		this.strain = armorsRules.getIntegerForField(this, Keys.STRAIN);
+		armorRating = armorsRules.getIntegerForField(this, Keys.ARMOR_RATING);
+		armorPenalty = armorsRules.getIntegerForField(this, Keys.ARMOR_PENALTY);
+		strain = armorsRules.getIntegerForField(this, Keys.STRAIN);
 	}
 
 	@Override
