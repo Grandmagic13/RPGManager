@@ -15,7 +15,8 @@ public enum Fields {
 	DEXTERITY_VALUE(Integer.class, DEXTERITY), MAGIC_VALUE(Integer.class, MAGIC), PERCEPTION_VALUE(Integer.class, PERCEPTION),
 	WILLPOWER_VALUE(Integer.class, WILLPOWER), STRENGTH_MAJORITY(Boolean.class, STRENGTH), COMMUNICATION_MAJORITY(Boolean.class, COMMUNICATION),
 	CONSTITUTION_MAJORITY(Boolean.class, CONSTITUTION), CUNNING_MAJORITY(Boolean.class, CUNNING), DEXTERITY_MAJORITY(Boolean.class, DEXTERITY),
-	MAGIC_MAJORITY(Boolean.class, MAGIC), PERCEPTION_MAJORITY(Boolean.class, PERCEPTION), WILLPOWER_MAJORITY(Boolean.class, WILLPOWER);
+	MAGIC_MAJORITY(Boolean.class, MAGIC), PERCEPTION_MAJORITY(Boolean.class, PERCEPTION), WILLPOWER_MAJORITY(Boolean.class, WILLPOWER),
+	ARMOR_TYPE(Armors.class), STRAIN(Integer.class);
 
 	private final Class<?> fieldClass;
 	private final Fields containingField;

@@ -3,6 +3,8 @@ package unit_test.test_suits;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import unit_test.character_sheet_unit_tests.ArmorRatingDefaultContentTests;
+import unit_test.character_sheet_unit_tests.ArmorsUnitTests;
 import unit_test.character_sheet_unit_tests.AttributeMajorityContentTests;
 import unit_test.character_sheet_unit_tests.BackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.BaseClassUnitTests;
@@ -34,7 +36,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
-		LanguagesUnitTests.class, FieldRulesTests.class })
+		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class })
 
 public class CharacterSheetTestSuite {
 

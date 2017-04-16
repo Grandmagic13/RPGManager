@@ -167,6 +167,13 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.CUNNING_MAJORITY, true);
 	}
 
+	@Test
+	public void expectException_SetCharacterStrainMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
+		final String malformedInput = "MALFORMED INPUT";
+		testCharacterSheet.setData(Fields.STRAIN, malformedInput);
+	}
+
 	// functional unit tests
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
@@ -299,6 +306,13 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.EQUIPMENT, "HasABackpack");
 		String equipment = testCharacterSheet.getData(Fields.EQUIPMENT);
 		assertEquals("HasABackpack", equipment);
+	}
+
+	@Test
+	public void testSetCharacterStrain() {
+		testCharacterSheet.setData(Fields.STRAIN, 6);
+		int strain = testCharacterSheet.getData(Fields.STRAIN);
+		assertEquals(6, strain);
 	}
 
 	// private methods
