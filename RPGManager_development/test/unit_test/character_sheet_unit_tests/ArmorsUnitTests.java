@@ -56,13 +56,6 @@ public class ArmorsUnitTests {
 	// default ArmorRating for BaseClasses
 
 	@Test
-	public void testGetDefaultArmorRating() {
-		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
-		int actualArmorValue = characterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(4, actualArmorValue);
-	}
-
-	@Test
 	public void testGetDefaultArmorRatingWarrior() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.WARRIOR);
