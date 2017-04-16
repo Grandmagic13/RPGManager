@@ -1,6 +1,6 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.common.FieldRules;
+import rpg_database.character_sheet.common.FieldRulesFactory;
 import rpg_database.character_sheet.common.Keys;
 import rpg_database.character_sheet.exceptions.FieldRuleException;
 
@@ -30,6 +31,7 @@ public class FieldRulesTests {
 	public ExpectedException thrown = ExpectedException.none();
 
 	// test methods
+	// FieldRules tests
 	@Test
 	public void expectException_wrongFilePath() {
 		expectExceptionWithMessage(FieldRuleException.class, "Error happened while trying to read .rule file!");
@@ -132,6 +134,14 @@ public class FieldRulesTests {
 	// "boolDataFalse");
 	// assertFalse(actual);
 	// }
+
+	// FieldRulesFactory tests
+	@Test
+	public void testGetStaticFieldRulesObject() {
+		FieldRules fieldRules1 = FieldRulesFactory.getFieldRules(FieldRulesFactory.ARMORS);
+		FieldRules fieldRules2 = FieldRulesFactory.getFieldRules(FieldRulesFactory.ARMORS);
+		assertTrue(fieldRules1 == fieldRules2);
+	}
 
 	// private methods
 

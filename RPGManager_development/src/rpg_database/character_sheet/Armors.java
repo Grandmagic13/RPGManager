@@ -2,6 +2,9 @@ package rpg_database.character_sheet;
 
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
+import rpg_database.character_sheet.common.FieldRules;
+import rpg_database.character_sheet.common.FieldRulesFactory;
+import rpg_database.character_sheet.common.Keys;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum Armors implements CustomSetter<Armors> {
@@ -9,19 +12,20 @@ public enum Armors implements CustomSetter<Armors> {
 	// TODO Later, we should revise the set method, because it'll depends on,
 	// which talent and/or specialization will the user choose.
 
-	LIGHT_LEATHER(3, 0, 1), HEAVY_LEATHER(4, -1, 2), LIGHT_MAIL(5, -2, 3), HEAVY_MAIL(7, -3, 4), LIGHT_PLATE(8, -4, 5), HEAVY_PLATE(10, -5, 6),
-	LIGHT_LEATHER_DUSTER(3, 0, 1), TAILORED_LEATHER_DUSTER(4, 0, 2), ROBE(0, 0, 0);
+	LIGHT_LEATHER, HEAVY_LEATHER, LIGHT_MAIL, HEAVY_MAIL, LIGHT_PLATE, HEAVY_PLATE, LIGHT_LEATHER_DUSTER, TAILORED_LEATHER_DUSTER, ROBE;
 
 	private final String text;
 	private final int armorRating;
 	private final int armorPenalty;
 	private final int strain;
 
-	private Armors(int armorRating, int armorPenalty, int strain) {
+	private Armors() {
 		this.text = generateEnumText(this.name());
-		this.armorRating = armorRating;
-		this.armorPenalty = armorPenalty;
-		this.strain = strain;
+
+		FieldRules armorsRules = FieldRulesFactory.getFieldRules(FieldRulesFactory.ARMORS);
+		this.armorRating = armorsRules.getIntegerForField(this, Keys.ARMOR_RATING);
+		this.armorPenalty = armorsRules.getIntegerForField(this, Keys.ARMOR_PENALTY);
+		this.strain = armorsRules.getIntegerForField(this, Keys.STRAIN);
 	}
 
 	@Override
