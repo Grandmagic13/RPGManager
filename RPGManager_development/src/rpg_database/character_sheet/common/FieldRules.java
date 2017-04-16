@@ -74,4 +74,8 @@ public class FieldRules {
 		return attributeRequirements;
 	}
 
+	public Integer getIntegerForField(Enum<?> field, Keys key) {
+		return getFieldData(field).getInt(key.toString());
+	}
+
 }

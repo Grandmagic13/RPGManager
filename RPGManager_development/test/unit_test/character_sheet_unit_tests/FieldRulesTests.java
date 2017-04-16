@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import rpg_database.character_sheet.Armors;
 import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.Fields;
@@ -40,7 +41,9 @@ public class FieldRulesTests {
 	public void testGetRootJSONObject() {
 		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
 		final JSONObject actualRoot = fieldRules.getJSONRoot();
-		final String expectedJSONString = "{\"ASSASSIN\":{\"someAttribute\":true,\"someOtherAttribute\":\"Orcs\",\"ATTRIBUTE_REQUIREMENTS\":[{\"FIELD\":\"CUNNING_VALUE\",\"VALUE\":3},{\"FIELD\":\"DEXTERITY_VALUE\",\"VALUE\":3}]},\"ANDER_SURVIVOR\":{\"boolDataTrue\":true,\"boolDataFalse\":false,\"stringData\":\"Orcs\",\"intData\":3,\"BASE_CLASSES_ARRAY\":[\"MAGE\",\"WARRIOR\",\"ROGUE\"],\"LANGUAGES_ARRAY\":[\"ANDER\",\"TRADE_TONGUE\"],\"BASE_CLASS\":\"WARRIOR\"}}";
+		final String expectedJSONString = "{\"ASSASSIN\":{\"someAttribute\":true,\"someOtherAttribute\":\"Orcs\",\"ATTRIBUTE_REQUIREMENTS\":[{\"FIELD\":\"CUNNING_VALUE\",\"VALUE\":3},{\"FIELD\":\"DEXTERITY_VALUE\","
+				+ "\"VALUE\":3}]},\"ANDER_SURVIVOR\":{\"boolDataTrue\":true,\"boolDataFalse\":false,\"stringData\":\"Orcs\",\"intData\":3,\"BASE_CLASSES_ARRAY\":[\"MAGE\",\"WARRIOR\",\"ROGUE\"],\"LANGUAGES_ARRAY\""
+				+ ":[\"ANDER\",\"TRADE_TONGUE\"],\"BASE_CLASS\":\"WARRIOR\",\"ARMOR_RATING\":3,\"ARMOR_PENALTY\":5,\"ARMOR_TYPE\":\"HEAVY_LEATHER\"}}";
 		final JSONObject expectedRoot = new JSONObject(expectedJSONString);
 		assertEquals(expectedRoot.toString(), actualRoot.toString());
 	}
@@ -70,12 +73,19 @@ public class FieldRulesTests {
 		assertEquals(expecteds, actuals);
 	}
 
-	// TODO test with another enum class like Armor_Type
 	@Test
 	public void testGetBaseClassByField() {
 		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
 		BaseClasses expected = BaseClasses.WARRIOR;
 		BaseClasses actual = fieldRules.getEnumForField(Background.ANDER_SURVIVOR, BaseClasses.class, Keys.BASE_CLASS);
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testGetArmorsByField() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		Armors expected = Armors.HEAVY_LEATHER;
+		Armors actual = fieldRules.getEnumForField(Background.ANDER_SURVIVOR, Armors.class, Keys.ARMOR_TYPE);
 		assertEquals(expected, actual);
 	}
 
@@ -87,6 +97,22 @@ public class FieldRulesTests {
 		expecteds.put(Fields.DEXTERITY_VALUE, 3);
 		HashMap<Fields, Integer> actuals = fieldRules.getAttributeRequirements(SpecializationClasses.ASSASSIN);
 		assertEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void testGetIntegerByField_ArmorRating() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		Integer expected = 3;
+		Integer actual = fieldRules.getIntegerForField(Background.ANDER_SURVIVOR, Keys.ARMOR_RATING);
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testGetIntegerByField_ArmorPenalty() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		Integer expected = 5;
+		Integer actual = fieldRules.getIntegerForField(Background.ANDER_SURVIVOR, Keys.ARMOR_PENALTY);
+		assertEquals(expected, actual);
 	}
 
 	// @Test
