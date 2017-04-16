@@ -23,6 +23,7 @@ public class CharacterSheet {
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
+		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
 		return defaultData;
 	}
 
@@ -49,6 +50,8 @@ public class CharacterSheet {
 		Object defaultValue;
 		if (allowedType == CharacterAttribute.class) {
 			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field));
+		} else if (field.name().equals("ARMOR_RATING")) {
+			defaultValue = 4;
 		} else {
 			defaultValue = defaultData.get(allowedType);
 		}
@@ -92,7 +95,6 @@ public class CharacterSheet {
 	}
 
 	private String createInvalidParameterExceptionMessage(Fields field, Class<?> valueClass) {
-		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(),
-				field.getAllowedClass().toString());
+		return String.format(INVALID_PARAMETER_EXCEPTION_MESSAGE_FORMAT, valueClass.toString(), field.getAllowedClass().toString());
 	}
 }

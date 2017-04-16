@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
+import rpg_database.character_sheet.Armors;
 import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
@@ -83,7 +84,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterArmor() {
 		int armor = defaultCharacterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(0, armor);
+		assertEquals(4, armor);
 	}
 
 	@Test
@@ -152,4 +153,16 @@ public class GetDefaultValuesUnitTest {
 		LanguagesSet actualLanguage = defaultCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(expectedLanguages, actualLanguage);
 	}
+
+	@Test
+	public void testGetDefaultArmorType() {
+		assertEquals(Armors.HEAVY_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
+	}
+
+	@Test
+	public void testGetDefaultStrain() {
+		int strain = defaultCharacterSheet.getData(Fields.STRAIN);
+		assertEquals(0, strain);
+	}
+
 }
