@@ -26,6 +26,7 @@ public class CommonMethods {
 	private static final String extension = ".json";
 	public static final String ARMOR_RATING_DEFAULT_DATA = "armorRatingDefaultData";
 	public static final String ATTRIBUTE_MAJORITY_DATA = "attributeMajorityData";
+	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
 
 	public static CharacterSheet createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses baseClass,
 			SpecializationClassesSet specializationClasses, int level) {
