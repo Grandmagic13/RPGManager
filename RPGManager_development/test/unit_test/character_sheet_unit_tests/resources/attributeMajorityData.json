@@ -1,0 +1,113 @@
+[
+	{
+		"BASE_CLASS": "WARRIOR",
+		"CHILDREN" : [
+		{
+			"FIELD" : "COMMUNICATION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "CONSTITUTION_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "CUNNING_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "DEXTERITY_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "MAGIC_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "PERCEPTION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "STRENGTH_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "WILLPOWER_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		}
+		]
+	},
+	{
+		"BASE_CLASS": "ROGUE",
+		"CHILDREN" : [
+		{
+			"FIELD" : "COMMUNICATION_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "CONSTITUTION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "CUNNING_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "DEXTERITY_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "MAGIC_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "PERCEPTION_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "STRENGTH_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "WILLPOWER_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		}
+		]
+	},
+	{
+		"BASE_CLASS": "MAGE",
+		"CHILDREN" : [
+		{
+			"FIELD" : "COMMUNICATION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "CONSTITUTION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "CUNNING_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "DEXTERITY_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "MAGIC_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		},
+		{
+			"FIELD" : "PERCEPTION_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "STRENGTH_MAJORITY",
+			"EXPECTED_MAJORITY" : false	
+		},
+		{
+			"FIELD" : "WILLPOWER_MAJORITY",
+			"EXPECTED_MAJORITY" : true	
+		}
+		]
+	}
+]
