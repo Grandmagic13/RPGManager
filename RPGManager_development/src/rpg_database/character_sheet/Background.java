@@ -62,22 +62,6 @@ public enum Background implements CustomSetter<Background> {
 		this.languages = languagesSet;
 	}
 
-	private static BaseClasses[] playAs_Mage() {
-		return new BaseClasses[] { BaseClasses.MAGE };
-	}
-
-	private static BaseClasses[] playAs_Rogue() {
-		return new BaseClasses[] { BaseClasses.ROGUE };
-	}
-
-	private static BaseClasses[] playAs_Mage_Warrior_Rogue() {
-		return new BaseClasses[] { BaseClasses.MAGE, BaseClasses.WARRIOR, BaseClasses.ROGUE };
-	}
-
-	private static BaseClasses[] playAs_Warrior_Rogue() {
-		return new BaseClasses[] { BaseClasses.WARRIOR, BaseClasses.ROGUE };
-	}
-
 	public ArrayList<BaseClasses> getAllowedBaseClasses() {
 		return baseClasses;
 	}
