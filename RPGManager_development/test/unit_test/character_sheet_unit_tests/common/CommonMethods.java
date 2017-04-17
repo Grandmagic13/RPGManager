@@ -31,6 +31,7 @@ public class CommonMethods {
 	public static final String ATTRIBUTE_MAJORITY_DATA = "attributeMajorityData";
 	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
 	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
+	public static final String INVALID_BACKGROUND_DATA = "invalidBackgroundData";
 
 	public static CharacterSheet createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses baseClass,
 			SpecializationClassesSet specializationClasses, int level) {
