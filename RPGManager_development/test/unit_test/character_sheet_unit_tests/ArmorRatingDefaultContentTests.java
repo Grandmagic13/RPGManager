@@ -1,10 +1,13 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
 
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -12,17 +15,14 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 import rpg_database.character_sheet.Armors;
+import rpg_database.character_sheet.common.Keys;
 
 @RunWith(Parameterized.class)
 public class ArmorRatingDefaultContentTests {
 
 	@Parameters(name = "Amror : ''{0}'' DefaultArmorRating :''{1}'' DefaultArmorPenalty :''{2}''")
-	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { Armors.LIGHT_LEATHER, 3, 0, 1 }, { Armors.HEAVY_LEATHER, 4, -1, 2 }, { Armors.LIGHT_MAIL, 5, -2, 3 },
-				{ Armors.HEAVY_MAIL, 7, -3, 4 }, { Armors.LIGHT_PLATE, 8, -4, 5 }, { Armors.HEAVY_PLATE, 10, -5, 6 }, { Armors.LIGHT_LEATHER_DUSTER,
-						3, 0, 1 }, { Armors.TAILORED_LEATHER_DUSTER, 4, 0, 2 },
-
-				{ Armors.ROBE, 0, 0, 0 } });
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getTestData(ARMOR_RATING_DEFAULT_DATA, Keys.ARMOR_TYPE, Keys.ARMOR_RATING, Keys.ARMOR_PENALTY, Keys.STRAIN);
 	}
 
 	@Parameter(0)
