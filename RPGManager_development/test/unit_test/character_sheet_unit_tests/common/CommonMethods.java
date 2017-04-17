@@ -11,10 +11,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import rpg_database.character_sheet.Armors;
+import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterAttribute;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Languages;
+import rpg_database.character_sheet.LanguagesSet;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class CommonMethods {
@@ -27,6 +30,7 @@ public class CommonMethods {
 	public static final String ARMOR_RATING_DEFAULT_DATA = "armorRatingDefaultData";
 	public static final String ATTRIBUTE_MAJORITY_DATA = "attributeMajorityData";
 	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
+	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
 
 	public static CharacterSheet createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses baseClass,
 			SpecializationClassesSet specializationClasses, int level) {
@@ -113,6 +117,7 @@ public class CommonMethods {
 	}
 
 	private static Object getObjectByKey(JSONObject element, DataKeys key) {
+		boolean isArray = key.name().contains("ARRAY");
 		Class<?> keyClass = key.getKeyClass();
 		Object object;
 		if (keyClass.isAssignableFrom(Integer.class)) {
@@ -125,6 +130,19 @@ public class CommonMethods {
 			object = element.getEnum(BaseClasses.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Fields.class)) {
 			object = element.getEnum(Fields.class, key.toString());
+		} else if (keyClass.isAssignableFrom(Background.class)) {
+			object = element.getEnum(Background.class, key.toString());
+		} else if (keyClass.isAssignableFrom(Languages.class)) {
+			if (isArray) {
+				LanguagesSet languagesSet = new LanguagesSet();
+				JSONArray jsonArray = element.getJSONArray(key.toString());
+				for (int index = 0; index < jsonArray.length(); index++) {
+					languagesSet.add(jsonArray.getEnum(Languages.class, index));
+				}
+				object = languagesSet;
+			} else {
+				object = element.getEnum(Languages.class, key.toString());
+			}
 		} else {
 			throw new IllegalArgumentException("Unknown dataKey class!");
 		}
