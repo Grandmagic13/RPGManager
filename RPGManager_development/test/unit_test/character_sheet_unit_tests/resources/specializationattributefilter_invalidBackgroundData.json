@@ -1,0 +1,242 @@
+[
+	{
+		"BASE_CLASS": "MAGE",
+		"SPECIALIZATION_CLASS": "KEEPER",
+		"CHILDREN": [
+		{
+				"BACKGROUND": "ANDER_SURVIVOR"
+			},
+			{
+				"BACKGROUND": "AVVAR"
+			},
+			{
+				"BACKGROUND": "CHASIND_WILDER"
+			},
+			{
+				"BACKGROUND": "HUMAN_APOSTATE"
+			},
+			{
+				"BACKGROUND": "HUMAN_CIRCLE_MAGE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_EXILE"
+			},
+			{
+				"BACKGROUND": "TAL_VASHOTH"
+			},
+			{
+				"BACKGROUND": "TEVINTER_ALTUS"
+			},
+			{
+				"BACKGROUND": "TEVINTER_LAETAN"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "MAGE",
+		"SPECIALIZATION_CLASS": "SAAREBAS",
+		"CHILDREN": [
+		{
+				"BACKGROUND": "ANDER_SURVIVOR"
+			},
+			{
+				"BACKGROUND": "AVVAR"
+			},
+			{
+				"BACKGROUND": "CHASIND_WILDER"
+			},
+			{
+				"BACKGROUND": "DALISH_ELF"
+			},
+			{
+				"BACKGROUND": "ELF_APOSTATE"
+			},
+			{
+				"BACKGROUND": "ELF_CIRCLE_MAGE"
+			},
+			{
+				"BACKGROUND": "ESCAPED_ELVEN_SLAVE"
+			},
+			{
+				"BACKGROUND": "HUMAN_APOSTATE"
+			},
+			{
+				"BACKGROUND": "HUMAN_CIRCLE_MAGE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_EXILE"
+			},
+			{
+				"BACKGROUND": "TEVINTER_ALTUS"
+			},
+			{
+				"BACKGROUND": "TEVINTER_LAETAN"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "ROGUE",
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_SCOUT",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "ANDER_SURVIVOR"
+			},
+			{
+				"BACKGROUND": "ANTIVAN_WAYFARER"
+			},
+			{
+				"BACKGROUND": "AVVAR"
+			},
+			{
+				"BACKGROUND": "CHASIND_WILDER"
+			},
+			{
+				"BACKGROUND": "CITY_ELF"
+			},
+			{
+				"BACKGROUND": "DALISH_ELF"
+			},
+			{
+				"BACKGROUND": "ESCAPED_ELVEN_SLAVE"
+			},
+			{
+				"BACKGROUND": "FERELDAN_CRAFTSMEN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_FREEMAN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "FREE_MARCHER"
+			},
+			{
+				"BACKGROUND": "NEVARRAN_ADVENTURER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_COMMONER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_EXILE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_STUDENT"
+			},
+			{
+				"BACKGROUND": "QUNARI_BERESAAD"
+			},
+			{
+				"BACKGROUND": "RIVAINI_MERCHANT"
+			},
+			{
+				"BACKGROUND": "SEHERON_CONVERT"
+			},
+			{
+				"BACKGROUND": "TAL_VASHOTH"
+			},
+			{
+				"BACKGROUND": "TEVINTER_SOPORATI"
+			},
+			{
+				"BACKGROUND": "WAKING_SEA_RAIDER"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "WARRIOR",
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_WARRIOR",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "ANDER_SURVIVOR"
+			},
+			{
+				"BACKGROUND": "ANTIVAN_WAYFARER"
+			},
+			{
+				"BACKGROUND": "AVVAR"
+			},
+			{
+				"BACKGROUND": "CHASIND_WILDER"
+			},
+			{
+				"BACKGROUND": "CITY_ELF"
+			},
+			{
+				"BACKGROUND": "DALISH_ELF"
+			},
+			{
+				"BACKGROUND": "ESCAPED_ELVEN_SLAVE"
+			},
+			{
+				"BACKGROUND": "FERELDAN_CRAFTSMEN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_FREEMAN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "FREE_MARCHER"
+			},
+			{
+				"BACKGROUND": "NEVARRAN_ADVENTURER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_COMMONER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_EXILE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_STUDENT"
+			},
+			{
+				"BACKGROUND": "QUNARI_BERESAAD"
+			},
+			{
+				"BACKGROUND": "RIVAINI_MERCHANT"
+			},
+			{
+				"BACKGROUND": "SEHERON_CONVERT"
+			},
+			{
+				"BACKGROUND": "TAL_VASHOTH"
+			},
+			{
+				"BACKGROUND": "TEVINTER_SOPORATI"
+			},
+			{
+				"BACKGROUND": "WAKING_SEA_RAIDER"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "WARRIOR",
+		"SPECIALIZATION_CLASS": "LYRIUM_WARRIOR",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "HIGH_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "LOW_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "QUNARI_BERESAAD"
+			},
+			{
+				"BACKGROUND": "SURFACE_DWARF"
+			},
+			{
+				"BACKGROUND": "TAL_VASHOTH"
+			}
+		]
+	}
+]

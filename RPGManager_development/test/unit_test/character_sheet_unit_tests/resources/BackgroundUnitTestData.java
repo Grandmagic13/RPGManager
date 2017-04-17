@@ -21,8 +21,8 @@ final public class BackgroundUnitTestData {
 	public static final Background[] humanAndElfWarriorBackgrounds = { Background.ANDER_SURVIVOR, Background.ANTIVAN_WAYFARER, Background.AVVAR,
 			Background.CHASIND_WILDER, Background.CITY_ELF, Background.DALISH_ELF, Background.ESCAPED_ELVEN_SLAVE, Background.FERELDAN_CRAFTSMEN,
 			Background.FERELDAN_FREEMAN, Background.FERELDAN_NOBLE, Background.FREE_MARCHER, Background.NEVARRAN_ADVENTURER,
-			Background.ORLESIAN_COMMONER, Background.ORLESIAN_EXILE, Background.ORLESIAN_NOBLE, Background.ORLESIAN_STUDENT,
-			Background.RIVAINI_MERCHANT, Background.SEHERON_CONVERT, Background.TEVINTER_SOPORATI, Background.WAKING_SEA_RAIDER };
+			Background.ORLESIAN_COMMONER, Background.ORLESIAN_NOBLE, Background.ORLESIAN_STUDENT, Background.RIVAINI_MERCHANT,
+			Background.SEHERON_CONVERT, Background.TEVINTER_SOPORATI, Background.WAKING_SEA_RAIDER };
 
 	private BackgroundUnitTestData() {
 

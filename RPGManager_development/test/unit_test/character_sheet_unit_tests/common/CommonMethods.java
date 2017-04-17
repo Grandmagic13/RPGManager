@@ -63,20 +63,25 @@ public class CommonMethods {
 	}
 
 	public static ArrayList<Object[]> getTestData(String testDataName, DataKeys... keys) throws JSONException, FileNotFoundException, IOException {
-		return getTestData(DataStructureType.ARRAY, testDataName, keys);
+		return getTestData(DataStructureType.ARRAY, testDataName, 0, keys);
+	}
+
+	public static ArrayList<Object[]> getTestDataHierarchicalToParentKeys(String testDataName, int numberOfParentKeys, DataKeys... keys)
+			throws JSONException, FileNotFoundException, IOException {
+		return getTestData(DataStructureType.HIERARCHICAL, testDataName, numberOfParentKeys, keys);
 	}
 
 	public static ArrayList<Object[]> getTestDataHierarchicalToFirstKey(String testDataName, DataKeys... keys) throws JSONException,
 			FileNotFoundException, IOException {
-		return getTestData(DataStructureType.HIERARCHICAL, testDataName, keys);
+		return getTestData(DataStructureType.HIERARCHICAL, testDataName, 1, keys);
 	}
 
 	public static ArrayList<Object[]> getAttributesRequirementsData(String testDataName) throws JSONException, FileNotFoundException, IOException {
-		return getTestData(DataStructureType.ATTRIBUTE_REQUIREMENT, testDataName);
+		return getTestData(DataStructureType.ATTRIBUTE_REQUIREMENT, testDataName, 0);
 	}
 
-	private static ArrayList<Object[]> getTestData(DataStructureType dataStructureType, String testDataName, DataKeys... keys) throws JSONException,
-			FileNotFoundException, IOException {
+	private static ArrayList<Object[]> getTestData(DataStructureType dataStructureType, String testDataName, int numberOfParentKeys, DataKeys... keys)
+			throws JSONException, FileNotFoundException, IOException {
 		JSONArray dataArray = new JSONArray(readDataToJSONString(testDataName));
 		ArrayList<Object[]> data = new ArrayList<>();
 		for (int index = 0; index < dataArray.length(); index++) {
@@ -86,7 +91,7 @@ public class CommonMethods {
 				addObjectsToDataByKeys(data, element, keys);
 				break;
 			case HIERARCHICAL:
-				addHierarchicalObjectsToDataByKeys(data, element, keys[0], getChildren(keys));
+				addHierarchicalObjectsToDataByKeys(data, element, getParents(keys, numberOfParentKeys), getChildren(keys, numberOfParentKeys));
 				break;
 			case ATTRIBUTE_REQUIREMENT:
 				addAttributeRequirementsToData(data, element);
@@ -99,10 +104,16 @@ public class CommonMethods {
 		return data;
 	}
 
-	private static DataKeys[] getChildren(DataKeys... keys) {
-		DataKeys[] childKeys = new DataKeys[keys.length - 1];
-		System.arraycopy(keys, 1, childKeys, 0, keys.length - 1);
+	private static DataKeys[] getChildren(DataKeys[] keys, int numberOfParents) {
+		DataKeys[] childKeys = new DataKeys[keys.length - numberOfParents];
+		System.arraycopy(keys, numberOfParents, childKeys, 0, keys.length - numberOfParents);
 		return childKeys;
+	}
+
+	private static DataKeys[] getParents(DataKeys[] keys, int numberOfParents) {
+		DataKeys[] parentKeys = new DataKeys[numberOfParents];
+		System.arraycopy(keys, 0, parentKeys, 0, numberOfParents);
+		return parentKeys;
 	}
 
 	private static void addObjectsToDataByKeys(ArrayList<Object[]> data, JSONObject element, DataKeys... keys) {
@@ -113,11 +124,14 @@ public class CommonMethods {
 		data.add(objectList.toArray());
 	}
 
-	private static void addHierarchicalObjectsToDataByKeys(ArrayList<Object[]> data, JSONObject element, DataKeys parentKey, DataKeys... childKeys) {
+	private static void addHierarchicalObjectsToDataByKeys(ArrayList<Object[]> data, JSONObject element, DataKeys parentKeys[],
+			DataKeys... childKeys) {
 		JSONArray children = element.getJSONArray("CHILDREN");
 		for (int childIndex = 0; childIndex < children.length(); childIndex++) {
 			ArrayList<Object> objectList = new ArrayList<>();
-			objectList.add(getObjectByKey(element, parentKey));
+			for (DataKeys parentKey : parentKeys) {
+				objectList.add(getObjectByKey(element, parentKey));
+			}
 			JSONObject childElement = children.getJSONObject(childIndex);
 			for (DataKeys key : childKeys) {
 				objectList.add(getObjectByKey(childElement, key));
