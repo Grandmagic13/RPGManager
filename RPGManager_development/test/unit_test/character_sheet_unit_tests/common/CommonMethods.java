@@ -16,7 +16,6 @@ import rpg_database.character_sheet.CharacterAttribute;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClassesSet;
-import rpg_database.character_sheet.common.Keys;
 
 public class CommonMethods {
 
@@ -43,13 +42,13 @@ public class CommonMethods {
 		return characterSheet;
 	}
 
-	public static ArrayList<Object[]> getTestData(String testDataName, Keys... keys) throws JSONException, FileNotFoundException, IOException {
+	public static ArrayList<Object[]> getTestData(String testDataName, DataKeys... keys) throws JSONException, FileNotFoundException, IOException {
 		JSONArray dataArray = new JSONArray(readDataToJSONString(testDataName));
 		ArrayList<Object[]> data = new ArrayList<>();
 		for (int index = 0; index < dataArray.length(); index++) {
 			JSONObject element = dataArray.getJSONObject(index);
 			ArrayList<Object> objectList = new ArrayList<>();
-			for (Keys key : keys) {
+			for (DataKeys key : keys) {
 				objectList.add(getObjectByKey(element, objectList, key));
 			}
 			data.add(objectList.toArray());
@@ -74,34 +73,16 @@ public class CommonMethods {
 		return String.format("%s%s%s", dataPath, dataName, extension);
 	}
 
-	private static Object getObjectByKey(JSONObject element, ArrayList<Object> objectList, Keys key) {
-		Class<?> keyClass = getKeyClass(key);
+	private static Object getObjectByKey(JSONObject element, ArrayList<Object> objectList, DataKeys key) {
+		Class<?> keyClass = key.getKeyClass();
 		Object object;
 		if (keyClass.isAssignableFrom(Integer.class)) {
 			object = element.getInt(key.toString());
 		} else if (keyClass.isAssignableFrom(Armors.class)) {
 			object = element.getEnum(Armors.class, key.toString());
 		} else {
-			throw new IllegalArgumentException("Unknown key class!");
+			throw new IllegalArgumentException("Unknown dataKey class!");
 		}
 		return object;
 	}
-
-	private static Class<?> getKeyClass(Keys key) {
-		Class<?> keyClass;
-		switch (key) {
-		case ARMOR_PENALTY:
-		case ARMOR_RATING:
-		case STRAIN:
-			keyClass = Integer.class;
-			break;
-		case ARMOR_TYPE:
-			keyClass = Armors.class;
-			break;
-		default:
-			throw new IllegalArgumentException("Unknown key!");
-		}
-		return keyClass;
-	}
-
 }
