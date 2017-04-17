@@ -8,6 +8,7 @@ public class FieldRulesFactory {
 	}
 
 	public static final String ARMORS = "armors";
+	public static final String BACKGROUND = "background";
 
 	private static HashMap<String, FieldRules> fieldRulesMap = new HashMap<>();
 	private static final String rulesPath = "src/rpg_database/character_sheet/rules/";
