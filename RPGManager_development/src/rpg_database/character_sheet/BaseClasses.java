@@ -4,38 +4,38 @@ import static rpg_database.character_sheet.common.CharacterSheetCommon.generateE
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.common.FieldRules;
+import rpg_database.character_sheet.common.FieldRulesFactory;
+import rpg_database.character_sheet.common.Keys;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public enum BaseClasses implements CustomSetter<BaseClasses> {
-	WARRIOR(Armors.HEAVY_LEATHER), ROGUE(Armors.LIGHT_LEATHER), MAGE(Armors.ROBE);
+	WARRIOR, ROGUE, MAGE;
 
 	private final String text;
 
 	private final Armors defaultArmor;
 
-	private final static ArrayList<Fields> warriorMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.STRENGTH, Fields.DEXTERITY,
-			Fields.CONSTITUTION }));
-	private final static ArrayList<Fields> mageMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.CUNNING, Fields.MAGIC,
-			Fields.WILLPOWER }));
-	private final static ArrayList<Fields> rogueMajors = new ArrayList<>(Arrays.asList(new Fields[] { Fields.COMMUNICATION, Fields.DEXTERITY,
-			Fields.PERCEPTION }));
-
 	@SuppressWarnings("serial")
 	private final static HashMap<BaseClasses, ArrayList<Fields>> majorAttributes = new HashMap<BaseClasses, ArrayList<Fields>>() {
 		{
+			FieldRules baseClassesRules = FieldRulesFactory.getFieldRules(FieldRulesFactory.BASE_CLASSES);
+			ArrayList<Fields> warriorMajors = baseClassesRules.getEnumsForField(WARRIOR, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
 			put(WARRIOR, warriorMajors);
+			ArrayList<Fields> rogueMajors = baseClassesRules.getEnumsForField(ROGUE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
 			put(ROGUE, rogueMajors);
+			ArrayList<Fields> mageMajors = baseClassesRules.getEnumsForField(MAGE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
 			put(MAGE, mageMajors);
 		}
 	};
 
-	private BaseClasses(Armors armor) {
+	private BaseClasses() {
+		FieldRules baseClassesRules = FieldRulesFactory.getFieldRules(FieldRulesFactory.BASE_CLASSES);
 		this.text = generateEnumText(this.name());
-		this.defaultArmor = armor;
+		this.defaultArmor = baseClassesRules.getEnumForField(this, Armors.class, Keys.ARMOR_TYPE);
 	}
 
 	@Override
