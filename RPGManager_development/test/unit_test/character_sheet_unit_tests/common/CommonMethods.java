@@ -173,7 +173,16 @@ public class CommonMethods {
 		} else if (keyClass.isAssignableFrom(Fields.class)) {
 			object = element.getEnum(Fields.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Background.class)) {
-			object = element.getEnum(Background.class, key.toString());
+			if (isArray) {
+				ArrayList<Background> backgrounds = new ArrayList<>();
+				JSONArray jsonArray = element.getJSONArray(key.toString());
+				for (int index = 0; index < jsonArray.length(); index++) {
+					backgrounds.add(jsonArray.getEnum(Background.class, index));
+				}
+				object = backgrounds;
+			} else {
+				object = element.getEnum(Background.class, key.toString());
+			}
 		} else if (keyClass.isAssignableFrom(Languages.class)) {
 			if (isArray) {
 				LanguagesSet languagesSet = new LanguagesSet();
