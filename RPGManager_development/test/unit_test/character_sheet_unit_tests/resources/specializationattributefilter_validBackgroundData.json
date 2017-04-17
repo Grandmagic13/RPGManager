@@ -1,0 +1,128 @@
+[
+	{
+		"BASE_CLASS": "MAGE",
+		"SPECIALIZATION_CLASS": "KEEPER",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "DALISH_ELF"
+			},
+			{
+				"BACKGROUND": "ELF_APOSTATE"
+			},
+			{
+				"BACKGROUND": "ELF_CIRCLE_MAGE"
+			},
+			{
+				"BACKGROUND": "ELF_CIRCLE_MAGE"
+			},
+			{
+				"BACKGROUND": "ESCAPED_ELVEN_SLAVE"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "MAGE",
+		"SPECIALIZATION_CLASS": "SAAREBAS",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "TAL_VASHOTH"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "ROGUE",
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_SCOUT",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "DWARF_DUSTER"
+			},
+			{
+				"BACKGROUND": "HIGH_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "LOW_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "SURFACE_DWARF"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "WARRIOR",
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_WARRIOR",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "HIGH_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "LOW_BORN_DWARF"
+			},
+			{
+				"BACKGROUND": "SURFACE_DWARF"
+			}
+		]
+	},
+	{
+		"BASE_CLASS": "WARRIOR",
+		"SPECIALIZATION_CLASS": "LYRIUM_WARRIOR",
+		"CHILDREN": [
+			{
+				"BACKGROUND": "ANDER_SURVIVOR"
+			},
+			{
+				"BACKGROUND": "ANTIVAN_WAYFARER"
+			},
+			{
+				"BACKGROUND": "AVVAR"
+			},
+			{
+				"BACKGROUND": "CHASIND_WILDER"
+			},
+			{
+				"BACKGROUND": "CITY_ELF"
+			},
+			{
+				"BACKGROUND": "DALISH_ELF"
+			},
+			{
+				"BACKGROUND": "ESCAPED_ELVEN_SLAVE"
+			},
+			{
+				"BACKGROUND": "FERELDAN_CRAFTSMEN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_FREEMAN"
+			},
+			{
+				"BACKGROUND": "FERELDAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "FREE_MARCHER"
+			},
+			{
+				"BACKGROUND": "NEVARRAN_ADVENTURER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_COMMONER"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_NOBLE"
+			},
+			{
+				"BACKGROUND": "ORLESIAN_STUDENT"
+			},
+			{
+				"BACKGROUND": "RIVAINI_MERCHANT"
+			},
+			{
+				"BACKGROUND": "SEHERON_CONVERT"
+			},
+			{
+				"BACKGROUND": "TEVINTER_SOPORATI"
+			},
+			{
+				"BACKGROUND": "WAKING_SEA_RAIDER"
+			}
+		]
+	}
+]

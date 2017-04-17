@@ -1,11 +1,15 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.SPECIALIZATION_ATTRIBUTE_FILTER_VALID_BACKGROUND_DATA;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getTestDataHierarchicalToParentKeys;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.setAllAttributesTo5;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -19,7 +23,7 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
 import unit_test.character_sheet_unit_tests.common.CommonMethods;
-import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
+import unit_test.character_sheet_unit_tests.common.DataKeys;
 
 @RunWith(Parameterized.class)
 public class SpecializationBackgroundFilter_ValidBackgroundsTests {
@@ -31,43 +35,23 @@ public class SpecializationBackgroundFilter_ValidBackgroundsTests {
 	// Every valid background - specialization pairing is tested
 
 	@Parameters(name = "{index}: Class: ''{0}'' Specialization: ''{1}'' Background: ''{2}''")
-	public static Collection<Object[]> data() {
-		ArrayList<Object[]> parameters = new ArrayList<>();
-
-		parameters.addAll(createListOfObjectsByClassAndSpec(BaseClasses.MAGE, SpecializationClasses.KEEPER,
-				BackgroundUnitTestData.elfMageBackgrounds));
-		parameters.addAll(createListOfObjectsByClassAndSpec(BaseClasses.MAGE, SpecializationClasses.SAAREBAS, new Background[] {
-				Background.TAL_VASHOTH }));
-		parameters.addAll(createListOfObjectsByClassAndSpec(BaseClasses.ROGUE, SpecializationClasses.LEGIONNAIRE_SCOUT,
-				BackgroundUnitTestData.dwarfRogueBackgrounds));
-		parameters.addAll(createListOfObjectsByClassAndSpec(BaseClasses.WARRIOR, SpecializationClasses.LEGIONNAIRE_WARRIOR,
-				BackgroundUnitTestData.dwarfWarriorBackgrounds));
-		parameters.addAll(createListOfObjectsByClassAndSpec(BaseClasses.WARRIOR, SpecializationClasses.LYRIUM_WARRIOR,
-				BackgroundUnitTestData.humanAndElfWarriorBackgrounds));
-
-		return parameters;
-	}
-
-	private final static ArrayList<Object[]> createListOfObjectsByClassAndSpec(BaseClasses baseClass, SpecializationClasses specializationClass,
-			Background[] backgrounds) {
-		ArrayList<Object[]> parameters = new ArrayList<>();
-		for (Background background : backgrounds) {
-			parameters.add(new Object[] { baseClass, new SpecializationClassesSet(specializationClass), background });
-		}
-		return parameters;
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getTestDataHierarchicalToParentKeys(SPECIALIZATION_ATTRIBUTE_FILTER_VALID_BACKGROUND_DATA, 2, DataKeys.BASE_CLASS,
+				DataKeys.SPECIALIZATION_CLASS, DataKeys.BACKGROUND);
 	}
 
 	@Parameter(0)
 	public BaseClasses baseClass;
 
 	@Parameter(1)
-	public SpecializationClassesSet specializationClassSingleton;
+	public SpecializationClasses specializationClass;
 
 	@Parameter(2)
 	public Background background;
 
 	@Test
 	public void testSetInvalidSpecializationClassForBackground() {
+		SpecializationClassesSet specializationClassSingleton = new SpecializationClassesSet(specializationClass);
 		CharacterSheet characterSheet = setAllAttributesTo5(new CharacterSheet("CharacterSheet"));
 		characterSheet.setData(Fields.LEVEL, CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
