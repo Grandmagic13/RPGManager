@@ -5,11 +5,12 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Languages;
+import rpg_database.character_sheet.SpecializationClasses;
 
 public enum DataKeys {
 	ARMOR_PENALTY(Integer.class), ARMOR_RATING(Integer.class), ARMOR_TYPE(Armors.class), BACKGROUND(Background.class), BASE_CLASS(BaseClasses.class),
-	EXPECTED_MAJORITY(Boolean.class), FIELD(Fields.class), LANGUAGES_ARRAY(Languages.class), MAJORITY_FIELD(Fields.class), STRAIN(Integer.class),
-	VALUE_FIELD(Fields.class);
+	EXPECTED_MAJORITY(Boolean.class), FIELD(Fields.class), LANGUAGES_ARRAY(Languages.class), MAJORITY_FIELD(Fields.class),
+	SPECIALIZATION_CLASS(SpecializationClasses.class), STRAIN(Integer.class), VALUE_FIELD(Fields.class);
 
 	private Class<?> keyClass;
 

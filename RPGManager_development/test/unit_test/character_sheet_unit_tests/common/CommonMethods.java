@@ -18,6 +18,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
+import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class CommonMethods {
@@ -32,6 +33,7 @@ public class CommonMethods {
 	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
 	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
 	public static final String INVALID_BACKGROUND_DATA = "invalidBackgroundData";
+	public static final String INVALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA = "invalidClassAndSpecializationPairingsData";
 
 	public static CharacterSheet createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses baseClass,
 			SpecializationClassesSet specializationClasses, int level) {
@@ -129,6 +131,8 @@ public class CommonMethods {
 			object = element.getEnum(Armors.class, key.toString());
 		} else if (keyClass.isAssignableFrom(BaseClasses.class)) {
 			object = element.getEnum(BaseClasses.class, key.toString());
+		} else if (keyClass.isAssignableFrom(SpecializationClasses.class)) {
+			object = element.getEnum(SpecializationClasses.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Fields.class)) {
 			object = element.getEnum(Fields.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Background.class)) {
