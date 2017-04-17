@@ -10,7 +10,8 @@ import rpg_database.character_sheet.SpecializationClasses;
 public enum DataKeys {
 	ARMOR_PENALTY(Integer.class), ARMOR_RATING(Integer.class), ARMOR_TYPE(Armors.class), BACKGROUND(Background.class), BASE_CLASS(BaseClasses.class),
 	EXPECTED_MAJORITY(Boolean.class), FIELD(Fields.class), LANGUAGES_ARRAY(Languages.class), MAJORITY_FIELD(Fields.class),
-	SPECIALIZATION_CLASS(SpecializationClasses.class), STRAIN(Integer.class), VALUE_FIELD(Fields.class);
+	SPECIALIZATION_CLASS(SpecializationClasses.class), STRAIN(Integer.class), VALUE_FIELD(Fields.class), VALUE(Integer.class),
+	ATTRIBUTE_REQUIREMENT(null);
 
 	private Class<?> keyClass;
 

@@ -1,12 +1,15 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
-import static unit_test.character_sheet_unit_tests.resources.SpecializationCompatibilityData.requiredAttributeValues;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.SPECIALIZATION_ATTRIBUTE_FILTER_ATTRIBUTE_VALUES_CONTENT_DATA;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getAttributesRequirementsData;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -24,12 +27,8 @@ public class SpecializationAttributeFilter_AttributeValuesContentTests {
 	// specialization
 
 	@Parameters(name = "{index}: ''{0}''")
-	public static Collection<Object[]> data() {
-		ArrayList<Object[]> parameters = new ArrayList<>();
-		for (SpecializationClasses specialization : requiredAttributeValues.keySet()) {
-			parameters.add(new Object[] { specialization, requiredAttributeValues.get(specialization) });
-		}
-		return parameters;
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getAttributesRequirementsData(SPECIALIZATION_ATTRIBUTE_FILTER_ATTRIBUTE_VALUES_CONTENT_DATA);
 	}
 
 	@Parameter(0)

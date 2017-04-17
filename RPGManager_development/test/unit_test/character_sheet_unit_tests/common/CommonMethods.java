@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,10 @@ import rpg_database.character_sheet.SpecializationClassesSet;
 
 public class CommonMethods {
 
+	private enum DataStructureType {
+		ARRAY, HIERARCHICAL, ATTRIBUTE_REQUIREMENT;
+	}
+
 	public static int LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION = 6;
 	public static int LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION = 14;
 	public static int LEVEL_REQUIRED_FOR_THIRD_SPECIALIZATION = 22;
@@ -34,6 +39,12 @@ public class CommonMethods {
 	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
 	public static final String INVALID_BACKGROUND_DATA = "invalidBackgroundData";
 	public static final String INVALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA = "invalidClassAndSpecializationPairingsData";
+	public static final String SPECIALIZATION_ATTRIBUTE_FILTER_ATTRIBUTE_VALUES_CONTENT_DATA = "specializationattributefilter_attributeValuesContentData";
+	public static final String SPECIALIZATION_ATTRIBUTE_FILTER_CONTENT_DATA = "specializationattributefilter_ContentData";
+	public static final String SPECIALIZATION_ATTRIBUTE_FILTER_INVALID_BACKGROUND_DATA = "specializationattributefilter_invalidBackgroundData";
+	public static final String SPECIALIZATION_ATTRIBUTE_FILTER_VALID_BACKGROUND_DATA = "specializationattributefilter_validBackgroundData";
+	public static final String VALID_BACKGROUND_DATA = "validBackgroundData";
+	public static final String VALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA = "validClassAndSpecializationPairingsData";
 
 	public static CharacterSheet createCharacterSheetWithCustomClassesAndLevelAllAttributes5(BaseClasses baseClass,
 			SpecializationClassesSet specializationClasses, int level) {
@@ -52,24 +63,37 @@ public class CommonMethods {
 	}
 
 	public static ArrayList<Object[]> getTestData(String testDataName, DataKeys... keys) throws JSONException, FileNotFoundException, IOException {
-		return getTestData(false, testDataName, keys);
+		return getTestData(DataStructureType.ARRAY, testDataName, keys);
 	}
 
 	public static ArrayList<Object[]> getTestDataHierarchicalToFirstKey(String testDataName, DataKeys... keys) throws JSONException,
 			FileNotFoundException, IOException {
-		return getTestData(true, testDataName, keys);
+		return getTestData(DataStructureType.HIERARCHICAL, testDataName, keys);
 	}
 
-	private static ArrayList<Object[]> getTestData(boolean isHierarchical, String testDataName, DataKeys... keys) throws JSONException,
+	public static ArrayList<Object[]> getAttributesRequirementsData(String testDataName) throws JSONException, FileNotFoundException, IOException {
+		return getTestData(DataStructureType.ATTRIBUTE_REQUIREMENT, testDataName);
+	}
+
+	private static ArrayList<Object[]> getTestData(DataStructureType dataStructureType, String testDataName, DataKeys... keys) throws JSONException,
 			FileNotFoundException, IOException {
 		JSONArray dataArray = new JSONArray(readDataToJSONString(testDataName));
 		ArrayList<Object[]> data = new ArrayList<>();
 		for (int index = 0; index < dataArray.length(); index++) {
 			JSONObject element = dataArray.getJSONObject(index);
-			if (isHierarchical) {
-				addHierarchicalObjectsToDataByKeys(data, element, keys[0], getChildren(keys));
-			} else {
+			switch (dataStructureType) {
+			case ARRAY:
 				addObjectsToDataByKeys(data, element, keys);
+				break;
+			case HIERARCHICAL:
+				addHierarchicalObjectsToDataByKeys(data, element, keys[0], getChildren(keys));
+				break;
+			case ATTRIBUTE_REQUIREMENT:
+				addAttributeRequirementsToData(data, element);
+				break;
+			default:
+				addObjectsToDataByKeys(data, element, keys);
+				break;
 			}
 		}
 		return data;
@@ -100,6 +124,19 @@ public class CommonMethods {
 			}
 			data.add(objectList.toArray());
 		}
+	}
+
+	private static void addAttributeRequirementsToData(ArrayList<Object[]> data, JSONObject element) {
+		JSONArray children = element.getJSONArray("CHILDREN");
+		ArrayList<Object> objectList = new ArrayList<>();
+		objectList.add(getObjectByKey(element, DataKeys.SPECIALIZATION_CLASS));
+		HashMap<Fields, Integer> attributeRequirements = new HashMap<>();
+		for (int childIndex = 0; childIndex < children.length(); childIndex++) {
+			JSONObject childElement = children.getJSONObject(childIndex);
+			attributeRequirements.put((Fields) getObjectByKey(childElement, DataKeys.FIELD), (Integer) getObjectByKey(childElement, DataKeys.VALUE));
+		}
+		objectList.add(attributeRequirements);
+		data.add(objectList.toArray());
 	}
 
 	private static String readDataToJSONString(String testDataName) throws FileNotFoundException, IOException {
