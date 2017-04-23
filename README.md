@@ -1,2 +1,2 @@
 # RPGManager
-Rpg manager project
+Rpg Manager project
