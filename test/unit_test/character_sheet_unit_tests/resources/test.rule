@@ -1,0 +1,35 @@
+{
+	"ASSASSIN": {
+		"someAttribute": true,
+		"someOtherAttribute": "Orcs",
+		"ATTRIBUTE_REQUIREMENTS": [
+			{
+				"FIELD": "CUNNING_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	"ANDER_SURVIVOR": {
+		"boolDataTrue": true,
+		"boolDataFalse": false,
+		"stringData": "Orcs",
+		"intData": 3,
+		"BASE_CLASSES_ARRAY": [
+			"MAGE",
+			"WARRIOR",
+			"ROGUE"
+		],
+		"LANGUAGES_ARRAY": [
+			"ANDER",
+			"TRADE_TONGUE"
+		],
+		"BASE_CLASS": "WARRIOR",
+		"ARMOR_RATING": 3,
+		"ARMOR_PENALTY": 5,
+		"ARMOR_TYPE": "HEAVY_LEATHER"
+	}
+}

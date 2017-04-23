@@ -1,0 +1,319 @@
+[
+	{
+		"SPECIALIZATION_CLASS": "ARCANE_WARRIOR",
+		"CHILDREN": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "ASSASSIN",
+		"CHILDREN": [
+			{
+				"FIELD": "CUNNING_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "BARD",
+		"CHILDREN": [
+			{
+				"FIELD": "COMMUNICATION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "BERSERKER",
+		"CHILDREN": [
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "BLOOD_MAGE",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "CHAMPION",
+		"CHILDREN": [
+			{
+				"FIELD": "COMMUNICATION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "CHEVALIER",
+		"CHILDREN": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "DUELIST",
+		"CHILDREN": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "PERCEPTION_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "FORCE_MAGE",
+		"CHILDREN": [
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "GUARDIAN",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "KEEPER",
+		"CHILDREN": [
+			{
+				"FIELD": "CUNNING_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_SCOUT",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "LEGIONNAIRE_WARRIOR",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "LYRIUM_WARRIOR",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "NECROMANCER",
+		"CHILDREN": [
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "MARKSMAN",
+		"CHILDREN": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "PERCEPTION_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "RANGER",
+		"CHILDREN": [
+			{
+				"FIELD": "COMMUNICATION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "PERCEPTION_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "REAVER",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "SAAREBAS",
+		"CHILDREN": [
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "SHADOW",
+		"CHILDREN": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 4
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "SHAPESHIFTER",
+		"CHILDREN": [
+			{
+				"FIELD": "CONSTITUTION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "SPIRIT_HEALER",
+		"CHILDREN": [
+			{
+				"FIELD": "COMMUNICATION_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "SPIRIT_WARRIOR",
+		"CHILDREN": [
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "WILLPOWER_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "TEMPEST",
+		"CHILDREN": [
+			{
+				"FIELD": "CUNNING_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	{
+		"SPECIALIZATION_CLASS": "TEMPLAR",
+		"CHILDREN": [
+			{
+				"FIELD": "MAGIC_VALUE",
+				"VALUE": 3
+			},
+			{
+				"FIELD": "STRENGTH_VALUE",
+				"VALUE": 3
+			}
+		]
+	}
+]
