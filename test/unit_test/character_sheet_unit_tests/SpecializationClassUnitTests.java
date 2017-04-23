@@ -26,7 +26,6 @@ import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.exceptions.InvalidSpecializationRequirementException;
 import unit_test.character_sheet_unit_tests.common.CommonMethods;
-import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
 
 public class SpecializationClassUnitTests {
 
@@ -42,6 +41,9 @@ public class SpecializationClassUnitTests {
 			SpecializationClasses.ARCANE_WARRIOR, SpecializationClasses.BLOOD_MAGE);
 	private final SpecializationClassesSet CHAMPION_CHEVALIER_BERSERKER = new SpecializationClassesSet(SpecializationClasses.CHAMPION,
 			SpecializationClasses.BERSERKER, SpecializationClasses.CHEVALIER);
+
+	private final Background[] ELF_MAGE_BACKGROUNDS = { Background.DALISH_ELF, Background.ELF_APOSTATE, Background.ELF_CIRCLE_MAGE,
+			Background.ELF_CIRCLE_MAGE, Background.ESCAPED_ELVEN_SLAVE };
 
 	private final String MESSAGE_NUMBER_OF_SPECIALIZATIONS_OUT_OF_BOUNDS = "Character can't take more specializations than 3!";
 	private final String MESSAGE_CAN_NOT_TAKE_1_SPECIALIZATION = "Character can't take 1 specialization(s) until level 6!";
@@ -351,7 +353,7 @@ public class SpecializationClassUnitTests {
 
 	@Test
 	public void testGetSpecializationClassRestrictedBackgroundsForKeeper() {
-		HashSet<Background> expectedBackgrounds = new HashSet<>(Arrays.asList(BackgroundUnitTestData.elfMageBackgrounds));
+		HashSet<Background> expectedBackgrounds = new HashSet<>(Arrays.asList(ELF_MAGE_BACKGROUNDS));
 		assertEquals(expectedBackgrounds, SpecializationClasses.KEEPER.getRestrictedBackgrounds());
 	}
 

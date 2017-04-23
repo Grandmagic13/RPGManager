@@ -1,10 +1,14 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.VALID_BACKGROUND_DATA;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getTestDataHierarchicalToFirstKey;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -15,7 +19,7 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import unit_test.character_sheet_unit_tests.resources.BackgroundUnitTestData;
+import unit_test.character_sheet_unit_tests.common.DataKeys;
 
 @RunWith(Parameterized.class)
 public class ValidBackgroundUnitTests {
@@ -27,48 +31,16 @@ public class ValidBackgroundUnitTests {
 	//
 	// Every valid class - background pairing is tested
 
-	@Parameters(name = "{index}: Class: ''{1}'' Background: ''{0}''")
-	public static Collection<Object[]> data() {
-		ArrayList<Object[]> parameters = new ArrayList<>();
-		for (BaseClasses baseClass : BaseClasses.values()) {
-			switch (baseClass) {
-			case MAGE:
-				for (Background background : BackgroundUnitTestData.mageOnlyBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				break;
-			case ROGUE:
-				for (Background background : BackgroundUnitTestData.rogueOnlyBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				for (Background background : BackgroundUnitTestData.rogueAndWarriorBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				break;
-			case WARRIOR:
-				for (Background background : BackgroundUnitTestData.rogueAndWarriorBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				for (Background background : BackgroundUnitTestData.allClassesBackgrounds) {
-					parameters.add(new Object[] { background, baseClass });
-				}
-				break;
-			}
-		}
-		return parameters;
+	@Parameters(name = "{index}: Class: ''{0}'' Background: ''{1}''")
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getTestDataHierarchicalToFirstKey(VALID_BACKGROUND_DATA, DataKeys.BASE_CLASS, DataKeys.BACKGROUND);
 	}
 
 	@Parameter(0)
-	public Background background;
+	public BaseClasses baseClass;
 
 	@Parameter(1)
-	public BaseClasses baseClass;
+	public Background background;
 
 	@Test
 	public void testSetBackground() {

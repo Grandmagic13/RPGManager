@@ -1,10 +1,14 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.DEFAULT_ATTRIBUTE_DATA;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getTestData;
 
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,17 +17,14 @@ import org.junit.runners.Parameterized.Parameters;
 
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import unit_test.character_sheet_unit_tests.common.DataKeys;
 
 @RunWith(Parameterized.class)
 public class GetDefaultAttributeUnitTests {
 
 	@Parameters(name = "Attribute fields: ''{0}'', ''{2}'' Expected Majority:''{1}'' Expected Value: 0")
-	public static Collection<Object[]> data() {
-		return Arrays.asList(new Object[][] { { Fields.COMMUNICATION_MAJORITY, false, Fields.COMMUNICATION_VALUE }, { Fields.CONSTITUTION_MAJORITY,
-				true, Fields.CONSTITUTION_VALUE }, { Fields.CUNNING_MAJORITY, false, Fields.CUNNING_VALUE }, { Fields.DEXTERITY_MAJORITY, true,
-						Fields.DEXTERITY_VALUE }, { Fields.MAGIC_MAJORITY, false, Fields.MAGIC_VALUE }, { Fields.PERCEPTION_MAJORITY, false,
-								Fields.PERCEPTION_VALUE }, { Fields.STRENGTH_MAJORITY, true, Fields.STRENGTH_VALUE }, { Fields.WILLPOWER_MAJORITY,
-										false, Fields.WILLPOWER_VALUE } });
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getTestData(DEFAULT_ATTRIBUTE_DATA, DataKeys.MAJORITY_FIELD, DataKeys.EXPECTED_MAJORITY, DataKeys.VALUE_FIELD);
 	}
 
 	@Parameter(0)

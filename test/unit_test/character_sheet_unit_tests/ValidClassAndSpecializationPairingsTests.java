@@ -1,11 +1,15 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.VALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getTestDataHierarchicalToFirstKey;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.setAllAttributesTo5;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -18,7 +22,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
-import unit_test.character_sheet_unit_tests.resources.SpecializationCompatibilityData;
+import unit_test.character_sheet_unit_tests.common.DataKeys;
 
 @RunWith(Parameterized.class)
 public class ValidClassAndSpecializationPairingsTests {
@@ -30,52 +34,29 @@ public class ValidClassAndSpecializationPairingsTests {
 	//
 	// Every valid class - specialization pairing is tested
 
-	@Parameters(name = "{index}: Class: ''{1}'' Specialization: ''{0}''")
-	public static Collection<Object[]> data() {
-		ArrayList<Object[]> parameters = new ArrayList<>();
-		for (BaseClasses baseClass : BaseClasses.values()) {
-			switch (baseClass) {
-			case MAGE:
-				addParameters(parameters, baseClass, SpecializationCompatibilityData.mageSpecializations);
-				break;
-			case ROGUE:
-				addParameters(parameters, baseClass, SpecializationCompatibilityData.rogueSpecializations);
-				break;
-			case WARRIOR:
-				addParameters(parameters, baseClass, SpecializationCompatibilityData.warriorSpecializations);
-				break;
-			}
-		}
-		return parameters;
-	}
-
-	private static void addParameters(ArrayList<Object[]> parameters, BaseClasses baseClass, SpecializationClasses[] specializationClasses) {
-		for (SpecializationClasses specializationClass : specializationClasses) {
-			Background background = specializationClass.isBackgroundRestricted() ? getAnyRequiredBackground(specializationClass)
-					: Background.ANDER_SURVIVOR;
-			parameters.add(new Object[] { new SpecializationClassesSet(specializationClass), baseClass, background });
-		}
+	@Parameters(name = "{index}: Class: ''{0}'' Specialization: ''{1}''")
+	public static Collection<Object[]> data() throws JSONException, FileNotFoundException, IOException {
+		return getTestDataHierarchicalToFirstKey(VALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA, DataKeys.BASE_CLASS, DataKeys.SPECIALIZATION_CLASS);
 	}
 
 	private static Background getAnyRequiredBackground(SpecializationClasses specializationClass) {
-		return specializationClass.getRestrictedBackgrounds().iterator().next();
+		return specializationClass.isBackgroundRestricted() ? specializationClass.getRestrictedBackgrounds().iterator().next()
+				: Background.ANDER_SURVIVOR;
 	}
 
 	@Parameter(0)
-	public SpecializationClassesSet specializationClassSingleton;
-
-	@Parameter(1)
 	public BaseClasses baseClass;
 
-	@Parameter(2)
-	public Background background;
+	@Parameter(1)
+	public SpecializationClasses specializationClass;
 
 	@Test
 	public void testSetSpecializationClass() {
+		SpecializationClassesSet specializationClassSingleton = new SpecializationClassesSet(specializationClass);
 		CharacterSheet characterSheet = setAllAttributesTo5(new CharacterSheet("CharacterSheet"));
 		characterSheet.setData(Fields.LEVEL, 6);
 		characterSheet.setData(Fields.BASECLASS, baseClass);
-		characterSheet.setData(Fields.BACKGROUND, background);
+		characterSheet.setData(Fields.BACKGROUND, getAnyRequiredBackground(specializationClass));
 		characterSheet.setData(Fields.SPECIALIZATIONCLASSES, specializationClassSingleton);
 		assertEquals(specializationClassSingleton, characterSheet.getData(Fields.SPECIALIZATIONCLASSES));
 	}
