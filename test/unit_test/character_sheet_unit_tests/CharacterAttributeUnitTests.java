@@ -17,5 +17,4 @@ public class CharacterAttributeUnitTests {
 		int actualValue = characterSheet.getData(Fields.MAGIC_VALUE);
 		assertEquals(expectedValue, actualValue);
 	}
-
 }

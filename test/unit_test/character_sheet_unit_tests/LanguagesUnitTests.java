@@ -29,6 +29,14 @@ public class LanguagesUnitTests {
 	}
 
 	@Test
+	public void expectException_SetLanguagesInvalidParameter() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class rpg_database.character_sheet.Background value is not an instance of class rpg_database.character_sheet.Languages");
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.LANGUAGES, Background.CITY_ELF);
+	}
+
+	@Test
 	public void testSetLanguagesAntivanWayfarer() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		LanguagesSet expectedLanguage = new LanguagesSet(Languages.ANTIVAN, Languages.TRADE_TONGUE);
