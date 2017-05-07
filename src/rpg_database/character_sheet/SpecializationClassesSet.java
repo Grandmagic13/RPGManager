@@ -36,6 +36,8 @@ public class SpecializationClassesSet implements Set<SpecializationClasses>, Cus
 	public boolean add(SpecializationClasses specializationClass) {
 		if (characterSheet != null) {
 			checkCharacterSheetInconsistencies(characterSheet, specializationClass);
+		} else {
+			throw new NullPointerException("Can't add null element as specializationClass enum!");
 		}
 		return specClassesSet.add(specializationClass);
 	}

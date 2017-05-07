@@ -1,6 +1,7 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.security.InvalidParameterException;
 
@@ -11,6 +12,7 @@ import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Money;
 import rpg_database.character_sheet.exceptions.CoinOutOfBoundsException;
 
 public class MoneyUnitTests {
@@ -64,6 +66,15 @@ public class MoneyUnitTests {
 		expectExceptionWithMessage(CoinOutOfBoundsException.class, "Gold Coin cannot be negative number!");
 		testCharacterSheet.setData(Fields.GOLD_COIN, -5);
 	}
+
+	@Test
+	public void expectException_getPlaceOrStoredValueByField() {
+		expectExceptionWithMessage(InvalidParameterException.class, "Unknown field type: 'Appearance'");
+		Money money = new Money();
+		money.getStoredValueByField(Fields.APPEARANCE);
+	}
+
+	// Functional tests
 
 	@Test
 	public void testSetGetGoldCoins101() {

@@ -268,6 +268,14 @@ public class SpecializationClassUnitTests {
 		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).addAll(FORCE_MAGE_ARCANE_WARRIOR);
 	}
 
+	@Test
+	public void expectException_AddNullToSet() {
+		expectExceptionWithMessage(NullPointerException.class, "Can't add null element as specializationClass enum!");
+		SpecializationClasses specializationClass = null;
+		SpecializationClassesSet specializationClassesSet = new SpecializationClassesSet();
+		specializationClassesSet.add(specializationClass);
+	}
+
 	// functional tests
 	@Test
 	public void testSetCharacterSpecClassChampion() {
@@ -418,6 +426,13 @@ public class SpecializationClassUnitTests {
 		characterSheet.<SpecializationClassesSet>getData(Fields.SPECIALIZATIONCLASSES).addAll(FORCE_MAGE_ARCANE_WARRIOR);
 		SpecializationClassesSet actualSpecializations = characterSheet.getData(Fields.SPECIALIZATIONCLASSES);
 		assertEquals(FORCE_MAGE_ARCANE_WARRIOR, actualSpecializations);
+	}
+
+	@Test
+	public void test_CreateSetWithNull() {
+		SpecializationClasses[] specializationClasses = null;
+		SpecializationClassesSet specializationClassesSet = new SpecializationClassesSet(specializationClasses);
+		assertTrue("SpecializationClassesSet object initialized with null is not empty!", specializationClassesSet.isEmpty());
 	}
 
 	// private methods
