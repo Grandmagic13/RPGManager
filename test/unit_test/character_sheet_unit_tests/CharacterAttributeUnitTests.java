@@ -19,9 +19,16 @@ public class CharacterAttributeUnitTests {
 
 	@Test
 	public void expectException_setSelfValueByFieldWrongObjectType() {
-		expectExceptionWithMessage(InvalidParameterException.class, "Unknown allowed field class: 'class java.lang.Integer'");
+		expectExceptionWithMessage(ClassCastException.class, "java.lang.String cannot be cast to java.lang.Integer");
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).setSelfValueByField(Fields.STRENGTH_VALUE, "MALFORMED INPUT");
+	}
+
+	@Test
+	public void expectException_setSelfValueByFieldWrongFieldType() {
+		expectExceptionWithMessage(InvalidParameterException.class, "Unknown allowed field class: 'class java.lang.String'");
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).setSelfValueByField(Fields.NAME, "MALFORMED INPUT");
 	}
 
 	@Test
@@ -34,14 +41,14 @@ public class CharacterAttributeUnitTests {
 	// Functional
 
 	@Test
-	public void testgetImplementingClass() {
+	public void testGetImplementingClass() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		assertEquals(rpg_database.character_sheet.CharacterAttribute.class, characterSheet.<CharacterAttribute>getData(Fields.STRENGTH)
 				.getImplementingClass());
 	}
 
 	@Test
-	public void testgetDataTypeClass() {
+	public void testGetDataTypeClass() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		assertEquals(Object.class, characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).getDataTypeClass());
 	}

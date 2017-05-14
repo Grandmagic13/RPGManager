@@ -1,8 +1,7 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_SECOND_SPECIALIZATION;
 import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_THIRD_SPECIALIZATION;

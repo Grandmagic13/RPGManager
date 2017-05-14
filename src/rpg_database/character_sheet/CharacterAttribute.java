@@ -33,11 +33,15 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	@Override
 	public void setSelfValueByField(Fields field, Object value) {
-		if (field.getAllowedClass() == Integer.class && value.getClass() == Integer.class) {
-			this.value = (int) value;
-		} else {
-			throw field.getAllowedClass() == Boolean.class ? new InvalidCharacterClassException("To change majority please modify the base class!")
-					: new InvalidParameterException(generateExceptionMessage(field));
+		try {
+			if (field.getAllowedClass() == Integer.class) {
+				this.value = (int) value;
+			} else {
+				throw field.getAllowedClass() == Boolean.class ? new InvalidCharacterClassException(
+						"To change majority please modify the base class!") : new InvalidParameterException(generateExceptionMessage(field));
+			}
+		} catch (ClassCastException exception) {
+			throw new ClassCastException(exception.getMessage());
 		}
 
 	}
