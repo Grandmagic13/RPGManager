@@ -9,7 +9,8 @@ import static rpg_database.character_sheet.Fields.MAGIC_MAJORITY;
 import static rpg_database.character_sheet.Fields.PERCEPTION_MAJORITY;
 import static rpg_database.character_sheet.Fields.STRENGTH_MAJORITY;
 import static rpg_database.character_sheet.Fields.WILLPOWER_MAJORITY;
-import static unit_test.character_sheet_unit_tests.common.CommonMethods.*;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.LEVEL_REQUIRED_FOR_FIRST_SPECIALIZATION;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.createCharacterSheetWithCustomClassesAndLevelAllAttributes5;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -40,6 +41,14 @@ public class BaseClassUnitTests {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BASECLASS, malformedInput);
 	}
+
+	@Test
+	public void expectException_isAttributeMajor() {
+		expectExceptionWithMessage(InvalidParameterException.class, "Field allowed class is not CharacterAttribute!");
+		BaseClasses.MAGE.isAttributeMajor(DEXTERITY_MAJORITY);
+	}
+
+	// Functional tests
 
 	@Test
 	public void testSetCharacterBaseClassMage() {
@@ -103,9 +112,8 @@ public class BaseClassUnitTests {
 	// private methods
 
 	private ArrayList<Boolean> getActualMajorities(CharacterSheet characterSheet) {
-		ArrayList<Fields> attributeMajorities = new ArrayList<>(Arrays.asList(COMMUNICATION_MAJORITY, CONSTITUTION_MAJORITY,
-				CUNNING_MAJORITY, DEXTERITY_MAJORITY, MAGIC_MAJORITY, PERCEPTION_MAJORITY,
-				STRENGTH_MAJORITY, WILLPOWER_MAJORITY));
+		ArrayList<Fields> attributeMajorities = new ArrayList<>(Arrays.asList(COMMUNICATION_MAJORITY, CONSTITUTION_MAJORITY, CUNNING_MAJORITY,
+				DEXTERITY_MAJORITY, MAGIC_MAJORITY, PERCEPTION_MAJORITY, STRENGTH_MAJORITY, WILLPOWER_MAJORITY));
 		ArrayList<Boolean> actualMajorities = new ArrayList<>();
 		for (Fields attributeMajority : attributeMajorities) {
 			actualMajorities.add(getMajority(characterSheet, attributeMajority));
