@@ -27,6 +27,7 @@ import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_Valid
 import unit_test.character_sheet_unit_tests.SpecializationClassUnitTests;
 import unit_test.character_sheet_unit_tests.TalentLevelsTests;
 import unit_test.character_sheet_unit_tests.TalentTests;
+import unit_test.character_sheet_unit_tests.TalentsTests;
 import unit_test.character_sheet_unit_tests.ValidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsTests;
 
@@ -39,7 +40,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
 		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, TalentLevelsTests.class,
-		TalentTests.class })
+		TalentTests.class, TalentsTests.class })
 
 public class CharacterSheetTestSuite {
 
