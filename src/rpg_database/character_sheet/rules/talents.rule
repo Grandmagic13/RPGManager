@@ -1,0 +1,8 @@
+{
+	"ALCHEMY": {
+		"BASE_CLASSES_ARRAY": [ "MAGE", "ROGUE", "WARRIOR" ]
+	},
+	"POLE_WEAPON_STYLE": {
+		"BASE_CLASSES_ARRAY": [ "WARRIOR" ]
+	}
+}
