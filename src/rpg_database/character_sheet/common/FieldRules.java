@@ -10,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.exceptions.FieldRuleException;
 
 public class FieldRules {
@@ -61,9 +60,9 @@ public class FieldRules {
 		return getFieldData(field).getEnum(enumClass, key.toString());
 	}
 
-	public HashMap<Fields, Integer> getAttributeRequirements(SpecializationClasses specializationClass) {
+	public HashMap<Fields, Integer> getAttributeRequirements(Enum<?> field) {
 		HashMap<Fields, Integer> attributeRequirements = new HashMap<Fields, Integer>();
-		JSONObject fieldData = getFieldData(specializationClass);
+		JSONObject fieldData = getFieldData(field);
 		JSONArray attributeRequirementsArray = fieldData.getJSONArray(Keys.ATTRIBUTE_REQUIREMENTS.toString());
 		for (int index = 0; index < attributeRequirementsArray.length(); index++) {
 			JSONObject requirement = attributeRequirementsArray.getJSONObject(index);

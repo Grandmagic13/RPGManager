@@ -1,6 +1,7 @@
 package rpg_database.character_sheet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import rpg_database.character_sheet.common.FieldRules;
 import rpg_database.character_sheet.common.FieldRulesFactory;
@@ -11,6 +12,7 @@ public class Talent {
 	private TalentLevels talentLevel;
 	private final Talents talentName;
 	private final ArrayList<BaseClasses> allowedBaseClasses;
+	private final HashMap<Fields, Integer> requiredAttributeValues;
 
 	public Talent(Talents talentName) {
 		this(talentName, TalentLevels.NOVICE);
@@ -21,6 +23,7 @@ public class Talent {
 		this.talentName = talentName;
 		FieldRules talentsRule = FieldRulesFactory.getFieldRules(FieldRulesFactory.TALENTS);
 		this.allowedBaseClasses = talentsRule.getEnumsForField(talentName, BaseClasses.class, Keys.BASE_CLASSES_ARRAY);
+		this.requiredAttributeValues = talentsRule.getAttributeRequirements(talentName);
 	}
 
 	public TalentLevels getTalentLevel() {
@@ -37,5 +40,9 @@ public class Talent {
 
 	public ArrayList<BaseClasses> getAllowedBaseClasses() {
 		return allowedBaseClasses;
+	}
+
+	public HashMap<Fields, Integer> getRequiredAttributeValues() {
+		return requiredAttributeValues;
 	}
 }

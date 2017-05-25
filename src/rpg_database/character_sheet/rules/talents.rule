@@ -1,8 +1,34 @@
 {
 	"ALCHEMY": {
-		"BASE_CLASSES_ARRAY": [ "MAGE", "ROGUE", "WARRIOR" ]
+		"BASE_CLASSES_ARRAY": [
+			"MAGE",
+			"ROGUE",
+			"WARRIOR"
+		],
+		"ATTRIBUTE_REQUIREMENTS": [
+			{
+				"FIELD": "CUNNING_VALUE",
+				"VALUE": 3
+			}
+		]
+	},
+	"DUAL_WEAPON_STYLE": {
+		"BASE_CLASSES_ARRAY": [
+			"ROGUE",
+			"WARRIOR"
+		],
+		"ATTRIBUTE_REQUIREMENTS": [
+			{
+				"FIELD": "DEXTERITY_VALUE",
+				"VALUE": 2
+			}
+		]
 	},
 	"POLE_WEAPON_STYLE": {
-		"BASE_CLASSES_ARRAY": [ "WARRIOR" ]
+		"BASE_CLASSES_ARRAY": [
+			"WARRIOR"
+		],
+		"ATTRIBUTE_REQUIREMENTS": [
+		]
 	}
 }

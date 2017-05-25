@@ -4,12 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.BaseClasses;
+import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Talent;
 import rpg_database.character_sheet.TalentLevels;
 import rpg_database.character_sheet.Talents;
@@ -61,7 +63,30 @@ public class TalentTests {
 		assertEquals(expectedAllowedBaseClassWarrior, talent.getAllowedBaseClasses());
 	}
 
-	// requirements
+	@Test
+	public void testGetRequiredAttributeValuesAlchemy() {
+		Talent talent = new Talent(Talents.ALCHEMY);
+		HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
+		expectedAttributeRequirements.put(Fields.CUNNING_VALUE, 3);
+		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
+	}
+
+	@Test
+	public void testGetRequiredAttributeValuesDualWeaponStyle() {
+		Talent talent = new Talent(Talents.DUAL_WEAPON_STYLE);
+		HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
+		expectedAttributeRequirements.put(Fields.DEXTERITY_VALUE, 2);
+		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
+	}
+
+	@Test
+	public void testGetRequiredAttributeValuesPoleWeaponStyle_expectEmptyList() {
+		Talent talent = new Talent(Talents.POLE_WEAPON_STYLE);
+		HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
+		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
+	}
+
+	// requirements for talents & focuses
 
 	// descriptions
 
