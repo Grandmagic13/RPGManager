@@ -47,7 +47,7 @@ public class WeaponGroupsSetUnitTests {
 	}
 
 	@Test
-	public void testSetWeaponGroupsAntivanWayfarerAfterSetCityElf() {
+	public void testResetWeaponGroupsAfterSetting() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		WeaponGroupsSet expectedWeaponGroups = new WeaponGroupsSet(WeaponGroups.BRAWLING);
 		WeaponGroupsSet temporaryWeaponGroups = new WeaponGroupsSet(WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS, WeaponGroups.AXES);
@@ -58,7 +58,7 @@ public class WeaponGroupsSetUnitTests {
 	}
 
 	@Test
-	public void testSetWeaponGroupsAntivanWayfarerAfterSetMoreWeaponGroups() {
+	public void testSetWeaponGroupsAfterResetting() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
 		WeaponGroupsSet expectedWeaponGroups = new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.BOWS, WeaponGroups.LIGHT_BLADES);
 		characterSheet.setData(Fields.BASECLASS, BaseClasses.ROGUE);
