@@ -70,38 +70,33 @@ public class TalentTests {
 		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
 	}
 
-	// @Test
-	// public void testGetRequiredAttributeValuesDualWeaponStyle() {
-	// Talent talent = new Talent(Talents.DUAL_WEAPON_STYLE);
-	// HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
-	// expectedAttributeRequirements.put(Fields.DEXTERITY_VALUE, 2);
-	// assertEquals(expectedAttributeRequirements,
-	// talent.getRequiredAttributeValues());
-	// }
-	//
-	// @Test
-	// public void
-	// testGetRequiredAttributeValuesPoleWeaponStyle_expectEmptyList() {
-	// Talent talent = new Talent(Talents.POLE_WEAPON_STYLE);
-	// HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
-	// assertEquals(expectedAttributeRequirements,
-	// talent.getRequiredAttributeValues());
-	// }
+	@Test
+	public void testGetRequiredAttributeValuesDualWeaponStyle() {
+		Talent talent = new Talent(Talents.DUAL_WEAPON_STYLE);
+		HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
+		expectedAttributeRequirements.put(Fields.DEXTERITY_VALUE, 2);
+		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
+	}
+
+	@Test
+	public void testGetRequiredAttributeValuesPoleWeaponStyle_expectEmptyList() {
+		Talent talent = new Talent(Talents.POLE_WEAPON_STYLE);
+		HashMap<Fields, Integer> expectedAttributeRequirements = new HashMap<>();
+		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
+	}
 
 	// @Test
-	// public void testGetRequiredTalentsAlchemy() {
+	// public void testGetWeaponGroupsFulfillingRequirementAlchemy() {
 	// Talent talent = new Talent(Talents.ALCHEMY);
-	// ArrayList<BaseClasses> expectedAllowedMageRogueWarrior = new
-	// ArrayList<>(Arrays.asList(BaseClasses.MAGE, BaseClasses.ROGUE,
-	// BaseClasses.WARRIOR));
-	// assertEquals(expectedAllowedMageRogueWarrior,
-	// talent.getAllowedBaseClasses());
+	// HashSet<> expectedWeaponGroupsFulfillingRequirement = new HashSet<>();
+	// assertEquals(expectedWeaponGroupsFulfillingRequirement,
+	// talent.getWeaponGroupsFulfillingRequirement());
 	// }
 
-	// requirements for talents & focuses //andOr & weapon group =>
-	// or relation
+	// weapon group => or relation
+	// requirements for focuses => andOr relation
 
-	// & Background later for specializationClasses
+	// Talents & Background later for specializationClasses
 
 	// refactor specializationClasses!
 
