@@ -13,7 +13,7 @@ import unit_test.character_sheet_unit_tests.CharacterSheetCommonUnitTests;
 import unit_test.character_sheet_unit_tests.CharacterSheetUnitTests;
 import unit_test.character_sheet_unit_tests.FieldRulesTests;
 import unit_test.character_sheet_unit_tests.FieldsUnitTests;
-import unit_test.character_sheet_unit_tests.FocusesTests;
+import unit_test.character_sheet_unit_tests.FocusesUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
@@ -28,6 +28,8 @@ import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_Valid
 import unit_test.character_sheet_unit_tests.SpecializationClassUnitTests;
 import unit_test.character_sheet_unit_tests.ValidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsTests;
+import unit_test.character_sheet_unit_tests.WeaponGroupsSetUnitTests;
+import unit_test.character_sheet_unit_tests.WeaponGroupsUnitTests;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AttributeMajorityContentTests.class, GetDefaultValuesUnitTest.class, GetDefaultAttributeUnitTests.class,
@@ -37,7 +39,8 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
-		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, FocusesTests.class })
+		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, WeaponGroupsUnitTests.class,
+		WeaponGroupsSetUnitTests.class, FocusesUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

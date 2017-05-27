@@ -15,7 +15,7 @@ import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Focuses;
 import rpg_database.character_sheet.FocusesSet;
 
-public class FocusesTests {
+public class FocusesUnitTests {
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
