@@ -13,6 +13,7 @@ import unit_test.character_sheet_unit_tests.CharacterSheetCommonUnitTests;
 import unit_test.character_sheet_unit_tests.CharacterSheetUnitTests;
 import unit_test.character_sheet_unit_tests.FieldRulesTests;
 import unit_test.character_sheet_unit_tests.FieldsUnitTests;
+import unit_test.character_sheet_unit_tests.FocusesTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
@@ -36,7 +37,7 @@ import unit_test.character_sheet_unit_tests.ValidClassAndSpecializationPairingsT
 		MoneyUnitTests.class, CharacterAttributeUnitTests.class, SpecializationBackgroundFilter_InvalidBackgroundsTests.class,
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
-		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class })
+		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, FocusesTests.class })
 
 public class CharacterSheetTestSuite {
 

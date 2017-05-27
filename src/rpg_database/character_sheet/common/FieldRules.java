@@ -77,4 +77,5 @@ public class FieldRules {
 	public Integer getIntegerForField(Enum<?> field, Keys key) {
 		return getFieldData(field).getInt(key.toString());
 	}
+
 }

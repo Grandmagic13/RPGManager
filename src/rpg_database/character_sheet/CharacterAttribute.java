@@ -1,6 +1,9 @@
 package rpg_database.character_sheet;
 
+import java.lang.reflect.Array;
 import java.security.InvalidParameterException;
+import java.util.HashMap;
+import java.util.List;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
@@ -59,5 +62,4 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	private String generateExceptionMessage(Fields field) {
 		return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
 	}
-
 }

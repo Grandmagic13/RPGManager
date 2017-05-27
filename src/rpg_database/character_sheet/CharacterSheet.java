@@ -24,6 +24,7 @@ public class CharacterSheet {
 		defaultData.put(Money.class, new Money());
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
 		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
+		defaultData.put(FocusesSet.class, new FocusesSet(Focuses.NONE));
 		return defaultData;
 	}
 
