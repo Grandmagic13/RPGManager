@@ -2,12 +2,56 @@ package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import java.security.InvalidParameterException;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import rpg_database.character_sheet.CharacterAttribute;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 
 public class CharacterAttributeUnitTests {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void expectException_setSelfValueByFieldWrongObjectType() {
+		expectExceptionWithMessage(ClassCastException.class, "java.lang.String cannot be cast to java.lang.Integer");
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).setSelfValueByField(Fields.STRENGTH_VALUE, "MALFORMED INPUT");
+	}
+
+	@Test
+	public void expectException_setSelfValueByFieldWrongFieldType() {
+		expectExceptionWithMessage(InvalidParameterException.class, "Unknown allowed field class: 'class java.lang.String'");
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).setSelfValueByField(Fields.NAME, "MALFORMED INPUT");
+	}
+
+	@Test
+	public void expectException_getStoredValueByFieldWrongField() {
+		expectExceptionWithMessage(InvalidParameterException.class, "Unknown allowed field class: 'class java.lang.String'");
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).getStoredValueByField(Fields.APPEARANCE);
+	}
+
+	// Functional
+
+	@Test
+	public void testGetImplementingClass() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		assertEquals(rpg_database.character_sheet.CharacterAttribute.class, characterSheet.<CharacterAttribute>getData(Fields.STRENGTH)
+				.getImplementingClass());
+	}
+
+	@Test
+	public void testGetDataTypeClass() {
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		assertEquals(Object.class, characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).getDataTypeClass());
+	}
 
 	@Test
 	public void testSetCharacterAttribute_Value1() {
@@ -18,4 +62,9 @@ public class CharacterAttributeUnitTests {
 		assertEquals(expectedValue, actualValue);
 	}
 
+	// private methods
+	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
+		thrown.expect(exceptionClass);
+		thrown.expectMessage(message);
+	}
 }

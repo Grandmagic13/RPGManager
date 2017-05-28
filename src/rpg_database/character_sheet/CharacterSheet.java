@@ -23,6 +23,8 @@ public class CharacterSheet {
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
 		defaultData.put(Money.class, new Money());
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
+		defaultData.put(WeaponGroupsSet.class, new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS,
+				WeaponGroups.AXES));
 		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
 		return defaultData;
 	}

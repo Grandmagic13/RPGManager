@@ -58,6 +58,7 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 		characterSheet.characterData.put(Fields.BASECLASS, this);
 		characterSheet.characterData.put(Fields.ARMOR_TYPE, this.defaultArmor);
 		characterSheet.characterData.put(Fields.ARMOR_RATING, this.defaultArmor.getArmorRating());
+		characterSheet.characterData.put(Fields.WEAPON_GROUPS, new WeaponGroupsSet(WeaponGroups.BRAWLING));
 		for (Fields attribute : CharacterAttribute.ATTRIBUTES) {
 			CharacterAttribute characterAttribute = (CharacterAttribute) characterSheet.characterData.get(attribute);
 			characterAttribute.setMajority(isAttributeMajor(attribute));

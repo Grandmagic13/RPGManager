@@ -15,6 +15,8 @@ import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
 import rpg_database.character_sheet.SpecializationClassesSet;
+import rpg_database.character_sheet.WeaponGroups;
+import rpg_database.character_sheet.WeaponGroupsSet;
 
 public class GetDefaultValuesUnitTest {
 	// fields
@@ -152,6 +154,17 @@ public class GetDefaultValuesUnitTest {
 		expectedLanguages.add(Languages.ANDER);
 		LanguagesSet actualLanguage = defaultCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(expectedLanguages, actualLanguage);
+	}
+
+	@Test
+	public void testGetDefaultWeaponGroups() {
+		HashSet<WeaponGroups> expectedWeaponGroups = new HashSet<WeaponGroups>();
+		expectedWeaponGroups.add(WeaponGroups.BRAWLING);
+		expectedWeaponGroups.add(WeaponGroups.HEAVY_BLADES);
+		expectedWeaponGroups.add(WeaponGroups.BLUDGEONS);
+		expectedWeaponGroups.add(WeaponGroups.AXES);
+		WeaponGroupsSet actualWeaponGroups = defaultCharacterSheet.getData(Fields.WEAPON_GROUPS);
+		assertEquals(expectedWeaponGroups, actualWeaponGroups);
 	}
 
 	@Test
