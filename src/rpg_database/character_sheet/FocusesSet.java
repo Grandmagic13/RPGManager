@@ -20,7 +20,8 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 	}
 
 	public FocusesSet(FocusesSet focusesSet) {
-		this((Focuses[]) focusesSet.toArray(new Focuses[focusesSet.size()]));
+		this.focusesSet = new HashSet<Focuses>();
+		this.focusesSet.addAll(focusesSet);
 	}
 
 	@Override
