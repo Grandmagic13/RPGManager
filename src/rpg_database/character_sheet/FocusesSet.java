@@ -1,7 +1,6 @@
 package rpg_database.character_sheet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -9,19 +8,14 @@ import java.util.Set;
 
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
-public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
+public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
 
-	private final HashSet<Focuses> focusesSet;
+	private final HashSet<FocusesLogic> focusesSet;
 
-	public FocusesSet(Focuses... focuses) {
-		isMultipleTimesAddedFocusInTheParameterList(focuses);
-		focusesSet = new HashSet<Focuses>();
-		focusesSet.addAll(Arrays.asList(focuses));
-	}
-
-	public FocusesSet(FocusesSet focusesSet) {
-		this.focusesSet = new HashSet<Focuses>();
-		this.focusesSet.addAll(focusesSet);
+	public FocusesSet(FocusesLogic... focuses) {
+		focusesSet = new HashSet<FocusesLogic>();
+		ArrayList<FocusesLogic> focusList = findMultipleTimesAddedFocusesInTheParameterList(focuses);
+		focusesSet.addAll(focusList);
 	}
 
 	@Override
@@ -31,7 +25,7 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
-		characterSheet.characterData.put(Fields.FOCUS, new FocusesSet(this));
+		characterSheet.characterData.put(Fields.FOCUSES, this);
 	}
 
 	@Override
@@ -50,7 +44,7 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public Iterator<Focuses> iterator() {
+	public Iterator<FocusesLogic> iterator() {
 		return focusesSet.iterator();
 	}
 
@@ -65,7 +59,7 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public boolean add(Focuses e) {
+	public boolean add(FocusesLogic e) {
 		return focusesSet.add(e);
 	}
 
@@ -80,7 +74,7 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends Focuses> focusesCollection) {
+	public boolean addAll(Collection<? extends FocusesLogic> focusesCollection) {
 		return focusesSet.addAll(focusesCollection);
 	}
 
@@ -107,20 +101,36 @@ public class FocusesSet implements Set<Focuses>, CustomSetter<FocusesSet> {
 	@Override
 	public String toString() {
 		ArrayList<String> focusesNames = new ArrayList<>();
-		for (Focuses focuse : focusesSet) {
+		for (FocusesLogic focuse : focusesSet) {
 			focusesNames.add(focuse.toString());
 		}
 		return String.join(", ", focusesNames);
 	}
 
-	private void isMultipleTimesAddedFocusInTheParameterList(Focuses[] focuses) {
-		Focuses[] temp = focuses;
+	private ArrayList<FocusesLogic> findMultipleTimesAddedFocusesInTheParameterList(FocusesLogic[] focuses) {
+		FocusesLogic[] temp = focuses;
+		ArrayList<FocusesLogic> result = new ArrayList<FocusesLogic>();
 		for (int i = 0; i < focuses.length; i++) {
 			for (int j = i + 1; j < focuses.length; j++) {
-				if (focuses[i] == temp[j]) {
-					focuses[i].setFocusValue();
-				}
+				if (temp[j] != null && focuses[i] != null)
+					if (focuses[i].getFocus().equals(temp[j].getFocus())) {
+						focuses[i].setFocusImprovement();
+						focuses[j] = null;
+						temp[j] = null;
+					}
+			}
+			if (focuses[i] != null) {
+				result.add(focuses[i]);
 			}
 		}
+		return result;
+	}
+
+	public FocusesLogic getRightFocusFromSet(Focuses focus) {
+		for (FocusesLogic containedFocus : this) {
+			containedFocus.getFocus().equals(focus);
+			return containedFocus;
+		}
+		return null;
 	}
 }

@@ -26,7 +26,7 @@ public class CharacterSheet {
 		defaultData.put(WeaponGroupsSet.class, new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS,
 				WeaponGroups.AXES));
 		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
-		defaultData.put(FocusesSet.class, new FocusesSet(Focuses.NONE));
+		defaultData.put(FocusesSet.class, new FocusesSet());
 		return defaultData;
 	}
 
