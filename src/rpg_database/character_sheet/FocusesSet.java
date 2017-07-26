@@ -1,6 +1,8 @@
 package rpg_database.character_sheet;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8,14 +10,13 @@ import java.util.Set;
 
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
-public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
+public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 
-	private final HashSet<FocusesLogic> focusesSet;
+	private final HashSet<Focus> focusesSet;
 
-	public FocusesSet(FocusesLogic... focuses) {
-		focusesSet = new HashSet<FocusesLogic>();
-		ArrayList<FocusesLogic> focusList = findMultipleTimesAddedFocusesInTheParameterList(focuses);
-		focusesSet.addAll(focusList);
+	public FocusesSet(Focus... focuses) {
+		focusesSet = new HashSet<Focus>();
+		focusesSet.addAll(Arrays.asList(focuses));
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public Iterator<FocusesLogic> iterator() {
+	public Iterator<Focus> iterator() {
 		return focusesSet.iterator();
 	}
 
@@ -59,7 +60,7 @@ public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public boolean add(FocusesLogic e) {
+	public boolean add(Focus e) {
 		return focusesSet.add(e);
 	}
 
@@ -74,7 +75,7 @@ public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends FocusesLogic> focusesCollection) {
+	public boolean addAll(Collection<? extends Focus> focusesCollection) {
 		return focusesSet.addAll(focusesCollection);
 	}
 
@@ -98,39 +99,25 @@ public class FocusesSet implements Set<FocusesLogic>, CustomSetter<FocusesSet> {
 		return focusesSet.equals(obj);
 	}
 
+	public void ImproveFocus(Focuses focus) {
+		Focus actualFocus = getRightFocusFromSet(focus);
+		actualFocus.MakeFocusImproved();
+	}
+
 	@Override
 	public String toString() {
 		ArrayList<String> focusesNames = new ArrayList<>();
-		for (FocusesLogic focuse : focusesSet) {
+		for (Focus focuse : focusesSet) {
 			focusesNames.add(focuse.toString());
 		}
 		return String.join(", ", focusesNames);
 	}
 
-	private ArrayList<FocusesLogic> findMultipleTimesAddedFocusesInTheParameterList(FocusesLogic[] focuses) {
-		FocusesLogic[] temp = focuses;
-		ArrayList<FocusesLogic> result = new ArrayList<FocusesLogic>();
-		for (int i = 0; i < focuses.length; i++) {
-			for (int j = i + 1; j < focuses.length; j++) {
-				if (temp[j] != null && focuses[i] != null)
-					if (focuses[i].getFocus().equals(temp[j].getFocus())) {
-						focuses[i].setFocusImprovement();
-						focuses[j] = null;
-						temp[j] = null;
-					}
-			}
-			if (focuses[i] != null) {
-				result.add(focuses[i]);
-			}
+	public Focus getRightFocusFromSet(Focuses focus) {
+		for (Focus containedFocus : this) {
+			if (containedFocus.getFocus().equals(focus))
+				return containedFocus;
 		}
-		return result;
-	}
-
-	public FocusesLogic getRightFocusFromSet(Focuses focus) {
-		for (FocusesLogic containedFocus : this) {
-			containedFocus.getFocus().equals(focus);
-			return containedFocus;
-		}
-		return null;
+		throw new InvalidParameterException(focus + "is not in the list.");
 	}
 }

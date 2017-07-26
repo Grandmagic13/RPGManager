@@ -11,7 +11,7 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.FocusesLogic;
+import rpg_database.character_sheet.Focus;
 import rpg_database.character_sheet.FocusesSet;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
@@ -183,7 +183,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultFocus() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		HashSet<FocusesLogic> expectedFocuses = new HashSet<FocusesLogic>();
+		HashSet<Focus> expectedFocuses = new HashSet<Focus>();
 		FocusesSet actualFocus = characterSheet.getData(Fields.FOCUSES);
 		assertEquals(expectedFocuses, actualFocus);
 	}

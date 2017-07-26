@@ -12,20 +12,13 @@ public enum Focuses {
 	SELF_DISCIPLINE;
 
 	private final String text;
-	private final int focusValue;
 
 	private Focuses() {
 		this.text = generateEnumText(this.name());
-		focusValue = 2;
 	}
 
 	@Override
 	public String toString() {
 		return text;
 	}
-
-	public int getFocusValue() {
-		return focusValue;
-	}
-
 }

@@ -11,7 +11,7 @@ import org.junit.rules.ExpectedException;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Focuses;
-import rpg_database.character_sheet.FocusesLogic;
+import rpg_database.character_sheet.Focus;
 import rpg_database.character_sheet.FocusesSet;
 
 public class FocusesSetUnitTests {
@@ -32,7 +32,7 @@ public class FocusesSetUnitTests {
 	@Test
 	public void testSetFocusWithFocusesSet() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		FocusesSet expectedFocuses = new FocusesSet(new FocusesLogic(Focuses.ETIQUETTE));
+		FocusesSet expectedFocuses = new FocusesSet(new Focus(Focuses.ETIQUETTE));
 		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
 		FocusesSet actualFocus = characterSheet.getData(Fields.FOCUSES);
 		assertEquals(expectedFocuses, actualFocus);
@@ -41,8 +41,7 @@ public class FocusesSetUnitTests {
 	@Test
 	public void testSetMoreDifferentFocus() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		FocusesSet expectedFocuses = new FocusesSet(new FocusesLogic(Focuses.ANIMAL_HANDLING), new FocusesLogic(Focuses.ARCANE_LANCE),
-				new FocusesLogic(Focuses.BRAWLING));
+		FocusesSet expectedFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING), new Focus(Focuses.ARCANE_LANCE), new Focus(Focuses.BRAWLING));
 		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
 		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
 		assertEquals(expectedFocuses, actualFocuses);
@@ -51,10 +50,50 @@ public class FocusesSetUnitTests {
 	@Test
 	public void testSetFocusMultipleTimes() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		FocusesSet tempFocuses = new FocusesSet(new FocusesLogic(Focuses.ANIMAL_HANDLING), new FocusesLogic(Focuses.ANIMAL_HANDLING));
+		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING, true));
 		characterSheet.setData(Fields.FOCUSES, tempFocuses);
 		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
-		assertEquals(3, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getFocusValue());
+		assertEquals(true, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getIsFocusImproved());
+	}
+
+	@Test
+	public void testSetFocusMultipleTimesAfterCreatedFocusesObject() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING, true), new Focus(Focuses.BARGAINING), new Focus(Focuses.COURAGE));
+		characterSheet.setData(Fields.FOCUSES, tempFocuses);
+		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
+		assertEquals(true, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getIsFocusImproved());
+	}
+
+	@Test
+	public void testSetIsFocusImprovedAfterCreatedFocusesObject() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING), new Focus(Focuses.BARGAINING), new Focus(Focuses.COURAGE));
+		characterSheet.setData(Fields.FOCUSES, tempFocuses);
+		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
+		actualFocuses.ImproveFocus(Focuses.ANIMAL_HANDLING);
+		assertEquals(true, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getIsFocusImproved());
+	}
+
+	@Test
+	public void testSetIsFocusImprovedSecondTime() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING), new Focus(Focuses.BARGAINING), new Focus(Focuses.COURAGE));
+		characterSheet.setData(Fields.FOCUSES, tempFocuses);
+		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
+		actualFocuses.ImproveFocus(Focuses.ANIMAL_HANDLING);
+		actualFocuses.ImproveFocus(Focuses.ANIMAL_HANDLING);
+		assertEquals(3, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getFocuseImprovementValue());
+	}
+
+	@Test
+	public void testSetIsFocusImprovedSecondTimeWithConstructor() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING, true, true), new Focus(Focuses.BARGAINING), new Focus(
+				Focuses.COURAGE));
+		characterSheet.setData(Fields.FOCUSES, tempFocuses);
+		FocusesSet actualFocuses = characterSheet.getData(Fields.FOCUSES);
+		assertEquals(3, actualFocuses.getRightFocusFromSet(Focuses.ANIMAL_HANDLING).getFocuseImprovementValue());
 	}
 
 	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {

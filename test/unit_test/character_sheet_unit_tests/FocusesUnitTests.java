@@ -25,11 +25,6 @@ public class FocusesUnitTests {
 	}
 
 	@Test
-	public void testGetFocusValue() {
-		assertEquals(2, JUMPING.getFocusValue());
-	}
-
-	@Test
 	public void testGetFocusName() {
 		assertEquals("Jumping", JUMPING.toString());
 	}

@@ -6,26 +6,26 @@ import static rpg_database.character_sheet.Focuses.JUMPING;
 import org.junit.Test;
 
 import rpg_database.character_sheet.Focuses;
-import rpg_database.character_sheet.FocusesLogic;
+import rpg_database.character_sheet.Focus;
 
-public class FocusesLogicUnitTests {
+public class FocusUnitTests {
 
 	@Test
 	public void testGetFocus() {
-		FocusesLogic expected = new FocusesLogic(Focuses.COURAGE);
+		Focus expected = new Focus(Focuses.COURAGE);
 		assertEquals(Focuses.COURAGE, expected.getFocus());
 	}
 
 	@Test
 	public void testGetFocusValue() {
-		FocusesLogic expected = new FocusesLogic(Focuses.JUMPING);
-		assertEquals(2, expected.getFocusValue());
+		Focus expected = new Focus(Focuses.JUMPING);
+		assertEquals(false, expected.getIsFocusImproved());
 	}
 
 	@Test
 	public void testSetFocusImprovement() {
-		FocusesLogic expected = new FocusesLogic(Focuses.JUMPING);
-		expected.setFocusImprovement();
-		assertEquals(3, expected.getFocusValue());
+		Focus expected = new Focus(Focuses.JUMPING);
+		expected.MakeFocusImproved();
+		assertEquals(true, expected.getIsFocusImproved());
 	}
 }
