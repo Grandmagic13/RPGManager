@@ -19,13 +19,13 @@ public class FocusUnitTests {
 	@Test
 	public void testGetFocusValue() {
 		Focus expected = new Focus(Focuses.JUMPING);
-		assertEquals(false, expected.getIsFocusImproved());
+		assertEquals(2, expected.getFocuseImprovementValue());
 	}
 
 	@Test
 	public void testSetFocusImprovement() {
 		Focus expected = new Focus(Focuses.JUMPING);
 		expected.MakeFocusImproved();
-		assertEquals(true, expected.getIsFocusImproved());
+		assertEquals(true, expected.isFocusImproved());
 	}
 }

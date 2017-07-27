@@ -7,28 +7,21 @@ public class Focus {
 	private Focuses focus;
 
 	public Focus(Focuses focus) {
-		this(focus, false, false);
+		this(focus, false);
 	}
 
 	public Focus(Focuses focus, boolean isImproved) {
-		this(focus, isImproved, false);
-	}
-
-	public Focus(Focuses focus, boolean isImproved, boolean isImprovedSecondTime) {
-		this.focus = focus;
-		if (isImprovedSecondTime && isImproved) {
+		if (isImproved) {
 			focusImprovementValue = 3;
-			this.isFocusImproved = true;
-		} else if (isImproved) {
-			focusImprovementValue = 2;
-			this.isFocusImproved = true;
+			isFocusImproved = true;
 		} else {
-			focusImprovementValue = 0;
-			this.isFocusImproved = false;
+			focusImprovementValue = 2;
+			isFocusImproved = false;
 		}
+		this.focus = focus;
 	}
 
-	public boolean getIsFocusImproved() {
+	public boolean isFocusImproved() {
 		return isFocusImproved;
 	}
 
@@ -51,10 +44,8 @@ public class Focus {
 	}
 
 	private void setIsFocusImproved(boolean isImproved) {
-		if (this.isFocusImproved) {
+		if (isImproved) {
 			focusImprovementValue = 3;
-		} else {
-			focusImprovementValue = 2;
 			isFocusImproved = true;
 		}
 	}
