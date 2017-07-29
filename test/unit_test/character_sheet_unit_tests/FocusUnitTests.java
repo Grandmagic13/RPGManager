@@ -1,7 +1,6 @@
 package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
-import static rpg_database.character_sheet.Focuses.JUMPING;
 
 import org.junit.Test;
 
@@ -17,9 +16,9 @@ public class FocusUnitTests {
 	}
 
 	@Test
-	public void testGetFocusValue() {
+	public void getFocuseValue() {
 		Focus expected = new Focus(Focuses.JUMPING);
-		assertEquals(2, expected.getFocuseImprovementValue());
+		assertEquals(2, expected.getFocuseValue());
 	}
 
 	@Test

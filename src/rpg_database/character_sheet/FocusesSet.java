@@ -1,6 +1,5 @@
 package rpg_database.character_sheet;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,15 +7,26 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import rpg_database.character_sheet.exceptions.InvalidFocusesSetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 
-	private final HashSet<Focus> focusesSet;
+	private HashSet<Focus> focusesSet;
+
+	public FocusesSet() {
+		focusesSet = new HashSet<Focus>();
+	}
 
 	public FocusesSet(Focus... focuses) {
 		focusesSet = new HashSet<Focus>();
 		focusesSet.addAll(Arrays.asList(focuses));
+	}
+
+	public FocusesSet(Focuses... focuses) {
+		focusesSet = new HashSet<Focus>();
+		focusesSet = findDuplicates(focuses);
+
 	}
 
 	@Override
@@ -60,8 +70,14 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 	}
 
 	@Override
-	public boolean add(Focus e) {
-		return focusesSet.add(e);
+	public boolean add(Focus focus) {
+		return focusesSet.add(focus);
+	}
+
+	public boolean add(Focuses focus) {
+		Focus focusInDb = getFocus(focus, focusesSet);
+		focusInDb.MakeFocusImproved();
+		return focusInDb.isFocusImproved();
 	}
 
 	@Override
@@ -99,11 +115,6 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return focusesSet.equals(obj);
 	}
 
-	public void ImproveFocus(Focuses focus) {
-		Focus actualFocus = getRightFocusFromSet(focus);
-		actualFocus.MakeFocusImproved();
-	}
-
 	@Override
 	public String toString() {
 		ArrayList<String> focusesNames = new ArrayList<>();
@@ -113,11 +124,40 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return String.join(", ", focusesNames);
 	}
 
-	public Focus getRightFocusFromSet(Focuses focus) {
+	public void ImproveFocus(Focuses focus) {
+		Focus actualFocus = getFocus(focus);
+		actualFocus.MakeFocusImproved();
+	}
+
+	public Focus getFocus(Focuses focus) {
 		for (Focus containedFocus : this) {
 			if (containedFocus.getFocus().equals(focus))
 				return containedFocus;
 		}
-		throw new InvalidParameterException(focus + "is not in the list.");
+		throw new InvalidFocusesSetException(focus.name() + "is not in the list.");
+	}
+
+	private HashSet<Focus> findDuplicates(Focuses... focuses) {
+		final HashSet<Focus> setToReturn = new HashSet<Focus>();
+		final HashSet<Focus> setTemp = new HashSet<Focus>();
+
+		for (Focuses focus : focuses) {
+			Focus tempFocus = new Focus(focus);
+			if (!setTemp.add(tempFocus)) {
+				Focus focusEnum = getFocus(focus, setToReturn);
+				focusEnum.MakeFocusImproved();
+			} else {
+				setToReturn.add(tempFocus);
+			}
+		}
+		return setToReturn;
+	}
+
+	private Focus getFocus(Focuses focus, HashSet<Focus> focusesList) {
+		for (Focus containedFocus : focusesList) {
+			if (containedFocus.getFocus().equals(focus))
+				return containedFocus;
+		}
+		throw new InvalidFocusesSetException(focus + "is not in the list.");
 	}
 }

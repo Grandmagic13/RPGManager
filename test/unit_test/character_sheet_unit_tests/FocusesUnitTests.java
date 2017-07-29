@@ -26,6 +26,6 @@ public class FocusesUnitTests {
 
 	@Test
 	public void testGetFocusName() {
-		assertEquals("Jumping", JUMPING.toString());
+		assertEquals("Historical Lore", HISTORICAL_LORE.toString());
 	}
 }

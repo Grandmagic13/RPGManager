@@ -3,7 +3,7 @@ package rpg_database.character_sheet;
 public class Focus {
 
 	private boolean isFocusImproved;
-	private int focusImprovementValue;
+	private int focusValue;
 	private Focuses focus;
 
 	public Focus(Focuses focus) {
@@ -12,10 +12,10 @@ public class Focus {
 
 	public Focus(Focuses focus, boolean isImproved) {
 		if (isImproved) {
-			focusImprovementValue = 3;
+			focusValue = 3;
 			isFocusImproved = true;
 		} else {
-			focusImprovementValue = 2;
+			focusValue = 2;
 			isFocusImproved = false;
 		}
 		this.focus = focus;
@@ -25,8 +25,8 @@ public class Focus {
 		return isFocusImproved;
 	}
 
-	public int getFocuseImprovementValue() {
-		return focusImprovementValue;
+	public int getFocuseValue() {
+		return focusValue;
 	}
 
 	public Focuses getFocus() {
@@ -39,13 +39,18 @@ public class Focus {
 
 	@Override
 	public boolean equals(Object obj) {
-		Focuses inputFocus = (Focuses) obj;
+		Focuses inputFocus = ((Focus) obj).focus;
 		return focus.name().equals(inputFocus.name());
+	}
+
+	@Override
+	public int hashCode() {
+		return this.focus.hashCode();
 	}
 
 	private void setIsFocusImproved(boolean isImproved) {
 		if (isImproved) {
-			focusImprovementValue = 3;
+			focusValue = 3;
 			isFocusImproved = true;
 		}
 	}
