@@ -1,7 +1,6 @@
 package rpg_database.character_sheet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,13 +15,6 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 
 	public FocusesSet() {
 		focusesSet = new HashSet<Focus>();
-	}
-
-	// itt is meg kéne vizsgálni a duplikáltakat,
-	// mert a kül.referencia miatt ua többször is hozzá lehet adni
-	public FocusesSet(Focus... focuses) {
-		focusesSet = new HashSet<Focus>();
-		focusesSet.addAll(Arrays.asList(focuses));
 	}
 
 	public FocusesSet(Focuses... focuses) {
@@ -76,7 +68,6 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return focusesSet.add(focus);
 	}
 
-	// TODO egyáltalán fel van már véve ez a focus
 	public boolean add(Focuses focus) {
 		Focus focusInDb = getFocus(focus, focusesSet);
 		if (focusInDb == null) {

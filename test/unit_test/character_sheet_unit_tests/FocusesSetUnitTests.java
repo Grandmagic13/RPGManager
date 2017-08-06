@@ -10,6 +10,7 @@ import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Focus;
 import rpg_database.character_sheet.Focuses;
 import rpg_database.character_sheet.FocusesSet;
 import rpg_database.character_sheet.exceptions.InvalidFocusesSetException;
