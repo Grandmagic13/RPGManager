@@ -18,6 +18,8 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		focusesSet = new HashSet<Focus>();
 	}
 
+	// itt is meg kéne vizsgálni a duplikáltakat,
+	// mert a kül.referencia miatt ua többször is hozzá lehet adni
 	public FocusesSet(Focus... focuses) {
 		focusesSet = new HashSet<Focus>();
 		focusesSet.addAll(Arrays.asList(focuses));
@@ -74,10 +76,20 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return focusesSet.add(focus);
 	}
 
+	// TODO egyáltalán fel van már véve ez a focus
 	public boolean add(Focuses focus) {
 		Focus focusInDb = getFocus(focus, focusesSet);
-		focusInDb.MakeFocusImproved();
-		return focusInDb.isFocusImproved();
+		if (focusInDb == null) {
+			Focus tempFocus = new Focus(focus);
+			focusesSet.add(tempFocus);
+			return tempFocus.isFocusImproved();
+		} else {
+			if (focusInDb.isFocusImproved()) {
+				throw new InvalidFocusesSetException(focus.name() + " is already improved!");
+			}
+			focusInDb.makeFocusImproved();
+			return focusInDb.isFocusImproved();
+		}
 	}
 
 	@Override
@@ -124,17 +136,12 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return String.join(", ", focusesNames);
 	}
 
-	public void ImproveFocus(Focuses focus) {
-		Focus actualFocus = getFocus(focus);
-		actualFocus.MakeFocusImproved();
-	}
-
 	public Focus getFocus(Focuses focus) {
 		for (Focus containedFocus : this) {
 			if (containedFocus.getFocus().equals(focus))
 				return containedFocus;
 		}
-		throw new InvalidFocusesSetException(focus.name() + "is not in the list.");
+		throw new InvalidFocusesSetException(focus.name() + " is not in the list!");
 	}
 
 	private HashSet<Focus> findDuplicates(Focuses... focuses) {
@@ -145,7 +152,7 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 			Focus tempFocus = new Focus(focus);
 			if (!setTemp.add(tempFocus)) {
 				Focus focusEnum = getFocus(focus, setToReturn);
-				focusEnum.MakeFocusImproved();
+				focusEnum.makeFocusImproved();
 			} else {
 				setToReturn.add(tempFocus);
 			}
@@ -158,6 +165,6 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 			if (containedFocus.getFocus().equals(focus))
 				return containedFocus;
 		}
-		throw new InvalidFocusesSetException(focus + "is not in the list.");
+		return null;
 	}
 }

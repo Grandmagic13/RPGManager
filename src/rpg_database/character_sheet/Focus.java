@@ -2,38 +2,38 @@ package rpg_database.character_sheet;
 
 public class Focus {
 
-	private boolean isFocusImproved;
-	private int focusValue;
+	private boolean isImproved;
+	private int value;
 	private Focuses focus;
 
 	public Focus(Focuses focus) {
 		this(focus, false);
 	}
 
-	public Focus(Focuses focus, boolean isImproved) {
-		if (isImproved) {
-			focusValue = 3;
-			isFocusImproved = true;
+	public Focus(Focuses focus, boolean isFocusImproved) {
+		if (isFocusImproved) {
+			value = 3;
+			isImproved = true;
 		} else {
-			focusValue = 2;
-			isFocusImproved = false;
+			value = 2;
+			isImproved = false;
 		}
 		this.focus = focus;
 	}
 
 	public boolean isFocusImproved() {
-		return isFocusImproved;
+		return isImproved;
 	}
 
-	public int getFocuseValue() {
-		return focusValue;
+	public int getValue() {
+		return value;
 	}
 
 	public Focuses getFocus() {
 		return focus;
 	}
 
-	public void MakeFocusImproved() {
+	public void makeFocusImproved() {
 		setIsFocusImproved(true);
 	}
 
@@ -48,10 +48,10 @@ public class Focus {
 		return this.focus.hashCode();
 	}
 
-	private void setIsFocusImproved(boolean isImproved) {
-		if (isImproved) {
-			focusValue = 3;
-			isFocusImproved = true;
+	private void setIsFocusImproved(boolean isFocusImproved) {
+		if (isFocusImproved) {
+			value = 3;
+			isImproved = true;
 		}
 	}
 }

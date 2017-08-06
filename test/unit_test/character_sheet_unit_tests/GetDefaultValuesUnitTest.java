@@ -182,7 +182,7 @@ public class GetDefaultValuesUnitTest {
 
 	@Test
 	public void testGetDefaultFocus() {
-		HashSet<Focus> expectedFocuses = new HashSet<Focus>();
+		FocusesSet expectedFocuses = new FocusesSet();
 		FocusesSet actualFocuses = defaultCharacterSheet.getData(Fields.FOCUSES);
 		assertEquals(expectedFocuses, actualFocuses);
 	}

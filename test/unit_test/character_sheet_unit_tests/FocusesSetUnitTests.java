@@ -11,8 +11,8 @@ import org.junit.rules.ExpectedException;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Focuses;
-import rpg_database.character_sheet.Focus;
 import rpg_database.character_sheet.FocusesSet;
+import rpg_database.character_sheet.exceptions.InvalidFocusesSetException;
 
 public class FocusesSetUnitTests {
 
@@ -28,18 +28,24 @@ public class FocusesSetUnitTests {
 		characterSheet.setData(Fields.FOCUSES, malformedInput);
 	}
 
-	// functional tests
 	@Test
-	public void testSetFocusWithFocusesSet() {
-		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		FocusesSet expectedFocuses = new FocusesSet(new Focus(Focuses.ETIQUETTE));
-		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
-		FocusesSet actualFocus = characterSheet.getData(Fields.FOCUSES);
-		assertEquals(expectedFocuses, actualFocus);
+	public void expectException_SetSameFocusesMoreThanAllowed() {
+		expectExceptionWithMessage(InvalidFocusesSetException.class, "ANIMAL_HANDLING is already improved!");
+		FocusesSet focusesSet = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.ANIMAL_HANDLING);
+		focusesSet.add(Focuses.ANIMAL_HANDLING);
 	}
 
 	@Test
-	public void testSetFocusWithFocusesEnum() {
+	public void expectException_GetFocusesWithWrongParameter() {
+		expectExceptionWithMessage(InvalidFocusesSetException.class, "BRAWLING is not in the list!");
+		FocusesSet focusesSet = new FocusesSet();
+		focusesSet.getFocus(Focuses.BRAWLING);
+	}
+
+	// functional tests
+
+	@Test
+	public void testSetFocusWithEtiquetteEnum() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
 		FocusesSet expectedFocuses = new FocusesSet(Focuses.ETIQUETTE);
 		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
@@ -50,33 +56,20 @@ public class FocusesSetUnitTests {
 	@Test
 	public void testGetSingleTimeSetIsFocusImproved() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
-		assertEquals(false, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).isFocusImproved());
+		assertEquals(2, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
 	}
 
 	@Test
 	public void testGetMultipleTimesSetIsFocusImproved() {
-		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.ANIMAL_HANDLING, Focuses.BARGAINING, Focuses.COURAGE);
-		assertEquals(true, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).isFocusImproved());
+		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.ANIMAL_HANDLING);
+		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
 	}
 
 	@Test
 	public void testAddFocusMultipleTimesAfterCreatedFocusesObject() {
-		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.BARGAINING, Focuses.COURAGE);
+		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
 		tempFocuses.add(Focuses.ANIMAL_HANDLING);
-		assertEquals(true, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).isFocusImproved());
-	}
-
-	@Test
-	public void testGetFocusValue() {
-		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING, true), new Focus(Focuses.BARGAINING), new Focus(Focuses.COURAGE));
-		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getFocuseValue());
-	}
-
-	@Test
-	public void testImproveFocus() {
-		FocusesSet tempFocuses = new FocusesSet(new Focus(Focuses.ANIMAL_HANDLING), new Focus(Focuses.BARGAINING), new Focus(Focuses.COURAGE));
-		tempFocuses.ImproveFocus(Focuses.ANIMAL_HANDLING);
-		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getFocuseValue());
+		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
 	}
 
 	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {

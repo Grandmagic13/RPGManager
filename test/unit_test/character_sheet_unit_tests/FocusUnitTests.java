@@ -16,15 +16,29 @@ public class FocusUnitTests {
 	}
 
 	@Test
-	public void getFocuseValue() {
+	public void testGetFocusValue() {
 		Focus expected = new Focus(Focuses.JUMPING);
-		assertEquals(2, expected.getFocuseValue());
+		assertEquals(2, expected.getValue());
+	}
+
+	@Test
+	public void testGetImprovedFocusValue() {
+		Focus expected = new Focus(Focuses.COURAGE, true);
+		assertEquals(3, expected.getValue());
+	}
+
+	@Test
+	public void testGetDefaultFocusImprovment() {
+		Focus expected = new Focus(Focuses.ACROBATICS);
+		assertEquals(false, expected.isFocusImproved());
 	}
 
 	@Test
 	public void testSetFocusImprovement() {
 		Focus expected = new Focus(Focuses.JUMPING);
-		expected.MakeFocusImproved();
+		expected.makeFocusImproved();
+		assertEquals(3, expected.getValue());
 		assertEquals(true, expected.isFocusImproved());
 	}
+
 }
