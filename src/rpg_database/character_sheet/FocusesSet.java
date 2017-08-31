@@ -1,6 +1,7 @@
 package rpg_database.character_sheet;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -63,6 +64,12 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return focusesSet.toArray(a);
 	}
 
+	/**
+	 * Does some thing in old style.
+	 *
+	 * @deprecated use {@link #new()} instead.
+	 */
+	@Deprecated
 	@Override
 	public boolean add(Focus focus) {
 		return focusesSet.add(focus);
@@ -83,6 +90,11 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		}
 	}
 
+	// TODO comment dekorator needed
+	public boolean addAllFocuses(Collection<? extends Focuses> focusesCollection) {
+		return true;
+	}
+
 	@Override
 	public boolean remove(Object o) {
 		return focusesSet.remove(o);
@@ -93,6 +105,12 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return focusesSet.containsAll(focusesCollection);
 	}
 
+	/**
+	 * Does some thing in old style.
+	 *
+	 * @deprecated use {@link #new()} instead.
+	 */
+	@Deprecated
 	@Override
 	public boolean addAll(Collection<? extends Focus> focusesCollection) {
 		return focusesSet.addAll(focusesCollection);
@@ -125,14 +143,6 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 			focusesNames.add(focuse.toString());
 		}
 		return String.join(", ", focusesNames);
-	}
-
-	public Focus getFocus(Focuses focus) {
-		for (Focus containedFocus : this) {
-			if (containedFocus.getFocus().equals(focus))
-				return containedFocus;
-		}
-		throw new InvalidFocusesSetException(focus.name() + " is not in the list!");
 	}
 
 	private HashSet<Focus> findDuplicates(Focuses... focuses) {

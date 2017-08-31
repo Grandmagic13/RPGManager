@@ -3,6 +3,7 @@ package unit_test.character_sheet_unit_tests;
 import static org.junit.Assert.*;
 
 import java.security.InvalidParameterException;
+import java.util.function.Consumer;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,13 +37,6 @@ public class FocusesSetUnitTests {
 		focusesSet.add(Focuses.ANIMAL_HANDLING);
 	}
 
-	@Test
-	public void expectException_GetFocusesWithWrongParameter() {
-		expectExceptionWithMessage(InvalidFocusesSetException.class, "BRAWLING is not in the list!");
-		FocusesSet focusesSet = new FocusesSet();
-		focusesSet.getFocus(Focuses.BRAWLING);
-	}
-
 	// functional tests
 
 	@Test
@@ -55,22 +49,22 @@ public class FocusesSetUnitTests {
 	}
 
 	@Test
-	public void testGetSingleTimeSetIsFocusImproved() {
+	public void testGetDefaultFocusValueWhenFocusAdded() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
-		assertEquals(2, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
+		assertEquals(2, tempFocuses.iterator().next().getValue());
 	}
 
 	@Test
-	public void testGetMultipleTimesSetIsFocusImproved() {
+	public void testGetMultipleTimesAddedFocusValue() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.ANIMAL_HANDLING);
-		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
+		assertEquals(3, tempFocuses.iterator().next().getValue());
 	}
 
 	@Test
 	public void testAddFocusMultipleTimesAfterCreatedFocusesObject() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
 		tempFocuses.add(Focuses.ANIMAL_HANDLING);
-		assertEquals(3, tempFocuses.getFocus(Focuses.ANIMAL_HANDLING).getValue());
+		assertEquals(3, tempFocuses.iterator().next().getValue());
 	}
 
 	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
