@@ -3,6 +3,7 @@ package unit_test.character_sheet_unit_tests;
 import static org.junit.Assert.*;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import org.junit.Rule;
@@ -37,6 +38,17 @@ public class FocusesSetUnitTests {
 		focusesSet.add(Focuses.ANIMAL_HANDLING);
 	}
 
+	@Test
+	public void expectException_SetSameFocusesMoreThanAllowedWithAddALl() {
+		expectExceptionWithMessage(InvalidFocusesSetException.class, "ANIMAL_HANDLING is already improved!");
+		FocusesSet tempFocuses = new FocusesSet();
+		ArrayList<Focuses> focusesList = new ArrayList<Focuses>();
+		focusesList.add(Focuses.ANIMAL_HANDLING);
+		focusesList.add(Focuses.ANIMAL_HANDLING);
+		focusesList.add(Focuses.ANIMAL_HANDLING);
+		tempFocuses.addAllFocuses(focusesList);
+	}
+
 	// functional tests
 
 	@Test
@@ -51,24 +63,52 @@ public class FocusesSetUnitTests {
 	@Test
 	public void testGetDefaultFocusValueWhenFocusAdded() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
-		assertEquals(2, tempFocuses.iterator().next().getValue());
+		assertEquals(2, getOnlyElementOf(tempFocuses).getValue());
 	}
 
 	@Test
 	public void testGetMultipleTimesAddedFocusValue() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING, Focuses.ANIMAL_HANDLING);
-		assertEquals(3, tempFocuses.iterator().next().getValue());
+		assertEquals(3, getOnlyElementOf(tempFocuses).getValue());
 	}
 
 	@Test
 	public void testAddFocusMultipleTimesAfterCreatedFocusesObject() {
 		FocusesSet tempFocuses = new FocusesSet(Focuses.ANIMAL_HANDLING);
 		tempFocuses.add(Focuses.ANIMAL_HANDLING);
-		assertEquals(3, tempFocuses.iterator().next().getValue());
+		assertEquals(3, getOnlyElementOf(tempFocuses).getValue());
+	}
+
+	@Test
+	public void testAddAllFocuses() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		FocusesSet expectedFocuses = new FocusesSet();
+		ArrayList<Focuses> focusesList = new ArrayList<Focuses>();
+		focusesList.add(Focuses.ACROBATICS);
+		focusesList.add(Focuses.ANIMAL_HANDLING);
+		focusesList.add(Focuses.ARCANE_LANCE);
+		expectedFocuses.addAllFocuses(focusesList);
+		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
+		FocusesSet actualFocus = characterSheet.getData(Fields.FOCUSES);
+		assertEquals(expectedFocuses, actualFocus);
+	}
+
+	@Test
+	public void testAddAllMultipleTimesFocuses() {
+		FocusesSet tempFocuses = new FocusesSet();
+		ArrayList<Focuses> focusesList = new ArrayList<Focuses>();
+		focusesList.add(Focuses.ACROBATICS);
+		focusesList.add(Focuses.ACROBATICS);
+		tempFocuses.addAllFocuses(focusesList);
+		assertEquals(3, getOnlyElementOf(tempFocuses).getValue());
 	}
 
 	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
 		thrown.expect(exceptionClass);
 		thrown.expectMessage(message);
+	}
+
+	private Focus getOnlyElementOf(FocusesSet tempFocuses) {
+		return tempFocuses.iterator().next();
 	}
 }

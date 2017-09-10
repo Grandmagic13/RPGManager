@@ -20,7 +20,7 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 
 	public FocusesSet(Focuses... focuses) {
 		focusesSet = new HashSet<Focus>();
-		focusesSet = findDuplicates(focuses);
+		focusesSet = getFocusesWithoutDuplicates(focuses);
 
 	}
 
@@ -76,22 +76,29 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 	}
 
 	public boolean add(Focuses focus) {
-		Focus focusInDb = getFocus(focus, focusesSet);
-		if (focusInDb == null) {
+		Focus focusInDataBase = getFocus(focus, focusesSet);
+		if (focusInDataBase == null) {
 			Focus tempFocus = new Focus(focus);
-			focusesSet.add(tempFocus);
-			return tempFocus.isFocusImproved();
+			return focusesSet.add(tempFocus);
 		} else {
-			if (focusInDb.isFocusImproved()) {
-				throw new InvalidFocusesSetException(focus.name() + " is already improved!");
-			}
-			focusInDb.makeFocusImproved();
-			return focusInDb.isFocusImproved();
+			focusInDataBase.makeFocusImproved();
+			return true;
 		}
 	}
 
 	// TODO comment dekorator needed
 	public boolean addAllFocuses(Collection<? extends Focuses> focusesCollection) {
+		if (focusesCollection == null)
+			return false;
+		for (Focuses focus : focusesCollection) {
+			Focus focusInDataBase = getFocus(focus, focusesSet);
+			if (focusInDataBase == null) {
+				Focus tempFocus = new Focus(focus);
+				focusesSet.add(tempFocus);
+			} else {
+				focusInDataBase.makeFocusImproved();
+			}
+		}
 		return true;
 	}
 
@@ -145,7 +152,7 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return String.join(", ", focusesNames);
 	}
 
-	private HashSet<Focus> findDuplicates(Focuses... focuses) {
+	private HashSet<Focus> getFocusesWithoutDuplicates(Focuses... focuses) {
 		final HashSet<Focus> setToReturn = new HashSet<Focus>();
 		final HashSet<Focus> setTemp = new HashSet<Focus>();
 
@@ -161,8 +168,8 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 		return setToReturn;
 	}
 
-	private Focus getFocus(Focuses focus, HashSet<Focus> focusesList) {
-		for (Focus containedFocus : focusesList) {
+	private Focus getFocus(Focuses focus, HashSet<Focus> focusesSet) {
+		for (Focus containedFocus : focusesSet) {
 			if (containedFocus.getFocus().equals(focus))
 				return containedFocus;
 		}

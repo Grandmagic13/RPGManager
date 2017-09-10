@@ -1,8 +1,11 @@
 package rpg_database.character_sheet;
 
+import rpg_database.character_sheet.exceptions.InvalidFocusesSetException;
+
 public class Focus {
 
-	private boolean isImproved;
+	private static final int FOCUS_VALUE_DEFAULT = 2;
+	private static final int FOCUS_VALUE_IMPROVED = 3;
 	private int value;
 	private Focuses focus;
 
@@ -11,18 +14,12 @@ public class Focus {
 	}
 
 	public Focus(Focuses focus, boolean isFocusImproved) {
-		if (isFocusImproved) {
-			value = 3;
-			isImproved = true;
-		} else {
-			value = 2;
-			isImproved = false;
-		}
+		value = isFocusImproved ? FOCUS_VALUE_IMPROVED : FOCUS_VALUE_DEFAULT;
 		this.focus = focus;
 	}
 
 	public boolean isFocusImproved() {
-		return isImproved;
+		return value > 2;
 	}
 
 	public int getValue() {
@@ -34,13 +31,15 @@ public class Focus {
 	}
 
 	public void makeFocusImproved() {
+		if (this.isFocusImproved())
+			throw new InvalidFocusesSetException(focus.name() + " is already improved!");
 		setIsFocusImproved(true);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		Focuses inputFocus = ((Focus) obj).focus;
-		return focus.name().equals(inputFocus.name());
+		Focus inputFocus = ((Focus) obj);
+		return focus.name().equals(inputFocus.focus.name()) && value == inputFocus.value;
 	}
 
 	@Override
@@ -51,7 +50,6 @@ public class Focus {
 	private void setIsFocusImproved(boolean isFocusImproved) {
 		if (isFocusImproved) {
 			value = 3;
-			isImproved = true;
 		}
 	}
 }
