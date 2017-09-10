@@ -59,5 +59,4 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	private String generateExceptionMessage(Fields field) {
 		return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
 	}
-
 }

@@ -36,6 +36,8 @@ public class LanguagesUnitTests {
 		characterSheet.setData(Fields.LANGUAGES, Background.CITY_ELF);
 	}
 
+	// Functional tests
+
 	@Test
 	public void testSetLanguagesAntivanWayfarer() {
 		CharacterSheet characterSheet = new CharacterSheet("characterSheet");

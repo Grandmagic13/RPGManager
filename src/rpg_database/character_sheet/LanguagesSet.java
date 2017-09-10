@@ -15,7 +15,7 @@ public class LanguagesSet implements Set<Languages>, CustomSetter<LanguagesSet> 
 
 	public LanguagesSet(Languages... languages) {
 		languagesSet = new HashSet<Languages>();
-		languagesSet.addAll(Arrays.asList(languages));
+		addAll(Arrays.asList(languages));
 	}
 
 	public LanguagesSet(LanguagesSet languagesSet) {
