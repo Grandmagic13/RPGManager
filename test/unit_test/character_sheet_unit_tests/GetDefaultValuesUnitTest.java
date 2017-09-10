@@ -11,6 +11,8 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Focus;
+import rpg_database.character_sheet.FocusesSet;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
@@ -176,6 +178,13 @@ public class GetDefaultValuesUnitTest {
 	public void testGetDefaultStrain() {
 		int strain = defaultCharacterSheet.getData(Fields.STRAIN);
 		assertEquals(0, strain);
+	}
+
+	@Test
+	public void testGetDefaultFocus() {
+		FocusesSet expectedFocuses = new FocusesSet();
+		FocusesSet actualFocuses = defaultCharacterSheet.getData(Fields.FOCUSES);
+		assertEquals(expectedFocuses, actualFocuses);
 	}
 
 }
