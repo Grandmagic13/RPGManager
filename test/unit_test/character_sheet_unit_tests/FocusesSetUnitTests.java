@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -81,16 +81,14 @@ public class FocusesSetUnitTests {
 
 	@Test
 	public void testAddAllFocuses() {
-		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		FocusesSet expectedFocuses = new FocusesSet();
+		FocusesSet expectedFocuses = new FocusesSet(Focuses.ACROBATICS, Focuses.ANIMAL_HANDLING, Focuses.ARCANE_LANCE);
 		ArrayList<Focuses> focusesList = new ArrayList<Focuses>();
 		focusesList.add(Focuses.ACROBATICS);
 		focusesList.add(Focuses.ANIMAL_HANDLING);
 		focusesList.add(Focuses.ARCANE_LANCE);
-		expectedFocuses.addAllFocuses(focusesList);
-		characterSheet.setData(Fields.FOCUSES, expectedFocuses);
-		FocusesSet actualFocus = characterSheet.getData(Fields.FOCUSES);
-		assertEquals(expectedFocuses, actualFocus);
+		FocusesSet actualFocuses = new FocusesSet();
+		actualFocuses.addAllFocuses(focusesList);
+		assertEquals(expectedFocuses, actualFocuses);
 	}
 
 	@Test

@@ -2,25 +2,13 @@ package unit_test.character_sheet_unit_tests;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.Focuses;
 import rpg_database.character_sheet.Focus;
 
 public class FocusUnitTests {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
-	@Test
-	public void expectedException_TestOverridedHashCode() {
-		expectExceptionWithMessage(AssertionError.class, "rpg_database.character_sheet.Focus<rpg_database.character_sheet.Focus@5d20e46>");
-		Focus focus1 = new Focus(Focuses.ACROBATICS, true);
-		Focus focus2 = new Focus(Focuses.ACROBATICS);
-		assertEquals(focus1, focus2);
-	}
 
 	@Test
 	public void testGetFocus() {
@@ -55,14 +43,30 @@ public class FocusUnitTests {
 	}
 
 	@Test
-	public void testOverridedHashCode() {
+	public void testFocusEquals_NeitherEquals() {
+		Focus focus1 = new Focus(Focuses.ACROBATICS);
+		Focus focus2 = new Focus(Focuses.ANIMAL_HANDLING, true);
+		Assert.assertFalse(focus1.equals(focus2));
+	}
+
+	@Test
+	public void testFocusEquals_BothEquals() {
 		Focus focus1 = new Focus(Focuses.ACROBATICS, true);
 		Focus focus2 = new Focus(Focuses.ACROBATICS, true);
 		assertEquals(focus1, focus2);
 	}
 
-	private void expectExceptionWithMessage(Class<AssertionError> exceptionClass, String message) {
-		thrown.expect(exceptionClass);
-		thrown.expectMessage(message);
+	@Test
+	public void testFocusEquals_NameEqualsValueNotEquals() {
+		Focus focus1 = new Focus(Focuses.ACROBATICS, true);
+		Focus focus2 = new Focus(Focuses.ACROBATICS);
+		Assert.assertFalse(focus1.equals(focus2));
+	}
+
+	@Test
+	public void testFocusEquals_NameNotEqualsValueEquals() {
+		Focus focus1 = new Focus(Focuses.ACROBATICS, true);
+		Focus focus2 = new Focus(Focuses.BOWS, true);
+		Assert.assertFalse(focus1.equals(focus2));
 	}
 }

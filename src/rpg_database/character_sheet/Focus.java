@@ -38,8 +38,10 @@ public class Focus {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
 		Focus inputFocus = ((Focus) obj);
-		return focus.name().equals(inputFocus.focus.name()) && value == inputFocus.value;
+		return focus.equals(inputFocus.focus) && value == inputFocus.value;
 	}
 
 	@Override

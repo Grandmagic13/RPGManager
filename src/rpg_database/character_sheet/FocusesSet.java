@@ -140,7 +140,16 @@ public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {
 
 	@Override
 	public boolean equals(Object obj) {
-		return focusesSet.equals(obj);
+		if (obj == null)
+			return false;
+		if (!FocusesSet.class.isAssignableFrom(obj.getClass())) {
+			return false;
+		}
+		final FocusesSet other = (FocusesSet) obj;
+		if ((this.focusesSet == null) ? (other.focusesSet != null) : !this.focusesSet.equals(other.focusesSet)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
