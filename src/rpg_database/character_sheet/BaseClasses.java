@@ -3,7 +3,6 @@ package rpg_database.character_sheet;
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
