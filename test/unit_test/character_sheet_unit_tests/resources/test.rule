@@ -31,5 +31,29 @@
 		"ARMOR_RATING": 3,
 		"ARMOR_PENALTY": 5,
 		"ARMOR_TYPE": "HEAVY_LEATHER"
+	},
+	"SHADOW": {
+		"FOCUSES": [
+			[
+				"LEGERDEMAIN"
+			],
+			[
+				"STEALTH"
+			]
+		]
+	},
+	"ARMOR_TRAINING": {
+		"FOCUSES": [
+			[
+			]
+		]
+	},
+	"MUSIC": {
+		"FOCUSES": [
+			[
+				"PERFORMANCE",
+				"MUSICAL_LORE"
+			]
+		]
 	}
 }

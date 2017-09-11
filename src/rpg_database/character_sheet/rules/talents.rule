@@ -10,6 +10,23 @@
 				"FIELD": "CUNNING_VALUE",
 				"VALUE": 3
 			}
+		],
+		"WEAPON_GROUPS": [
+		],
+		"FOCUSES": [["NATURAL_LORE"]
+		]
+	},
+	"ARCHERY_STYLE": {
+		"BASE_CLASSES_ARRAY": [
+			"ROGUE",
+			"WARRIOR"
+		],
+		"ATTRIBUTE_REQUIREMENTS": [
+		],
+		"WEAPON_GROUPS": [
+			"BOWS"
+		],
+		"FOCUSES": [
 		]
 	},
 	"DUAL_WEAPON_STYLE": {
@@ -22,6 +39,27 @@
 				"FIELD": "DEXTERITY_VALUE",
 				"VALUE": 2
 			}
+		],
+		"WEAPON_GROUPS": [
+		],
+		"FOCUSES": [
+		]
+	},
+	"MUSIC": {
+		"BASE_CLASSES_ARRAY": [
+			"MAGE",
+			"ROGUE",
+			"WARRIOR"
+		],
+		"ATTRIBUTE_REQUIREMENTS": [
+		],
+		"WEAPON_GROUPS": [
+		],
+		"FOCUSES": [
+			[
+				"PERFORMANCE",
+				"MUSICAL_LORE"
+			]
 		]
 	},
 	"POLE_WEAPON_STYLE": {
@@ -29,6 +67,12 @@
 			"WARRIOR"
 		],
 		"ATTRIBUTE_REQUIREMENTS": [
+		],
+		"WEAPON_GROUPS": [
+			"POLEARMS",
+			"SPEARS"
+		],
+		"FOCUSES": [
 		]
 	}
 }

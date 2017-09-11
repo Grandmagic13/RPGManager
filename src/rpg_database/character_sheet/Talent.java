@@ -13,6 +13,8 @@ public class Talent {
 	private final Talents talentName;
 	private final HashSet<BaseClasses> allowedBaseClasses;
 	private final HashMap<Fields, Integer> requiredAttributeValues;
+	private final HashSet<WeaponGroups> requiredWeaponGroups;
+	private final HashSet<HashSet<Focuses>> requiredFocuses;
 
 	public Talent(Talents talentName) {
 		this(talentName, TalentLevels.NOVICE);
@@ -25,6 +27,9 @@ public class Talent {
 		this.allowedBaseClasses = new HashSet<>();
 		this.allowedBaseClasses.addAll(talentsRule.getEnumsForField(talentName, BaseClasses.class, Keys.BASE_CLASSES_ARRAY));
 		this.requiredAttributeValues = talentsRule.getAttributeRequirements(talentName);
+		this.requiredWeaponGroups = new HashSet<>();
+		this.requiredWeaponGroups.addAll(talentsRule.getEnumsForField(talentName, WeaponGroups.class, Keys.WEAPON_GROUPS));
+		this.requiredFocuses = talentsRule.getAndOrEnumsForField(talentName, Focuses.class, Keys.FOCUSES);
 	}
 
 	public TalentLevels getTalentLevel() {
@@ -45,5 +50,13 @@ public class Talent {
 
 	public HashMap<Fields, Integer> getRequiredAttributeValues() {
 		return requiredAttributeValues;
+	}
+
+	public HashSet<WeaponGroups> getWeaponGroupsFulfillingRequirement() {
+		return requiredWeaponGroups;
+	}
+
+	public HashSet<HashSet<Focuses>> getFocusesFulfillingRequirement() {
+		return requiredFocuses;
 	}
 }

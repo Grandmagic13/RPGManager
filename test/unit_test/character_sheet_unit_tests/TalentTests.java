@@ -12,9 +12,11 @@ import org.junit.rules.ExpectedException;
 
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Focuses;
 import rpg_database.character_sheet.Talent;
 import rpg_database.character_sheet.TalentLevels;
 import rpg_database.character_sheet.Talents;
+import rpg_database.character_sheet.WeaponGroups;
 
 public class TalentTests {
 
@@ -85,28 +87,84 @@ public class TalentTests {
 		assertEquals(expectedAttributeRequirements, talent.getRequiredAttributeValues());
 	}
 
+	@Test
+	public void testGetWeaponGroupsFulfillingRequirementAlchemy() {
+		Talent talent = new Talent(Talents.ALCHEMY);
+		HashSet<WeaponGroups> expectedWeaponGroupsFulfillingRequirement = new HashSet<>();
+		assertEquals(expectedWeaponGroupsFulfillingRequirement, talent.getWeaponGroupsFulfillingRequirement());
+	}
+
+	@Test
+	public void testGetWeaponGroupsFulfillingRequirementArcheryStyle() {
+		Talent talent = new Talent(Talents.ARCHERY_STYLE);
+		HashSet<WeaponGroups> expectedWeaponGroupsFulfillingRequirement = new HashSet<>();
+		expectedWeaponGroupsFulfillingRequirement.add(WeaponGroups.BOWS);
+		assertEquals(expectedWeaponGroupsFulfillingRequirement, talent.getWeaponGroupsFulfillingRequirement());
+	}
+
+	@Test
+	public void testGetWeaponGroupsFulfillingRequirementPoleWeaponStyle() {
+		Talent talent = new Talent(Talents.POLE_WEAPON_STYLE);
+		HashSet<WeaponGroups> expectedWeaponGroupsFulfillingRequirement = new HashSet<>();
+		expectedWeaponGroupsFulfillingRequirement.add(WeaponGroups.POLEARMS);
+		expectedWeaponGroupsFulfillingRequirement.add(WeaponGroups.SPEARS);
+		assertEquals(expectedWeaponGroupsFulfillingRequirement, talent.getWeaponGroupsFulfillingRequirement());
+	}
+
+	@Test
+	public void testGetFocusesFulfillingRequirementArmorTraining_NoFocus() {
+		Talent talent = new Talent(Talents.ARCHERY_STYLE);
+		HashSet<HashSet<Focuses>> expectedFocusesFulfillingRequirement = new HashSet<>();
+		assertEquals(expectedFocusesFulfillingRequirement, talent.getFocusesFulfillingRequirement());
+	}
+
+	@Test
+	public void testGetFocusesFulfillingRequirementChirurgy_OneFocus() {
+		Talent talent = new Talent(Talents.ALCHEMY);
+		HashSet<HashSet<Focuses>> expectedFocusesFulfillingRequirement = new HashSet<>();
+		HashSet<Focuses> focusSubSet = new HashSet<>();
+		focusSubSet.add(Focuses.NATURAL_LORE);
+		expectedFocusesFulfillingRequirement.add(focusSubSet);
+		assertEquals(expectedFocusesFulfillingRequirement, talent.getFocusesFulfillingRequirement());
+	}
+
+	@Test
+	public void testGetFocusesFulfillingRequirementMusic_PerformanceORMusicalLore() {
+		Talent talent = new Talent(Talents.MUSIC);
+		HashSet<HashSet<Focuses>> expectedFocusesFulfillingRequirement = new HashSet<>();
+		HashSet<Focuses> focusSubSet = new HashSet<>();
+		focusSubSet.add(Focuses.PERFORMANCE);
+		focusSubSet.add(Focuses.MUSICAL_LORE);
+		expectedFocusesFulfillingRequirement.add(focusSubSet);
+		assertEquals(expectedFocusesFulfillingRequirement, talent.getFocusesFulfillingRequirement());
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// REFACTORING COMMENTS FOR SPECIALIZATIONCLASS-TALENTS
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// AND test <--- check with shadow specializationtalent once specializations
+	// use Talent class
+
 	// @Test
-	// public void testGetWeaponGroupsFulfillingRequirementAlchemy() {
-	// Talent talent = new Talent(Talents.ALCHEMY);
-	// HashSet<> expectedWeaponGroupsFulfillingRequirement = new HashSet<>();
+	// public void
+	// testGetFocusesFulfillingRequirementShadow_LegerdemainANDStealth() {
+	// //TODO use SHADOW spectalent
+	// Talent talent = new Talent(Talents.POLE_WEAPON_STYLE);
+	// HashSet<WeaponGroups> expectedWeaponGroupsFulfillingRequirement = new
+	// HashSet<>();
+	// expectedWeaponGroupsFulfillingRequirement.add(WeaponGroups.POLEARMS);
+	// expectedWeaponGroupsFulfillingRequirement.add(WeaponGroups.SPEARS);
 	// assertEquals(expectedWeaponGroupsFulfillingRequirement,
 	// talent.getWeaponGroupsFulfillingRequirement());
 	// }
 
-	// weapon group => or relation
-	// requirements for focuses => andOr relation
+	// AND + OR test? Is this even possible?
+	///////////////////////////////////////////////////////////
 
 	// Talents & Background later for specializationClasses
 
-	// refactor specializationClasses!
-
 	// descriptions in frontend!
 
-	// private methods
-
-	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
-		thrown.expect(exceptionClass);
-		thrown.expectMessage(message);
-	}
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 }
