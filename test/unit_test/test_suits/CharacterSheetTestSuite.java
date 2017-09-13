@@ -22,6 +22,7 @@ import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
 import unit_test.character_sheet_unit_tests.LanguagesUnitTests;
+import unit_test.character_sheet_unit_tests.LevelAndXpCrossDependencyCheckUnitTest;
 import unit_test.character_sheet_unit_tests.MoneyUnitTests;
 import unit_test.character_sheet_unit_tests.SpecializationAttributeFilter_AttributeValuesContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ContentTests;
@@ -42,7 +43,8 @@ import unit_test.character_sheet_unit_tests.WeaponGroupsUnitTests;
 		SpecializationBackgroundFilter_ValidBackgroundsTests.class, SpecializationBackgroundFilter_ContentTests.class,
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
 		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, WeaponGroupsUnitTests.class,
-		WeaponGroupsSetUnitTests.class, FocusesSetUnitTests.class, FocusesUnitTests.class, FocusUnitTests.class })
+		WeaponGroupsSetUnitTests.class, FocusesSetUnitTests.class, FocusesUnitTests.class, FocusUnitTests.class,
+		LevelAndXpCrossDependencyCheckUnitTest.class })
 
 public class CharacterSheetTestSuite {
 

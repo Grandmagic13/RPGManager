@@ -76,7 +76,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterLevel() {
 		int level = defaultCharacterSheet.getData(Fields.LEVEL);
-		assertEquals(0, level);
+		assertEquals(1, level);
 	}
 
 	@Test
