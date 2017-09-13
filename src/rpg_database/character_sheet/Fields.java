@@ -3,9 +3,10 @@ package rpg_database.character_sheet;
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
 public enum Fields {
-	NAME(String.class), AGE(Integer.class), XP(Integer.class), GENDER(Gender.class), SPEED(Integer.class), BACKGROUND(Background.class),
-	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASSES(SpecializationClassesSet.class), LEVEL(Integer.class), DEFENSE(Integer.class),
-	ARMOR_RATING(Integer.class), HEALTH_POINTS(Integer.class), MANA_POINTS(Integer.class), APPEARANCE(String.class),
+	NAME(String.class), AGE(Integer.class), LEVEL_AND_XP_CROSS_DEPENDENCY_CHECK(LevelAndXPCrossDependencyCheck.class),
+	XP(Integer.class, LEVEL_AND_XP_CROSS_DEPENDENCY_CHECK), GENDER(Gender.class), SPEED(Integer.class), BACKGROUND(Background.class),
+	BASECLASS(BaseClasses.class), SPECIALIZATIONCLASSES(SpecializationClassesSet.class), LEVEL(Integer.class, LEVEL_AND_XP_CROSS_DEPENDENCY_CHECK),
+	DEFENSE(Integer.class), ARMOR_RATING(Integer.class), HEALTH_POINTS(Integer.class), MANA_POINTS(Integer.class), APPEARANCE(String.class),
 	DISTINGUISHING_FEATURES(String.class), OFTEN_USED_EQUIPMENT(String.class), GOALS_AND_TIES(String.class), EQUIPMENT(String.class),
 	MONEY(Money.class), GOLD_COIN(Integer.class, MONEY), SILVER_COIN(Integer.class, MONEY), COPPER_COIN(Integer.class, MONEY),
 	LANGUAGES(LanguagesSet.class), STRENGTH(CharacterAttribute.class), COMMUNICATION(CharacterAttribute.class),

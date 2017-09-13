@@ -10,18 +10,6 @@ import rpg_database.character_sheet.Fields;
 
 public class FieldsUnitTests {
 
-	// test set-up
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
-	// test methods
-	// exception tests
-	@Test
-	public void expectException_getContainingFieldNull() {
-		expectExceptionWithMessage(NullPointerException.class, "XP is not contained by another field!");
-		Fields.XP.getContainingField();
-	}
-
 	// functional tests
 	@Test
 	public void testGetAllowedFieldClass() {
@@ -41,11 +29,5 @@ public class FieldsUnitTests {
 	@Test
 	public void testIsContainedTrue() {
 		assertTrue(Fields.GOLD_COIN.isContainted());
-	}
-
-	// private methods
-	private void expectExceptionWithMessage(Class<? extends Exception> exceptionClass, String message) {
-		thrown.expect(exceptionClass);
-		thrown.expectMessage(message);
 	}
 }
