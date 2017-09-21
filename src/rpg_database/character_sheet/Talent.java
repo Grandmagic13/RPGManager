@@ -29,7 +29,7 @@ public class Talent {
 		this.requiredAttributeValues = talentsRule.getAttributeRequirements(talentName);
 		this.requiredWeaponGroups = new HashSet<>();
 		this.requiredWeaponGroups.addAll(talentsRule.getEnumsForField(talentName, WeaponGroups.class, Keys.WEAPON_GROUPS));
-		this.requiredFocuses = talentsRule.getAndOrEnumsForField(talentName, Focuses.class, Keys.FOCUSES);
+		this.requiredFocuses = talentsRule.getAndOrRelatedEnumsForField(talentName, Focuses.class, Keys.FOCUSES);
 	}
 
 	public TalentLevels getTalentLevel() {

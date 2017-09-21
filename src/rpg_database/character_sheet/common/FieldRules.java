@@ -89,7 +89,7 @@ public class FieldRules {
 	 * ENUM_TWO fulfills the requirement
 	 * </p>
 	 */
-	public <E extends java.lang.Enum<E>> HashSet<HashSet<E>> getAndOrEnumsForField(Enum<?> field, Class<E> enumClass, Keys key) {
+	public <E extends java.lang.Enum<E>> HashSet<HashSet<E>> getAndOrRelatedEnumsForField(Enum<?> field, Class<E> enumClass, Keys key) {
 		HashSet<HashSet<E>> outerSet = new HashSet<>();
 		JSONObject fieldData = getFieldData(field);
 		JSONArray jsonArray = fieldData.getJSONArray(key.toString());

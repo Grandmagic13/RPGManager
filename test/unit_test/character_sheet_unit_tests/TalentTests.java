@@ -46,7 +46,7 @@ public class TalentTests {
 
 	@Test
 	public void testGetTalentName() {
-		Talent talent = new Talent(Talents.ALCHEMY, TalentLevels.MASTER);
+		Talent talent = new Talent(Talents.ALCHEMY);
 		assertEquals(Talents.ALCHEMY, talent.getTalentName());
 	}
 
@@ -112,7 +112,7 @@ public class TalentTests {
 	}
 
 	@Test
-	public void testGetFocusesFulfillingRequirementArmorTraining_NoFocus() {
+	public void testGetFocusesFulfillingRequirementArcheryStyle_NoFocus() {
 		Talent talent = new Talent(Talents.ARCHERY_STYLE);
 		HashSet<HashSet<Focuses>> expectedFocusesFulfillingRequirement = new HashSet<>();
 		assertEquals(expectedFocusesFulfillingRequirement, talent.getFocusesFulfillingRequirement());

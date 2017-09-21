@@ -123,36 +123,36 @@ public class FieldRulesTests {
 	}
 
 	@Test
-	public void testGetAndOrEnumsByField_EmptyList() {
+	public void testGetAndOrRelatedEnumsByField_EmptyList() {
 		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
 		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
-		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrEnumsForField(Talents.ARMOR_TRAINING, Focuses.class, Keys.FOCUSES);
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(Talents.ARMOR_TRAINING, Focuses.class, Keys.FOCUSES);
 		assertEquals(expecteds, actuals);
 	}
 
 	@Test
-	public void testGetAndOrEnumsByField_FocusesORRelation() {
+	public void testGetAndOrRelatedEnumsByField_FocusesORRelation() {
 		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
 		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
-		HashSet<Focuses> focusesList = new HashSet<>();
-		focusesList.add(Focuses.PERFORMANCE);
-		focusesList.add(Focuses.MUSICAL_LORE);
-		expecteds.add(focusesList);
-		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrEnumsForField(Talents.MUSIC, Focuses.class, Keys.FOCUSES);
+		HashSet<Focuses> focusesSet = new HashSet<>();
+		focusesSet.add(Focuses.PERFORMANCE);
+		focusesSet.add(Focuses.MUSICAL_LORE);
+		expecteds.add(focusesSet);
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(Talents.MUSIC, Focuses.class, Keys.FOCUSES);
 		assertEquals(expecteds, actuals);
 	}
 
 	@Test
-	public void testGetAndOrEnumsByField_FocusesANDRelation() {
+	public void testGetAndOrRelatedEnumsByField_FocusesANDRelation() {
 		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
 		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
-		HashSet<Focuses> focusesList1 = new HashSet<>();
-		HashSet<Focuses> focusesList2 = new HashSet<>();
-		focusesList1.add(Focuses.LEGERDEMAIN);
-		focusesList2.add(Focuses.STEALTH);
-		expecteds.add(focusesList1);
-		expecteds.add(focusesList2);
-		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrEnumsForField(SpecializationClasses.SHADOW, Focuses.class, Keys.FOCUSES);
+		HashSet<Focuses> focusesSet1 = new HashSet<>();
+		HashSet<Focuses> focusesSet2 = new HashSet<>();
+		focusesSet1.add(Focuses.LEGERDEMAIN);
+		focusesSet2.add(Focuses.STEALTH);
+		expecteds.add(focusesSet1);
+		expecteds.add(focusesSet2);
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(SpecializationClasses.SHADOW, Focuses.class, Keys.FOCUSES);
 		assertEquals(expecteds, actuals);
 	}
 
