@@ -5,12 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.exceptions.FieldRuleException;
 
 public class FieldRules {
@@ -61,9 +61,9 @@ public class FieldRules {
 		return getFieldData(field).getEnum(enumClass, key.toString());
 	}
 
-	public HashMap<Fields, Integer> getAttributeRequirements(SpecializationClasses specializationClass) {
+	public HashMap<Fields, Integer> getAttributeRequirements(Enum<?> field) {
 		HashMap<Fields, Integer> attributeRequirements = new HashMap<Fields, Integer>();
-		JSONObject fieldData = getFieldData(specializationClass);
+		JSONObject fieldData = getFieldData(field);
 		JSONArray attributeRequirementsArray = fieldData.getJSONArray(Keys.ATTRIBUTE_REQUIREMENTS.toString());
 		for (int index = 0; index < attributeRequirementsArray.length(); index++) {
 			JSONObject requirement = attributeRequirementsArray.getJSONObject(index);
@@ -72,6 +72,38 @@ public class FieldRules {
 			attributeRequirements.put(attribute, value);
 		}
 		return attributeRequirements;
+	}
+
+	/**
+	 * <p>
+	 * Returns a HashSet of HashSets containing enums.
+	 * </p>
+	 * <p>
+	 * The inner sets have are modeled to have an AND relation to each other.
+	 * eg. [ [ENUM_ONE] , [ENUM_TWO] ]----> !both! ENUM_ONE and ENUM_TWO are
+	 * required elements.
+	 * </p>
+	 * <p>
+	 * The enum elements in the inner sets are modeled to have an OR relation to
+	 * each other. eg. [ [ENUM_ONE, ENUM_TWO] ] ----> !either! ENUM_ONE or
+	 * ENUM_TWO fulfills the requirement
+	 * </p>
+	 */
+	public <E extends java.lang.Enum<E>> HashSet<HashSet<E>> getAndOrRelatedEnumsForField(Enum<?> field, Class<E> enumClass, Keys key) {
+		HashSet<HashSet<E>> outerSet = new HashSet<>();
+		JSONObject fieldData = getFieldData(field);
+		JSONArray jsonArray = fieldData.getJSONArray(key.toString());
+		for (int index = 0; index < jsonArray.length(); index++) {
+			JSONArray innerArray = jsonArray.getJSONArray(index);
+			HashSet<E> innerSet = new HashSet<>();
+			for (int elementPosition = 0; elementPosition < innerArray.length(); elementPosition++) {
+				innerSet.add(innerArray.getEnum(enumClass, elementPosition));
+			}
+			if (!innerSet.isEmpty()) {
+				outerSet.add(innerSet);
+			}
+		}
+		return outerSet;
 	}
 
 	public Integer getIntegerForField(Enum<?> field, Keys key) {

@@ -11,6 +11,7 @@ public class FieldRulesFactory {
 	public static final String BACKGROUND = "background";
 	public static final String BASE_CLASSES = "baseclasses";
 	public static final String SPECIALIZATION_CLASSES = "specializationclasses";
+	public static final String TALENTS = "talents";
 
 	private static HashMap<String, FieldRules> fieldRulesMap = new HashMap<>();
 	private static final String rulesPath = "src/rpg_database/character_sheet/rules/";

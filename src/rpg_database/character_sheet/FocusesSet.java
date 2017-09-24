@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import rpg_database.character_sheet.exceptions.InvalidFocusesSetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 
 public class FocusesSet implements Set<Focus>, CustomSetter<FocusesSet> {

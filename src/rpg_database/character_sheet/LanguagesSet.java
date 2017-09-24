@@ -21,7 +21,6 @@ public class LanguagesSet implements Set<Languages>, CustomSetter<LanguagesSet> 
 	public LanguagesSet(LanguagesSet languagesSet) {
 		this.languagesSet = new HashSet<Languages>();
 		addAll(languagesSet);
-
 	}
 
 	@Override

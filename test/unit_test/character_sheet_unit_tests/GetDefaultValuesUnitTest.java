@@ -11,7 +11,6 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
-import rpg_database.character_sheet.Focus;
 import rpg_database.character_sheet.FocusesSet;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;

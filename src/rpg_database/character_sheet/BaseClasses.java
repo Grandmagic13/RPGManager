@@ -3,8 +3,8 @@ package rpg_database.character_sheet;
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import rpg_database.character_sheet.common.FieldRules;
 import rpg_database.character_sheet.common.FieldRulesFactory;
@@ -20,14 +20,17 @@ public enum BaseClasses implements CustomSetter<BaseClasses> {
 	private final Armors defaultArmor;
 
 	@SuppressWarnings("serial")
-	private final static HashMap<BaseClasses, ArrayList<Fields>> majorAttributes = new HashMap<BaseClasses, ArrayList<Fields>>() {
+	private final static HashMap<BaseClasses, HashSet<Fields>> majorAttributes = new HashMap<BaseClasses, HashSet<Fields>>() {
 		{
 			FieldRules baseClassesRules = FieldRulesFactory.getFieldRules(FieldRulesFactory.BASE_CLASSES);
-			ArrayList<Fields> warriorMajors = baseClassesRules.getEnumsForField(WARRIOR, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
+			HashSet<Fields> warriorMajors = new HashSet<>();
+			warriorMajors.addAll(baseClassesRules.getEnumsForField(WARRIOR, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY));
 			put(WARRIOR, warriorMajors);
-			ArrayList<Fields> rogueMajors = baseClassesRules.getEnumsForField(ROGUE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
+			HashSet<Fields> rogueMajors = new HashSet<>();
+			rogueMajors.addAll(baseClassesRules.getEnumsForField(ROGUE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY));
 			put(ROGUE, rogueMajors);
-			ArrayList<Fields> mageMajors = baseClassesRules.getEnumsForField(MAGE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY);
+			HashSet<Fields> mageMajors = new HashSet<>();
+			mageMajors.addAll(baseClassesRules.getEnumsForField(MAGE, Fields.class, Keys.MAJOR_ATTRIBUTES_ARRAY));
 			put(MAGE, mageMajors);
 		}
 	};

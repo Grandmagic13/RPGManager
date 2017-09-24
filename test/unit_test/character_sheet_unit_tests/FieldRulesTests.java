@@ -1,10 +1,12 @@
 package unit_test.character_sheet_unit_tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONObject;
 import org.junit.Rule;
@@ -15,8 +17,10 @@ import rpg_database.character_sheet.Armors;
 import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Focuses;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.SpecializationClasses;
+import rpg_database.character_sheet.Talents;
 import rpg_database.character_sheet.common.FieldRules;
 import rpg_database.character_sheet.common.FieldRulesFactory;
 import rpg_database.character_sheet.common.Keys;
@@ -45,7 +49,8 @@ public class FieldRulesTests {
 		final JSONObject actualRoot = fieldRules.getJSONRoot();
 		final String expectedJSONString = "{\"ASSASSIN\":{\"someAttribute\":true,\"someOtherAttribute\":\"Orcs\",\"ATTRIBUTE_REQUIREMENTS\":[{\"FIELD\":\"CUNNING_VALUE\",\"VALUE\":3},{\"FIELD\":\"DEXTERITY_VALUE\","
 				+ "\"VALUE\":3}]},\"ANDER_SURVIVOR\":{\"boolDataTrue\":true,\"boolDataFalse\":false,\"stringData\":\"Orcs\",\"intData\":3,\"BASE_CLASSES_ARRAY\":[\"MAGE\",\"WARRIOR\",\"ROGUE\"],\"LANGUAGES_ARRAY\""
-				+ ":[\"ANDER\",\"TRADE_TONGUE\"],\"BASE_CLASS\":\"WARRIOR\",\"ARMOR_RATING\":3,\"ARMOR_PENALTY\":5,\"ARMOR_TYPE\":\"HEAVY_LEATHER\"}}";
+				+ ":[\"ANDER\",\"TRADE_TONGUE\"],\"BASE_CLASS\":\"WARRIOR\",\"ARMOR_RATING\":3,\"ARMOR_PENALTY\":5,\"ARMOR_TYPE\":\"HEAVY_LEATHER\"},\"SHADOW\":{\"FOCUSES\":[[\"LEGERDEMAIN\"],[\"STEALTH\"]]},"
+				+ "\"ARMOR_TRAINING\":{\"FOCUSES\":[[]]},\"MUSIC\":{\"FOCUSES\":[[\"PERFORMANCE\",\"MUSICAL_LORE\"]]}}";
 		final JSONObject expectedRoot = new JSONObject(expectedJSONString);
 		assertEquals(expectedRoot.toString(), actualRoot.toString());
 	}
@@ -117,23 +122,39 @@ public class FieldRulesTests {
 		assertEquals(expected, actual);
 	}
 
-	// @Test
-	// public void testGetBoolByField_True() {
-	// final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
-	// final boolean actual =
-	// fieldRules.<Boolean>getValueByField(Background.ANDER_SURVIVOR,
-	// "boolDataTrue");
-	// assertTrue(actual);
-	// }
-	//
-	// @Test
-	// public void testGetBoolByField_False() {
-	// final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
-	// final boolean actual =
-	// fieldRules.<Boolean>getValueByField(Background.ANDER_SURVIVOR,
-	// "boolDataFalse");
-	// assertFalse(actual);
-	// }
+	@Test
+	public void testGetAndOrRelatedEnumsByField_EmptyList() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(Talents.ARMOR_TRAINING, Focuses.class, Keys.FOCUSES);
+		assertEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void testGetAndOrRelatedEnumsByField_FocusesORRelation() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
+		HashSet<Focuses> focusesSet = new HashSet<>();
+		focusesSet.add(Focuses.PERFORMANCE);
+		focusesSet.add(Focuses.MUSICAL_LORE);
+		expecteds.add(focusesSet);
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(Talents.MUSIC, Focuses.class, Keys.FOCUSES);
+		assertEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void testGetAndOrRelatedEnumsByField_FocusesANDRelation() {
+		final FieldRules fieldRules = new FieldRules(TEST_RULE_FILE_PATH);
+		HashSet<HashSet<Focuses>> expecteds = new HashSet<>();
+		HashSet<Focuses> focusesSet1 = new HashSet<>();
+		HashSet<Focuses> focusesSet2 = new HashSet<>();
+		focusesSet1.add(Focuses.LEGERDEMAIN);
+		focusesSet2.add(Focuses.STEALTH);
+		expecteds.add(focusesSet1);
+		expecteds.add(focusesSet2);
+		HashSet<HashSet<Focuses>> actuals = fieldRules.getAndOrRelatedEnumsForField(SpecializationClasses.SHADOW, Focuses.class, Keys.FOCUSES);
+		assertEquals(expecteds, actuals);
+	}
 
 	// FieldRulesFactory tests
 	@Test

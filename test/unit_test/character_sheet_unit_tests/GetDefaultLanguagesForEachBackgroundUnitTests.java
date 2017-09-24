@@ -46,7 +46,7 @@ public class GetDefaultLanguagesForEachBackgroundUnitTests {
 	}
 
 	private BaseClasses getFirstValidBaseClassByBackground() {
-		return background.getAllowedBaseClasses().get(0);
+		return background.getAllowedBaseClasses().iterator().next();
 	}
 
 }

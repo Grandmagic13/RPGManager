@@ -3,6 +3,7 @@ package rpg_database.character_sheet;
 import static rpg_database.character_sheet.common.CharacterSheetCommon.generateEnumText;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import rpg_database.character_sheet.common.FieldRules;
 import rpg_database.character_sheet.common.FieldRulesFactory;
@@ -17,21 +18,22 @@ public enum Background implements CustomSetter<Background> {
 	SURFACE_DWARF, TAL_VASHOTH, TEVINTER_ALTUS, TEVINTER_LAETAN, TEVINTER_SOPORATI, WAKING_SEA_RAIDER;
 
 	private final String text;
-	private final ArrayList<BaseClasses> baseClasses;
+	private final HashSet<BaseClasses> baseClasses;
 	private final LanguagesSet languages;
 
 	private Background() {
 		this.text = generateEnumText(this.name());
 
 		FieldRules backgroundRule = FieldRulesFactory.getFieldRules(FieldRulesFactory.BACKGROUND);
-		this.baseClasses = backgroundRule.getEnumsForField(this, BaseClasses.class, Keys.BASE_CLASSES_ARRAY);
+		this.baseClasses = new HashSet<>();
+		this.baseClasses.addAll(backgroundRule.getEnumsForField(this, BaseClasses.class, Keys.BASE_CLASSES_ARRAY));
 		LanguagesSet languagesSet = new LanguagesSet();
 		ArrayList<Languages> languagesFromRule = backgroundRule.getEnumsForField(this, Languages.class, Keys.LANGUAGES_ARRAY);
 		languagesSet.addAll(languagesFromRule);
 		this.languages = languagesSet;
 	}
 
-	public ArrayList<BaseClasses> getAllowedBaseClasses() {
+	public HashSet<BaseClasses> getAllowedBaseClasses() {
 		return baseClasses;
 	}
 
