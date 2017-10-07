@@ -3,6 +3,7 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
@@ -53,8 +54,8 @@ public class CharacterSheet {
 		Class<?> allowedType = field.getAllowedClass();
 		Object defaultValue;
 		if (allowedType == CharacterAttribute.class) {
-			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field));
-		} else if (field.name().equals("ARMOR_RATING")) {
+			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field), this);
+		} else if (field.equals(Fields.ARMOR_RATING)) {
 			defaultValue = 4;
 		} else {
 			defaultValue = defaultData.get(allowedType);
@@ -80,6 +81,8 @@ public class CharacterSheet {
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
 			if (field.isContainted()) {
+				if (field.equals(Fields.DEFENSE) || field.equals(Fields.SPEED))
+					throw new CharacterSheetException(String.format("You can not set %s value manually!", field.name().toLowerCase()));
 				Object containerObject = this.characterData.get(field.getContainingField());
 				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
 			} else {

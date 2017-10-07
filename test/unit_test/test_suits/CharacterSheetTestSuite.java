@@ -19,6 +19,7 @@ import unit_test.character_sheet_unit_tests.FocusesUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultRaceForEachBackgroundUnitTests;
+import unit_test.character_sheet_unit_tests.GetDefaultSpeedForEachBackgroundContentTest;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
@@ -30,6 +31,7 @@ import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_Conte
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ValidBackgroundsTests;
 import unit_test.character_sheet_unit_tests.SpecializationClassUnitTests;
+import unit_test.character_sheet_unit_tests.SpeedAndDefenseSupportTests;
 import unit_test.character_sheet_unit_tests.TalentLevelsTests;
 import unit_test.character_sheet_unit_tests.TalentTests;
 import unit_test.character_sheet_unit_tests.TalentsTests;
@@ -48,7 +50,8 @@ import unit_test.character_sheet_unit_tests.WeaponGroupsUnitTests;
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
 		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, FocusesSetUnitTests.class,
 		FocusesUnitTests.class, FocusUnitTests.class, TalentLevelsTests.class, TalentTests.class, TalentsTests.class, WeaponGroupsUnitTests.class,
-		WeaponGroupsSetUnitTests.class, RaceUnitTests.class, GetDefaultRaceForEachBackgroundUnitTests.class })
+		WeaponGroupsSetUnitTests.class, RaceUnitTests.class, GetDefaultRaceForEachBackgroundUnitTests.class, SpeedAndDefenseSupportTests.class,
+		GetDefaultSpeedForEachBackgroundContentTest.class })
 
 public class CharacterSheetTestSuite {
 
