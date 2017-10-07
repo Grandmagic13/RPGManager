@@ -9,12 +9,15 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private int value;
 	private boolean isMajor;
+	private final int defense = 10;
+	private final CharacterSheet characterSheet;
 	public final static Fields[] ATTRIBUTES = { Fields.COMMUNICATION, Fields.CONSTITUTION, Fields.CUNNING, Fields.DEXTERITY, Fields.MAGIC,
 			Fields.PERCEPTION, Fields.STRENGTH, Fields.WILLPOWER };
 
-	protected CharacterAttribute(int value, boolean isMajor) {
+	protected CharacterAttribute(int value, boolean isMajor, CharacterSheet characterSheet) {
 		this.value = value;
 		this.isMajor = isMajor;
+		this.characterSheet = characterSheet;
 	}
 
 	protected void setMajority(boolean majority) {
@@ -48,9 +51,14 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	@Override
 	public Object getStoredValueByField(Fields field) {
-		if (field.getAllowedClass() == Integer.class)
+		if (field.getAllowedClass() == Integer.class) {
+			if (field.equals(Fields.DEFENSE))
+				return defense + value;
+			else if (field.equals(Fields.SPEED))
+				return (getBackground().getBaseSpeed() + getArmorType().getArmorPenalty() + value) < 0 ? 0
+						: getBackground().getBaseSpeed() + getArmorType().getArmorPenalty() + value;
 			return value;
-		else if (field.getAllowedClass() == Boolean.class)
+		} else if (field.getAllowedClass() == Boolean.class)
 			return isMajor;
 		else
 			throw new InvalidParameterException(generateExceptionMessage(field));
@@ -58,5 +66,13 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private String generateExceptionMessage(Fields field) {
 		return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
+	}
+
+	private Armors getArmorType() {
+		return characterSheet.getData(Fields.ARMOR_TYPE);
+	}
+
+	private Background getBackground() {
+		return characterSheet.getData(Fields.BACKGROUND);
 	}
 }
