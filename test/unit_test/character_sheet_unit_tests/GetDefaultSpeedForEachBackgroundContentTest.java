@@ -15,11 +15,12 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import rpg_database.character_sheet.Armors;
 import rpg_database.character_sheet.Background;
-import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import unit_test.character_sheet_unit_tests.common.DataKeys;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getFirstValidBaseClassByBackground;;
 
 @RunWith(Parameterized.class)
 public class GetDefaultSpeedForEachBackgroundContentTest {
@@ -36,15 +37,12 @@ public class GetDefaultSpeedForEachBackgroundContentTest {
 	public int expectedSpeed;
 
 	@Test
-	public void testGetDefaultBackgroundForLanguages() {
+	public void testGetDefaultBackgroundForSpeed() {
 		CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
-		testCharacterSheet.setData(Fields.BASECLASS, getFirstValidBaseClassByBackground());
+		testCharacterSheet.setData(Fields.BASECLASS, getFirstValidBaseClassByBackground(background));
 		testCharacterSheet.setData(Fields.BACKGROUND, background);
+		testCharacterSheet.setData(Fields.ARMOR_TYPE, Armors.LIGHT_LEATHER);
 		int actualSpeed = testCharacterSheet.getData(Fields.SPEED);
 		assertEquals(expectedSpeed, actualSpeed);
-	}
-
-	private BaseClasses getFirstValidBaseClassByBackground() {
-		return background.getAllowedBaseClasses().iterator().next();
 	}
 }

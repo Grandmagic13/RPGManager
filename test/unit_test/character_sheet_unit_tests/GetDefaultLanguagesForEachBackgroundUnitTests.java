@@ -21,6 +21,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.LanguagesSet;
 import unit_test.character_sheet_unit_tests.common.DataKeys;
+import static unit_test.character_sheet_unit_tests.common.CommonMethods.getFirstValidBaseClassByBackground;
 
 @RunWith(Parameterized.class)
 public class GetDefaultLanguagesForEachBackgroundUnitTests {
@@ -39,14 +40,9 @@ public class GetDefaultLanguagesForEachBackgroundUnitTests {
 	@Test
 	public void testGetDefaultBackgroundForLanguages() {
 		CharacterSheet testCharacterSheet = new CharacterSheet("TestCharacterSheet");
-		testCharacterSheet.setData(Fields.BASECLASS, getFirstValidBaseClassByBackground());
+		testCharacterSheet.setData(Fields.BASECLASS, getFirstValidBaseClassByBackground(background));
 		testCharacterSheet.setData(Fields.BACKGROUND, background);
 		LanguagesSet actualLanguage = testCharacterSheet.getData(Fields.LANGUAGES);
 		assertEquals(expectedLanguage, actualLanguage);
 	}
-
-	private BaseClasses getFirstValidBaseClassByBackground() {
-		return background.getAllowedBaseClasses().iterator().next();
-	}
-
 }

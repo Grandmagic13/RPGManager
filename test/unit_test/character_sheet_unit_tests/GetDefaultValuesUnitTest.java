@@ -52,7 +52,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterSpeed() {
 		int speed = defaultCharacterSheet.getData(Fields.SPEED);
-		assertEquals(9, speed);
+		assertEquals(10, speed);
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterArmor() {
 		int armor = defaultCharacterSheet.getData(Fields.ARMOR_RATING);
-		assertEquals(4, armor);
+		assertEquals(3, armor);
 	}
 
 	@Test
@@ -171,7 +171,7 @@ public class GetDefaultValuesUnitTest {
 
 	@Test
 	public void testGetDefaultArmorType() {
-		assertEquals(Armors.HEAVY_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
+		assertEquals(Armors.LIGHT_LEATHER, defaultCharacterSheet.getData(Fields.ARMOR_TYPE));
 	}
 
 	@Test
