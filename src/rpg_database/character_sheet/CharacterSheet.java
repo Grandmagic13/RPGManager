@@ -26,7 +26,7 @@ public class CharacterSheet {
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
 		defaultData.put(WeaponGroupsSet.class, new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS,
 				WeaponGroups.AXES));
-		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
+		defaultData.put(Armors.class, Armors.LIGHT_LEATHER);
 		defaultData.put(FocusesSet.class, new FocusesSet());
 		return defaultData;
 	}
@@ -55,7 +55,7 @@ public class CharacterSheet {
 		if (allowedType == CharacterAttribute.class) {
 			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field), this);
 		} else if (field.equals(Fields.ARMOR_RATING)) {
-			defaultValue = 4;
+			defaultValue = 3;
 		} else {
 			defaultValue = defaultData.get(allowedType);
 		}

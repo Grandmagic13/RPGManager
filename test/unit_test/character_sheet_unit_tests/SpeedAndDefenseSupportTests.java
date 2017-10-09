@@ -15,14 +15,14 @@ public class SpeedAndDefenseSupportTests {
 	public void SetDexterity3GetSpeed12() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.DEXTERITY_VALUE, 3);
-		assertEquals(12, (int) characterSheet.getData(Fields.SPEED));
+		assertEquals(13, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
 	public void SetDexterityMinus1GetSpeed8() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.DEXTERITY_VALUE, -1);
-		assertEquals(8, (int) characterSheet.getData(Fields.SPEED));
+		assertEquals(9, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
@@ -36,14 +36,14 @@ public class SpeedAndDefenseSupportTests {
 	public void SetMagic5GetSpeedDefault() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.MAGIC_VALUE, 5);
-		assertEquals(9, (int) characterSheet.getData(Fields.SPEED));
+		assertEquals(10, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
 	public void SetBackgroundToCityElfGetSpeed11() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.BACKGROUND, Background.CITY_ELF);
-		assertEquals(11, (int) characterSheet.getData(Fields.SPEED));
+		assertEquals(12, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
@@ -51,6 +51,14 @@ public class SpeedAndDefenseSupportTests {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.ARMOR_TYPE, Armors.LIGHT_PLATE);
 		assertEquals(6, (int) characterSheet.getData(Fields.SPEED));
+	}
+
+	@Test
+	public void SetBackgroundToCityElfSetArmorHeavyLeatherGetSpeed11() {
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.BACKGROUND, Background.CITY_ELF);
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.HEAVY_LEATHER);
+		assertEquals(11, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
@@ -73,7 +81,7 @@ public class SpeedAndDefenseSupportTests {
 	public void SetDexterityMinus11GetDefenseMinus1() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.DEXTERITY_VALUE, -11);
-		assertEquals(-1, (int) characterSheet.getData(Fields.DEFENSE));
+		assertEquals(0, (int) characterSheet.getData(Fields.DEFENSE));
 	}
 
 	@Test

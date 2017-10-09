@@ -9,7 +9,7 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private int value;
 	private boolean isMajor;
-	private final int defense = 10;
+	private static final int DEFENSE_BASE_VALUE = 10;
 	private final CharacterSheet characterSheet;
 	public final static Fields[] ATTRIBUTES = { Fields.COMMUNICATION, Fields.CONSTITUTION, Fields.CUNNING, Fields.DEXTERITY, Fields.MAGIC,
 			Fields.PERCEPTION, Fields.STRENGTH, Fields.WILLPOWER };
@@ -52,11 +52,12 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	@Override
 	public Object getStoredValueByField(Fields field) {
 		if (field.getAllowedClass() == Integer.class) {
-			if (field.equals(Fields.DEFENSE))
-				return defense + value;
-			else if (field.equals(Fields.SPEED))
-				return (getBackground().getBaseSpeed() + getArmorType().getArmorPenalty() + value) < 0 ? 0
-						: getBackground().getBaseSpeed() + getArmorType().getArmorPenalty() + value;
+			if (field.equals(Fields.DEFENSE)) {
+				return DEFENSE_BASE_VALUE + value < 0 ? 0 : DEFENSE_BASE_VALUE + value;
+			} else if (field.equals(Fields.SPEED)) {
+				int speedCalculation = getBackgroundBaseSpeed() + getArmorPenaltyValue() + value;
+				return speedCalculation < 0 ? 0 : speedCalculation;
+			}
 			return value;
 		} else if (field.getAllowedClass() == Boolean.class)
 			return isMajor;
@@ -68,11 +69,11 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 		return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
 	}
 
-	private Armors getArmorType() {
-		return characterSheet.getData(Fields.ARMOR_TYPE);
+	private int getArmorPenaltyValue() {
+		return characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorPenalty();
 	}
 
-	private Background getBackground() {
-		return characterSheet.getData(Fields.BACKGROUND);
+	private int getBackgroundBaseSpeed() {
+		return characterSheet.<Background>getData(Fields.BACKGROUND).getBaseSpeed();
 	}
 }
