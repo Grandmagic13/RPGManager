@@ -12,6 +12,8 @@ import org.junit.rules.ExpectedException;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
+import rpg_database.character_sheet.Race;
+import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 public class CharacterSheetUnitTests {
@@ -172,6 +174,20 @@ public class CharacterSheetUnitTests {
 		expectExceptionWithMessage(InvalidParameterException.class, "class java.lang.String value is not an instance of class java.lang.Integer");
 		final String malformedInput = "MALFORMED INPUT";
 		testCharacterSheet.setData(Fields.STRAIN, malformedInput);
+	}
+
+	@Test
+	public void expectException_SetCharacterRaceMalformedInput() {
+		expectExceptionWithMessage(InvalidParameterException.class,
+				"class java.lang.String value is not an instance of class rpg_database.character_sheet.Race");
+		final String malformedInput = "MALFORMED INPUT";
+		testCharacterSheet.setData(Fields.RACE, malformedInput);
+	}
+
+	@Test
+	public void expectException_SetCharacterRaceManually() {
+		expectExceptionWithMessage(CharacterSheetException.class, "The race can not be set manually!");
+		testCharacterSheet.setData(Fields.RACE, Race.DWARF);
 	}
 
 	// functional unit tests

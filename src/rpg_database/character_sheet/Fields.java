@@ -16,20 +16,30 @@ public enum Fields {
 	WILLPOWER_VALUE(Integer.class, WILLPOWER), STRENGTH_MAJORITY(Boolean.class, STRENGTH), COMMUNICATION_MAJORITY(Boolean.class, COMMUNICATION),
 	CONSTITUTION_MAJORITY(Boolean.class, CONSTITUTION), CUNNING_MAJORITY(Boolean.class, CUNNING), DEXTERITY_MAJORITY(Boolean.class, DEXTERITY),
 	MAGIC_MAJORITY(Boolean.class, MAGIC), PERCEPTION_MAJORITY(Boolean.class, PERCEPTION), WILLPOWER_MAJORITY(Boolean.class, WILLPOWER),
-	ARMOR_TYPE(Armors.class), STRAIN(Integer.class), WEAPON_GROUPS(WeaponGroupsSet.class), FOCUSES(FocusesSet.class);
+	ARMOR_TYPE(Armors.class), STRAIN(Integer.class), WEAPON_GROUPS(WeaponGroupsSet.class), FOCUSES(FocusesSet.class), RACE(Race.class, true);
 
 	private final Class<?> fieldClass;
 	private final Fields containingField;
 	private final String text;
+	private final boolean isReadOnly;
 
 	private Fields(Class<?> fieldClass) {
 		this(fieldClass, null);
 	}
 
 	private Fields(Class<?> fieldClass, Fields containingField) {
+		this(fieldClass, containingField, false);
+	}
+
+	private Fields(Class<?> fieldClass, boolean isReadOnly) {
+		this(fieldClass, null, isReadOnly);
+	}
+
+	private Fields(Class<?> fieldClass, Fields containingField, boolean isReadOnly) {
 		this.fieldClass = fieldClass;
 		this.containingField = containingField;
 		this.text = generateEnumText(this.name());
+		this.isReadOnly = isReadOnly;
 	}
 
 	public Class<?> getAllowedClass() {
@@ -45,6 +55,10 @@ public enum Fields {
 
 	public boolean isContainted() {
 		return containingField != null;
+	}
+
+	public boolean isReadOnly() {
+		return isReadOnly;
 	}
 
 	@Override
