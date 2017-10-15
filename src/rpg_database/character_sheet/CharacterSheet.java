@@ -3,7 +3,6 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
-import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
@@ -80,8 +79,6 @@ public class CharacterSheet {
 	@SuppressWarnings("unchecked")
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
-			if (field.isReadOnly())
-				throw new CharacterSheetException(String.format("The %s can not be set manually!", field.name().toLowerCase()));
 			if (field.isContainted()) {
 				Object containerObject = this.characterData.get(field.getContainingField());
 				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);

@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -189,7 +191,17 @@ public class CommonMethods {
 		} else if (keyClass.isAssignableFrom(Fields.class)) {
 			object = element.getEnum(Fields.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Race.class)) {
-			object = element.getEnum(Race.class, key.toString());
+			if (isArray) {
+				HashSet<Race> races = new HashSet<>();
+				JSONArray jsonArray = element.getJSONArray(key.toString());
+				for (int index = 0; index < jsonArray.length(); index++) {
+					races.add(jsonArray.getEnum(Race.class, index));
+				}
+				object = races;
+			} else {
+				// TODO rename it
+				throw new InvalidParameterException("EZ nem lehetséges singletonban!");
+			}
 		} else if (keyClass.isAssignableFrom(Background.class)) {
 			if (isArray) {
 				ArrayList<Background> backgrounds = new ArrayList<>();

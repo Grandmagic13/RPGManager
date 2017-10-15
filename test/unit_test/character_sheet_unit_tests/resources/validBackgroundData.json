@@ -3,7 +3,7 @@
 		"BASE_CLASS": "MAGE",
 		"CHILDREN": [
 			{
-        "BACKGROUND": "ANDER_SURVIVOR"
+				"BACKGROUND": "ANDER_SURVIVOR"
 			},
 			{
 				"BACKGROUND": "AVVAR"

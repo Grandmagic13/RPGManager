@@ -20,7 +20,7 @@ public enum Background implements CustomSetter<Background> {
 	private final String text;
 	private final HashSet<BaseClasses> baseClasses;
 	private final LanguagesSet languages;
-	private final Race race;
+	private final HashSet<Race> allowedRaces;
 
 	private Background() {
 		this.text = generateEnumText(this.name());
@@ -32,11 +32,16 @@ public enum Background implements CustomSetter<Background> {
 		ArrayList<Languages> languagesFromRule = backgroundRule.getEnumsForField(this, Languages.class, Keys.LANGUAGES_ARRAY);
 		languagesSet.addAll(languagesFromRule);
 		this.languages = languagesSet;
-		race = backgroundRule.getEnumForField(this, Race.class, Keys.RACE);
+		this.allowedRaces = new HashSet<>();
+		this.allowedRaces.addAll(backgroundRule.getEnumsForField(this, Race.class, Keys.RACES_ARRAY));
 	}
 
 	public HashSet<BaseClasses> getAllowedBaseClasses() {
 		return baseClasses;
+	}
+
+	public HashSet<Race> getAllowedRaces() {
+		return allowedRaces;
 	}
 
 	@Override
@@ -57,7 +62,7 @@ public enum Background implements CustomSetter<Background> {
 		}
 
 		characterSheet.characterData.put(Fields.BACKGROUND, this);
-		characterSheet.characterData.put(Fields.RACE, this.race);
+		characterSheet.characterData.put(Fields.RACE, this.allowedRaces.iterator().next());
 		characterSheet.characterData.put(Fields.LANGUAGES, new LanguagesSet(this.languages));
 	}
 
