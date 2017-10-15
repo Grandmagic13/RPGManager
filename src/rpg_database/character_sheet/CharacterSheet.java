@@ -22,12 +22,12 @@ public class CharacterSheet {
 		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
 		defaultData.put(SpecializationClassesSet.class, new SpecializationClassesSet(this));
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
-		defaultData.put(Race.class, Race.HUMAN);
 		defaultData.put(Money.class, new Money());
+		defaultData.put(Race.class, Race.HUMAN);
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
 		defaultData.put(WeaponGroupsSet.class, new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS,
 				WeaponGroups.AXES));
-		defaultData.put(Armors.class, Armors.LIGHT_LEATHER);
+		defaultData.put(Armors.class, Armors.HEAVY_LEATHER);
 		defaultData.put(FocusesSet.class, new FocusesSet());
 		return defaultData;
 	}
@@ -56,7 +56,7 @@ public class CharacterSheet {
 		if (allowedType == CharacterAttribute.class) {
 			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field), this);
 		} else if (field.equals(Fields.ARMOR_RATING)) {
-			defaultValue = 3;
+			defaultValue = 4;
 		} else {
 			defaultValue = defaultData.get(allowedType);
 		}
@@ -81,8 +81,6 @@ public class CharacterSheet {
 	public <DataType> void setData(Fields field, DataType value) {
 		if (value.getClass() == field.getAllowedClass()) {
 			if (field.isContainted()) {
-				if (field.equals(Fields.DEFENSE) || field.equals(Fields.SPEED))
-					throw new CharacterSheetException(String.format("You can not set %s value manually!", field.name().toLowerCase()));
 				Object containerObject = this.characterData.get(field.getContainingField());
 				MultipleFieldsGetterSetter.class.cast(containerObject).setSelfValueByField(field, value);
 			} else {

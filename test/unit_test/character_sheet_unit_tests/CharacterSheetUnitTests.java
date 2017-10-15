@@ -190,14 +190,15 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.RACE, Race.DWARF);
 	}
 
+	@Test
 	public void expectException_SetCharacterDefenseValueManually() {
-		expectExceptionWithMessage(CharacterSheetException.class, "You can not set defense value manually!");
+		expectExceptionWithMessage(InvalidParameterException.class, "You can not set defense value manually!");
 		testCharacterSheet.setData(Fields.DEFENSE, 30);
 	}
 
 	@Test
 	public void expectException_SetCharacterSpeedValueManually() {
-		expectExceptionWithMessage(CharacterSheetException.class, "You can not set speed value manually!");
+		expectExceptionWithMessage(InvalidParameterException.class, "You can not set speed value manually!");
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
 		characterSheet.setData(Fields.SPEED, 30);
 	}
