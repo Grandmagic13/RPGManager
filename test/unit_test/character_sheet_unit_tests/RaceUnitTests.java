@@ -60,11 +60,8 @@ public class RaceUnitTests {
 		assertEquals(10, Race.QUNARI.getBaseSpeed());
 	}
 
-	// TODO Add test to check the multiple select arrays can be setted first,
-	// second value
-
 	@Test
-	public void testBackgroundHasMoreRaceOptionChoiceFirstAllowedRace() {
+	public void testBackgroundWithMultipleAllowedRaces_HumanChoice() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
 		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
 		characterSheet.setData(Fields.RACE, Race.HUMAN);
@@ -73,22 +70,12 @@ public class RaceUnitTests {
 	}
 
 	@Test
-	public void testBackgroundHasMoreRaceOptionChoiceSecondAllowedRace() {
+	public void testBackgroundWithMultipleAllowedRaces_ElfChoice() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
 		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
 		characterSheet.setData(Fields.RACE, Race.ELF);
 		Race actualRace = characterSheet.getData(Fields.RACE);
 		assertEquals(Race.ELF, actualRace);
-	}
-
-	@Test
-	public void testBackgroundHasMoreRaceOptionChoiceFirstAllowedRaceAfterChoiceSecond() {
-		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
-		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
-		characterSheet.setData(Fields.RACE, Race.ELF);
-		characterSheet.setData(Fields.RACE, Race.HUMAN);
-		Race actualRace = characterSheet.getData(Fields.RACE);
-		assertEquals(Race.HUMAN, actualRace);
 	}
 
 	// private methods

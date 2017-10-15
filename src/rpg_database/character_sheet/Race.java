@@ -35,7 +35,7 @@ public enum Race implements CustomSetter<Race> {
 
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
-		Background background = getCharacterSheetBackground(characterSheet);
+		Background background = characterSheet.getData(Fields.BACKGROUND);
 		HashSet<Race> allowedRaces = getAllowedRacesForBackground(background);
 		if (allowedRaces.size() > 1)
 			if (allowedRaces.contains(this))
@@ -48,10 +48,6 @@ public enum Race implements CustomSetter<Race> {
 
 	private HashSet<Race> getAllowedRacesForBackground(Background background) {
 		return background.getAllowedRaces();
-	}
-
-	private Background getCharacterSheetBackground(CharacterSheet characterSheet) {
-		return (Background) characterSheet.characterData.get(Fields.BACKGROUND);
 	}
 
 }
