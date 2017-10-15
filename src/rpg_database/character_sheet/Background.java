@@ -20,6 +20,7 @@ public enum Background implements CustomSetter<Background> {
 	private final String text;
 	private final HashSet<BaseClasses> baseClasses;
 	private final LanguagesSet languages;
+	private final HashSet<Race> allowedRaces;
 
 	private Background() {
 		this.text = generateEnumText(this.name());
@@ -31,10 +32,16 @@ public enum Background implements CustomSetter<Background> {
 		ArrayList<Languages> languagesFromRule = backgroundRule.getEnumsForField(this, Languages.class, Keys.LANGUAGES_ARRAY);
 		languagesSet.addAll(languagesFromRule);
 		this.languages = languagesSet;
+		this.allowedRaces = new HashSet<>();
+		this.allowedRaces.addAll(backgroundRule.getEnumsForField(this, Race.class, Keys.RACES_ARRAY));
 	}
 
 	public HashSet<BaseClasses> getAllowedBaseClasses() {
 		return baseClasses;
+	}
+
+	public HashSet<Race> getAllowedRaces() {
+		return allowedRaces;
 	}
 
 	@Override
@@ -53,8 +60,14 @@ public enum Background implements CustomSetter<Background> {
 			throw new InvalidCharacterClassException(String.format("%s is not a %s background!", this.toString(), characterSheet.getData(
 					Fields.BASECLASS).toString()));
 		}
+
 		characterSheet.characterData.put(Fields.BACKGROUND, this);
+		characterSheet.characterData.put(Fields.RACE, this.getFirstAllowedRace());
 		characterSheet.characterData.put(Fields.LANGUAGES, new LanguagesSet(this.languages));
+	}
+
+	private Race getFirstAllowedRace() {
+		return allowedRaces.iterator().next();
 	}
 
 	private boolean isCharacterBaseClassAllowed(CharacterSheet characterSheet) {

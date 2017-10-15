@@ -14,6 +14,7 @@ import rpg_database.character_sheet.Background;
 import rpg_database.character_sheet.BaseClasses;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
+import rpg_database.character_sheet.Race;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
@@ -54,6 +55,15 @@ public class BackgroundUnitTests {
 		characterSheet.setData(Fields.BACKGROUND, Background.CHASIND_WILDER);
 		Background background = characterSheet.getData(Fields.BACKGROUND);
 		assertEquals(Background.CHASIND_WILDER, background);
+	}
+
+	@Test
+	public void testSetBackgroundGetRaceElf() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		Race expectedRace = Race.ELF;
+		characterSheet.setData(Fields.BACKGROUND, Background.CITY_ELF);
+		Race actualRace = characterSheet.getData(Fields.RACE);
+		assertEquals(expectedRace, actualRace);
 	}
 
 	// private methods

@@ -15,6 +15,7 @@ import rpg_database.character_sheet.FocusesSet;
 import rpg_database.character_sheet.Gender;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
+import rpg_database.character_sheet.Race;
 import rpg_database.character_sheet.SpecializationClassesSet;
 import rpg_database.character_sheet.WeaponGroups;
 import rpg_database.character_sheet.WeaponGroupsSet;
@@ -186,4 +187,9 @@ public class GetDefaultValuesUnitTest {
 		assertEquals(expectedFocuses, actualFocuses);
 	}
 
+	@Test
+	public void testGetDefaultRace() {
+		Race actualRace = defaultCharacterSheet.getData(Fields.RACE);
+		assertEquals(Race.HUMAN, actualRace);
+	}
 }

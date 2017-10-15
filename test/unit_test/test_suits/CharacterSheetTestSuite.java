@@ -18,11 +18,13 @@ import unit_test.character_sheet_unit_tests.FocusesSetUnitTests;
 import unit_test.character_sheet_unit_tests.FocusesUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultAttributeUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultLanguagesForEachBackgroundUnitTests;
+import unit_test.character_sheet_unit_tests.GetDefaultRaceForEachBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.GetDefaultValuesUnitTest;
 import unit_test.character_sheet_unit_tests.InvalidBackgroundUnitTests;
 import unit_test.character_sheet_unit_tests.InvalidClassAndSpecializationPairingsTests;
 import unit_test.character_sheet_unit_tests.LanguagesUnitTests;
 import unit_test.character_sheet_unit_tests.MoneyUnitTests;
+import unit_test.character_sheet_unit_tests.RaceUnitTests;
 import unit_test.character_sheet_unit_tests.SpecializationAttributeFilter_AttributeValuesContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ContentTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
@@ -46,7 +48,7 @@ import unit_test.character_sheet_unit_tests.WeaponGroupsUnitTests;
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
 		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, FocusesSetUnitTests.class,
 		FocusesUnitTests.class, FocusUnitTests.class, TalentLevelsTests.class, TalentTests.class, TalentsTests.class, WeaponGroupsUnitTests.class,
-		WeaponGroupsSetUnitTests.class })
+		WeaponGroupsSetUnitTests.class, RaceUnitTests.class, GetDefaultRaceForEachBackgroundUnitTests.class })
 
 public class CharacterSheetTestSuite {
 

@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +21,7 @@ import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Languages;
 import rpg_database.character_sheet.LanguagesSet;
+import rpg_database.character_sheet.Race;
 import rpg_database.character_sheet.SpecializationClasses;
 import rpg_database.character_sheet.SpecializationClassesSet;
 
@@ -37,6 +40,7 @@ public class CommonMethods {
 	public static final String ATTRIBUTE_MAJORITY_DATA = "attributeMajorityData";
 	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
 	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
+	public static final String DEFAULT_RACE_DATA = "defaultRaceData";
 	public static final String INVALID_BACKGROUND_DATA = "invalidBackgroundData";
 	public static final String INVALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA = "invalidClassAndSpecializationPairingsData";
 	public static final String SPECIALIZATION_ATTRIBUTE_FILTER_ATTRIBUTE_VALUES_CONTENT_DATA = "specializationattributefilter_attributeValuesContentData";
@@ -186,6 +190,17 @@ public class CommonMethods {
 			object = element.getEnum(SpecializationClasses.class, key.toString());
 		} else if (keyClass.isAssignableFrom(Fields.class)) {
 			object = element.getEnum(Fields.class, key.toString());
+		} else if (keyClass.isAssignableFrom(Race.class)) {
+			if (isArray) {
+				HashSet<Race> races = new HashSet<>();
+				JSONArray jsonArray = element.getJSONArray(key.toString());
+				for (int index = 0; index < jsonArray.length(); index++) {
+					races.add(jsonArray.getEnum(Race.class, index));
+				}
+				object = races;
+			} else {
+				throw new InvalidParameterException("The key must be array!");
+			}
 		} else if (keyClass.isAssignableFrom(Background.class)) {
 			if (isArray) {
 				ArrayList<Background> backgrounds = new ArrayList<>();
