@@ -12,15 +12,17 @@ import rpg_database.character_sheet.Fields;
 public class SpeedAndDefenseSupportTests {
 
 	@Test
-	public void SetDexterity3GetSpeed12() {
+	public void SetDexterity3GetSpeed13() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.DEXTERITY_VALUE, 3);
 		assertEquals(13, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
-	public void SetDexterityMinus1GetSpeed8() {
+	public void SetDexterityMinus1GetSpeed9() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.DEXTERITY_VALUE, -1);
 		assertEquals(9, (int) characterSheet.getData(Fields.SPEED));
 	}
@@ -28,6 +30,7 @@ public class SpeedAndDefenseSupportTests {
 	@Test
 	public void SetDexterityMinus15GetSpeed0() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.DEXTERITY_VALUE, -15);
 		assertEquals(0, (int) characterSheet.getData(Fields.SPEED));
 	}
@@ -35,13 +38,15 @@ public class SpeedAndDefenseSupportTests {
 	@Test
 	public void SetMagic5GetSpeedDefault() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.MAGIC_VALUE, 5);
 		assertEquals(10, (int) characterSheet.getData(Fields.SPEED));
 	}
 
 	@Test
-	public void SetBackgroundToCityElfGetSpeed11() {
+	public void SetBackgroundToCityElfGetSpeed12() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.BACKGROUND, Background.CITY_ELF);
 		assertEquals(12, (int) characterSheet.getData(Fields.SPEED));
 	}
@@ -73,13 +78,15 @@ public class SpeedAndDefenseSupportTests {
 	@Test
 	public void SetDexterity3GetDefense13() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.DEXTERITY_VALUE, 3);
 		assertEquals(13, (int) characterSheet.getData(Fields.DEFENSE));
 	}
 
 	@Test
-	public void SetDexterityMinus11GetDefenseMinus1() {
+	public void SetDexterityMinus11GetDefense0() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.DEXTERITY_VALUE, -11);
 		assertEquals(0, (int) characterSheet.getData(Fields.DEFENSE));
 	}
@@ -87,6 +94,7 @@ public class SpeedAndDefenseSupportTests {
 	@Test
 	public void SetMagic5GetDefenseDefault() {
 		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.ARMOR_TYPE, Armors.ROBE);
 		characterSheet.setData(Fields.MAGIC_VALUE, 5);
 		assertEquals(10, (int) characterSheet.getData(Fields.DEFENSE));
 	}
