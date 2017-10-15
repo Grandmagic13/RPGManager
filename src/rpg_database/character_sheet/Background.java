@@ -62,8 +62,12 @@ public enum Background implements CustomSetter<Background> {
 		}
 
 		characterSheet.characterData.put(Fields.BACKGROUND, this);
-		characterSheet.characterData.put(Fields.RACE, this.allowedRaces.iterator().next());
+		characterSheet.characterData.put(Fields.RACE, this.getFirstAllowedRace());
 		characterSheet.characterData.put(Fields.LANGUAGES, new LanguagesSet(this.languages));
+	}
+
+	private Race getFirstAllowedRace() {
+		return allowedRaces.iterator().next();
 	}
 
 	private boolean isCharacterBaseClassAllowed(CharacterSheet characterSheet) {

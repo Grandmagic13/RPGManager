@@ -19,10 +19,18 @@ public class RaceUnitTests {
 
 	@Test
 	public void expectException_TestBackgroundHasMoreRaceOptionChoiceInvalidRace() {
-		expectExceptionWithMessage(CharacterSheetException.class, "Seheron Convert does not offer Qunari race for choicing!");
+		expectExceptionWithMessage(CharacterSheetException.class, "Seheron Convert can not originate from Qunari heritage!");
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
 		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
 		characterSheet.setData(Fields.RACE, Race.QUNARI);
+	}
+
+	@Test
+	public void expectException_TestBackgroundHasMoreRaceOptionChoiceInvalidRace2() {
+		expectExceptionWithMessage(CharacterSheetException.class, "Waking Sea Raider can not originate from Dwarf heritage!");
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		characterSheet.setData(Fields.BACKGROUND, Background.WAKING_SEA_RAIDER);
+		characterSheet.setData(Fields.RACE, Race.DWARF);
 	}
 
 	// Functional tests
@@ -52,12 +60,32 @@ public class RaceUnitTests {
 		assertEquals(10, Race.QUNARI.getBaseSpeed());
 	}
 
-	// TODO Add test to check the multiple select arrays
+	// TODO Add test to check the multiple select arrays can be setted first,
+	// second value
 
 	@Test
-	public void testBackgroundHasMoreRaceOptionChoiceRace() {
+	public void testBackgroundHasMoreRaceOptionChoiceFirstAllowedRace() {
 		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
 		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
+		characterSheet.setData(Fields.RACE, Race.HUMAN);
+		Race actualRace = characterSheet.getData(Fields.RACE);
+		assertEquals(Race.HUMAN, actualRace);
+	}
+
+	@Test
+	public void testBackgroundHasMoreRaceOptionChoiceSecondAllowedRace() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
+		characterSheet.setData(Fields.RACE, Race.ELF);
+		Race actualRace = characterSheet.getData(Fields.RACE);
+		assertEquals(Race.ELF, actualRace);
+	}
+
+	@Test
+	public void testBackgroundHasMoreRaceOptionChoiceFirstAllowedRaceAfterChoiceSecond() {
+		CharacterSheet characterSheet = new CharacterSheet("TestCharacterSheet");
+		characterSheet.setData(Fields.BACKGROUND, Background.SEHERON_CONVERT);
+		characterSheet.setData(Fields.RACE, Race.ELF);
 		characterSheet.setData(Fields.RACE, Race.HUMAN);
 		Race actualRace = characterSheet.getData(Fields.RACE);
 		assertEquals(Race.HUMAN, actualRace);

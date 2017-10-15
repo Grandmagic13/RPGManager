@@ -199,8 +199,7 @@ public class CommonMethods {
 				}
 				object = races;
 			} else {
-				// TODO rename it
-				throw new InvalidParameterException("EZ nem lehetséges singletonban!");
+				throw new InvalidParameterException("The key must be array!");
 			}
 		} else if (keyClass.isAssignableFrom(Background.class)) {
 			if (isArray) {

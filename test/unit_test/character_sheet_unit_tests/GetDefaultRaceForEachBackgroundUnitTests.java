@@ -36,8 +36,8 @@ public class GetDefaultRaceForEachBackgroundUnitTests {
 
 	@Test
 	public void testGetDefaultBackgroundForRaces() {
-		HashSet<Race> actualRace = background.getAllowedRaces();
-		assertEquals(expectedRaceSet, actualRace);
+		HashSet<Race> actualRaceSet = background.getAllowedRaces();
+		assertEquals(expectedRaceSet, actualRaceSet);
 	}
 
 }

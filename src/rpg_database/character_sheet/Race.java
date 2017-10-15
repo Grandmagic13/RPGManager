@@ -35,13 +35,13 @@ public enum Race implements CustomSetter<Race> {
 
 	@Override
 	public void setSelfInSheet(CharacterSheet characterSheet) {
-		HashSet<Race> allowedRaces = getAllowedRacesForBackground(getActaulBackground(characterSheet));
+		Background background = getCharacterSheetBackground(characterSheet);
+		HashSet<Race> allowedRaces = getAllowedRacesForBackground(background);
 		if (allowedRaces.size() > 1)
 			if (allowedRaces.contains(this))
 				characterSheet.characterData.put(Fields.RACE, this);
 			else
-				throw new CharacterSheetException(String.format("%s does not offer %s race for choicing!", getActaulBackground(characterSheet)
-						.toString(), this.text));
+				throw new CharacterSheetException(String.format("%s can not originate from %s heritage!", background.toString(), this.text));
 		else
 			throw new CharacterSheetException("The race can not be set manually!");
 	}
@@ -50,7 +50,7 @@ public enum Race implements CustomSetter<Race> {
 		return background.getAllowedRaces();
 	}
 
-	private Background getActaulBackground(CharacterSheet characterSheet) {
+	private Background getCharacterSheetBackground(CharacterSheet characterSheet) {
 		return (Background) characterSheet.characterData.get(Fields.BACKGROUND);
 	}
 

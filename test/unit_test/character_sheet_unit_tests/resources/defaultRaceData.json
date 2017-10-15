@@ -1,197 +1,197 @@
 [
 	{
 		"BACKGROUND": "ANDER_SURVIVOR",
-    "RACES_ARRAY": [
-      "HUMAN" 
-    ]
+    	"RACES_ARRAY": [
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "ANTIVAN_WAYFARER",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "AVVAR",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "CHASIND_WILDER",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "CITY_ELF",
 		"RACES_ARRAY": [
-      "ELF" 
-    ]
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "DALISH_ELF",
 		"RACES_ARRAY": [
-      "ELF" 
-    ]
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "DWARF_DUSTER",
 		"RACES_ARRAY": [
-      "DWARF" 
-    ]
+      		"DWARF" 
+    	]
 	},
 	{
 		"BACKGROUND": "ELF_APOSTATE",
 		"RACES_ARRAY": [
-      "ELF" 
-    ]
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "ELF_CIRCLE_MAGE",
 		"RACES_ARRAY": [
-      "ELF" 
-    ]
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "ESCAPED_ELVEN_SLAVE",
 		"RACES_ARRAY": [
-      "ELF" 
-    ]
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "FERELDAN_CRAFTSMEN",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "FERELDAN_FREEMAN",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "FERELDAN_NOBLE",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "FREE_MARCHER",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "HIGH_BORN_DWARF",
 		"RACES_ARRAY": [
-      "DWARF" 
-    ]
+      		"DWARF" 
+    	]
 	},
 	{
 		"BACKGROUND": "HUMAN_APOSTATE",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "HUMAN_CIRCLE_MAGE",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "LOW_BORN_DWARF",
 		"RACES_ARRAY": [
-      "DWARF" 
-    ]
+      		"DWARF" 
+    	]
 	},
 	{
 		"BACKGROUND": "NEVARRAN_ADVENTURER",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "ORLESIAN_COMMONER",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "ORLESIAN_EXILE",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "ORLESIAN_NOBLE",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "ORLESIAN_STUDENT",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "QUNARI_BERESAAD",
 		"RACES_ARRAY": [
-      "QUNARI" 
-    ]
+      		"QUNARI" 
+    	]
 	},
 	{
 		"BACKGROUND": "RIVAINI_MERCHANT",
 		"RACES_ARRAY": [
-      "HUMAN",
-      "ELF" 
-    ]
+      		"HUMAN",
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "SEHERON_CONVERT",
 		"RACES_ARRAY": [
-      "HUMAN",
-      "ELF" 
-    ]
+      		"HUMAN",
+      		"ELF" 
+    	]
 	},
 	{
 		"BACKGROUND": "SURFACE_DWARF",
 		"RACES_ARRAY": [
-      "DWARF" 
-    ]
+      		"DWARF" 
+    	]
 	},
 	{
 		"BACKGROUND": "TAL_VASHOTH",
 		"RACES_ARRAY": [
-      "QUNARI" 
-    ]
+      		"QUNARI" 
+    	]
 	},
 	{
 		"BACKGROUND": "TEVINTER_ALTUS",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "TEVINTER_LAETAN",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "TEVINTER_SOPORATI",
 		"RACES_ARRAY": [
-      "HUMAN" 
-    ]
+      		"HUMAN" 
+    	]
 	},
 	{
 		"BACKGROUND": "WAKING_SEA_RAIDER",
 		"RACES_ARRAY": [
-      "HUMAN",
-      "ELF"
-    ]
+      		"HUMAN",
+      		"ELF"
+    	]
 	}
 ]
