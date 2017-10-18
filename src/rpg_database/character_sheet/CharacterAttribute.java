@@ -93,6 +93,6 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	}
 
 	private int getBackgroundBaseSpeed() {
-		return characterSheet.<Background>getData(Fields.BACKGROUND).getBaseSpeed();
+		return characterSheet.<Race>getData(Fields.RACE).getBaseSpeed();
 	}
 }

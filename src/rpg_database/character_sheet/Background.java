@@ -21,7 +21,6 @@ public enum Background implements CustomSetter<Background> {
 	private final HashSet<BaseClasses> baseClasses;
 	private final LanguagesSet languages;
 	private final HashSet<Race> allowedRaces;
-	private final int speed;
 
 	private Background() {
 		this.text = generateEnumText(this.name());
@@ -35,7 +34,6 @@ public enum Background implements CustomSetter<Background> {
 		this.languages = languagesSet;
 		this.allowedRaces = new HashSet<>();
 		this.allowedRaces.addAll(backgroundRule.getEnumsForField(this, Race.class, Keys.RACES_ARRAY));
-		this.speed = backgroundRule.getIntegerForField(this, Keys.SPEED_VALUE);
 	}
 
 	public HashSet<BaseClasses> getAllowedBaseClasses() {
@@ -54,10 +52,6 @@ public enum Background implements CustomSetter<Background> {
 	@Override
 	public Class<Background> getImplementingClass() {
 		return Background.class;
-	}
-
-	public int getBaseSpeed() {
-		return this.speed;
 	}
 
 	@Override
