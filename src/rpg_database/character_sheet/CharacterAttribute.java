@@ -1,6 +1,8 @@
 package rpg_database.character_sheet;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
@@ -9,12 +11,20 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private int value;
 	private boolean isMajor;
+	private static final int DEFENSE_BASE_VALUE = 10;
+	private final CharacterSheet characterSheet;
+
+	private final static ArrayList<Fields> ATTRIBUTES_VALUES = new ArrayList<>(Arrays.asList(Fields.COMMUNICATION_VALUE, Fields.CONSTITUTION_VALUE,
+			Fields.CUNNING_VALUE, Fields.DEXTERITY_VALUE, Fields.MAGIC_VALUE, Fields.PERCEPTION_VALUE, Fields.STRENGTH_VALUE,
+			Fields.WILLPOWER_VALUE));
+
 	public final static Fields[] ATTRIBUTES = { Fields.COMMUNICATION, Fields.CONSTITUTION, Fields.CUNNING, Fields.DEXTERITY, Fields.MAGIC,
 			Fields.PERCEPTION, Fields.STRENGTH, Fields.WILLPOWER };
 
-	protected CharacterAttribute(int value, boolean isMajor) {
+	protected CharacterAttribute(int value, boolean isMajor, CharacterSheet characterSheet) {
 		this.value = value;
 		this.isMajor = isMajor;
+		this.characterSheet = characterSheet;
 	}
 
 	protected void setMajority(boolean majority) {
@@ -34,7 +44,7 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	@Override
 	public void setSelfValueByField(Fields field, Object value) {
 		try {
-			if (field.getAllowedClass() == Integer.class) {
+			if (field.getAllowedClass() == Integer.class && ATTRIBUTES_VALUES.contains(field)) {
 				this.value = (int) value;
 			} else {
 				throw field.getAllowedClass() == Boolean.class ? new InvalidCharacterClassException(
@@ -48,15 +58,41 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	@Override
 	public Object getStoredValueByField(Fields field) {
-		if (field.getAllowedClass() == Integer.class)
-			return value;
-		else if (field.getAllowedClass() == Boolean.class)
+		if (field.getAllowedClass() == Integer.class) {
+			if (ATTRIBUTES_VALUES.contains(field)) {
+				return value;
+			} else if (field.equals(Fields.DEFENSE)) {
+				return DEFENSE_BASE_VALUE + value < 0 ? 0 : DEFENSE_BASE_VALUE + value;
+			} else if (field.equals(Fields.SPEED)) {
+				int speedCalculation = getBackgroundBaseSpeed() + getArmorPenaltyValue() + value;
+				return speedCalculation < 0 ? 0 : speedCalculation;
+			} else
+				throw new InvalidParameterException(generateExceptionMessage(field));
+		} else if (field.getAllowedClass() == Boolean.class)
 			return isMajor;
 		else
 			throw new InvalidParameterException(generateExceptionMessage(field));
 	}
 
 	private String generateExceptionMessage(Fields field) {
-		return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
+		String exceptionMessage = "";
+		if (field.getAllowedClass() == Integer.class) {
+			if (field.equals(Fields.DEFENSE) || field.equals(Fields.SPEED)) {
+				exceptionMessage = String.format("You can not set %s value manually!", field.name().toLowerCase());
+			} else {
+				exceptionMessage = String.format("The %s is not a valid member of CharacterAttribute.class!", field.name());
+			}
+		} else {
+			exceptionMessage = String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
+		}
+		return exceptionMessage;
+	}
+
+	private int getArmorPenaltyValue() {
+		return characterSheet.<Armors>getData(Fields.ARMOR_TYPE).getArmorPenalty();
+	}
+
+	private int getBackgroundBaseSpeed() {
+		return characterSheet.<Race>getData(Fields.RACE).getBaseSpeed();
 	}
 }

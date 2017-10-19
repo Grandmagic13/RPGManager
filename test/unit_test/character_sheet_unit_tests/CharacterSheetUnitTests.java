@@ -190,6 +190,19 @@ public class CharacterSheetUnitTests {
 		testCharacterSheet.setData(Fields.RACE, Race.DWARF);
 	}
 
+	@Test
+	public void expectException_SetCharacterDefenseValueManually() {
+		expectExceptionWithMessage(InvalidParameterException.class, "You can not set defense value manually!");
+		testCharacterSheet.setData(Fields.DEFENSE, 30);
+	}
+
+	@Test
+	public void expectException_SetCharacterSpeedValueManually() {
+		expectExceptionWithMessage(InvalidParameterException.class, "You can not set speed value manually!");
+		CharacterSheet characterSheet = new CharacterSheet("CharacterSheet");
+		characterSheet.setData(Fields.SPEED, 30);
+	}
+
 	// functional unit tests
 	@Test
 	public void testGetCharacterSheetEntryName_Tibor() {
@@ -248,24 +261,10 @@ public class CharacterSheetUnitTests {
 	}
 
 	@Test
-	public void testSetCharacterSpeed12() {
-		testCharacterSheet.setData(Fields.SPEED, 12);
-		int speed = testCharacterSheet.getData(Fields.SPEED);
-		assertEquals(12, speed);
-	}
-
-	@Test
 	public void testSetCharacterLevel10() {
 		testCharacterSheet.setData(Fields.LEVEL, 10);
 		int level = testCharacterSheet.getData(Fields.LEVEL);
 		assertEquals(10, level);
-	}
-
-	@Test
-	public void testSetCharacterDefense15() {
-		testCharacterSheet.setData(Fields.DEFENSE, 15);
-		int defense = testCharacterSheet.getData(Fields.DEFENSE);
-		assertEquals(15, defense);
 	}
 
 	@Test

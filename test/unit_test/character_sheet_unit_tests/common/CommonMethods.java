@@ -84,6 +84,10 @@ public class CommonMethods {
 		return getTestData(DataStructureType.ATTRIBUTE_REQUIREMENT, testDataName, 0);
 	}
 
+	public static BaseClasses getFirstValidBaseClassByBackground(Background background) {
+		return background.getAllowedBaseClasses().iterator().next();
+	}
+
 	private static ArrayList<Object[]> getTestData(DataStructureType dataStructureType, String testDataName, int numberOfParentKeys, DataKeys... keys)
 			throws JSONException, FileNotFoundException, IOException {
 		JSONArray dataArray = new JSONArray(readDataToJSONString(testDataName));

@@ -38,6 +38,13 @@ public class CharacterAttributeUnitTests {
 		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).getStoredValueByField(Fields.APPEARANCE);
 	}
 
+	@Test
+	public void expectException_getStoredValueByFieldWrongField2() {
+		expectExceptionWithMessage(InvalidParameterException.class, "The AGE is not a valid member of CharacterAttribute.class!");
+		CharacterSheet characterSheet = new CharacterSheet("characterSheet");
+		characterSheet.<CharacterAttribute>getData(Fields.STRENGTH).getStoredValueByField(Fields.AGE);
+	}
+
 	// Functional
 
 	@Test

@@ -52,7 +52,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterSpeed() {
 		int speed = defaultCharacterSheet.getData(Fields.SPEED);
-		assertEquals(0, speed);
+		assertEquals(9, speed);
 	}
 
 	@Test
@@ -82,7 +82,7 @@ public class GetDefaultValuesUnitTest {
 	@Test
 	public void testGetDefaultCharacterDefense() {
 		int defense = defaultCharacterSheet.getData(Fields.DEFENSE);
-		assertEquals(0, defense);
+		assertEquals(10, defense);
 	}
 
 	@Test

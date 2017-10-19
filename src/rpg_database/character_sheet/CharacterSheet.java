@@ -3,6 +3,7 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
@@ -21,8 +22,8 @@ public class CharacterSheet {
 		defaultData.put(BaseClasses.class, BaseClasses.WARRIOR);
 		defaultData.put(SpecializationClassesSet.class, new SpecializationClassesSet(this));
 		defaultData.put(Background.class, Background.ANDER_SURVIVOR);
-		defaultData.put(Race.class, Race.HUMAN);
 		defaultData.put(Money.class, new Money());
+		defaultData.put(Race.class, Race.HUMAN);
 		defaultData.put(LanguagesSet.class, new LanguagesSet(Languages.TRADE_TONGUE, Languages.ANDER));
 		defaultData.put(WeaponGroupsSet.class, new WeaponGroupsSet(WeaponGroups.BRAWLING, WeaponGroups.HEAVY_BLADES, WeaponGroups.BLUDGEONS,
 				WeaponGroups.AXES));
@@ -53,8 +54,8 @@ public class CharacterSheet {
 		Class<?> allowedType = field.getAllowedClass();
 		Object defaultValue;
 		if (allowedType == CharacterAttribute.class) {
-			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field));
-		} else if (field.name().equals("ARMOR_RATING")) {
+			defaultValue = new CharacterAttribute(0, BaseClasses.WARRIOR.isAttributeMajor(field), this);
+		} else if (field.equals(Fields.ARMOR_RATING)) {
 			defaultValue = 4;
 		} else {
 			defaultValue = defaultData.get(allowedType);

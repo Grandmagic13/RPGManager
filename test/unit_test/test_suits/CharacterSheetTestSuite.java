@@ -30,6 +30,8 @@ import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_Conte
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_InvalidBackgroundsTests;
 import unit_test.character_sheet_unit_tests.SpecializationBackgroundFilter_ValidBackgroundsTests;
 import unit_test.character_sheet_unit_tests.SpecializationClassUnitTests;
+import unit_test.character_sheet_unit_tests.SpeedSupportTests;
+import unit_test.character_sheet_unit_tests.DefenseSupportTests;
 import unit_test.character_sheet_unit_tests.TalentLevelsTests;
 import unit_test.character_sheet_unit_tests.TalentTests;
 import unit_test.character_sheet_unit_tests.TalentsTests;
@@ -48,7 +50,8 @@ import unit_test.character_sheet_unit_tests.WeaponGroupsUnitTests;
 		SpecializationAttributeFilter_AttributeValuesContentTests.class, GetDefaultLanguagesForEachBackgroundUnitTests.class,
 		LanguagesUnitTests.class, FieldRulesTests.class, ArmorsUnitTests.class, ArmorRatingDefaultContentTests.class, FocusesSetUnitTests.class,
 		FocusesUnitTests.class, FocusUnitTests.class, TalentLevelsTests.class, TalentTests.class, TalentsTests.class, WeaponGroupsUnitTests.class,
-		WeaponGroupsSetUnitTests.class, RaceUnitTests.class, GetDefaultRaceForEachBackgroundUnitTests.class })
+		WeaponGroupsSetUnitTests.class, RaceUnitTests.class, GetDefaultRaceForEachBackgroundUnitTests.class, DefenseSupportTests.class,
+		SpeedSupportTests.class })
 
 public class CharacterSheetTestSuite {
 
