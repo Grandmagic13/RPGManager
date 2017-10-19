@@ -40,7 +40,6 @@ public class CommonMethods {
 	public static final String ATTRIBUTE_MAJORITY_DATA = "attributeMajorityData";
 	public static final String DEFAULT_ATTRIBUTE_DATA = "defaultAttributeData";
 	public static final String DEFAULT_LANGUAGES_DATA = "defaultLanguagesData";
-	public static final String DEFAULT_SPEED_DATA = "defaultSpeedData";
 	public static final String DEFAULT_RACE_DATA = "defaultRaceData";
 	public static final String INVALID_BACKGROUND_DATA = "invalidBackgroundData";
 	public static final String INVALID_CLASS_AND_SPECIALIZATION_PAIRINGS_DATA = "invalidClassAndSpecializationPairingsData";
