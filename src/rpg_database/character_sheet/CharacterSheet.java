@@ -3,6 +3,7 @@ package rpg_database.character_sheet;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 
+import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.interfaces.CustomSetter;
 import rpg_database.character_sheet.interfaces.MultipleFieldsGetterSetter;
 
