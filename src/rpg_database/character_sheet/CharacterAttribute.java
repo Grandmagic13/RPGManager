@@ -44,7 +44,7 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 	@Override
 	public void setSelfValueByField(Fields field, Object value) {
 		try {
-			if (field.getAllowedClass() == Integer.class && ATTRIBUTES_VALUES.contains(field)) {
+			if (ATTRIBUTES_VALUES.contains(field)) {
 				this.value = (int) value;
 			} else {
 				throw field.getAllowedClass() == Boolean.class ? new InvalidCharacterClassException(
@@ -76,7 +76,7 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 
 	private String generateExceptionMessage(Fields field) {
 		if (field.getAllowedClass() == Integer.class) {
-			if (field.equals(Fields.DEFENSE) || field.equals(Fields.SPEED)) {
+			if (isSpeedOrDefense(field)) {
 				return String.format("You can not set %s value manually!", field.name().toLowerCase());
 			} else {
 				return String.format("The %s is not a valid member of CharacterAttribute.class!", field.name());
@@ -84,6 +84,10 @@ public class CharacterAttribute implements MultipleFieldsGetterSetter<CharacterA
 		} else {
 			return String.format("Unknown allowed field class: '%s'", field.getAllowedClass().toString());
 		}
+	}
+
+	private boolean isSpeedOrDefense(Fields field) {
+		return field.equals(Fields.DEFENSE) || field.equals(Fields.SPEED);
 	}
 
 	private int getArmorPenaltyValue() {
