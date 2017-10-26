@@ -12,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import rpg_database.character_sheet.CharacterSheet;
 import rpg_database.character_sheet.Fields;
 import rpg_database.character_sheet.Gender;
-import rpg_database.character_sheet.exceptions.CharacterSheetException;
 import rpg_database.character_sheet.exceptions.InvalidCharacterClassException;
 
 public class CharacterSheetUnitTests {
